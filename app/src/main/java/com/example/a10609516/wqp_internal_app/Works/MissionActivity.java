@@ -252,6 +252,7 @@ public class MissionActivity extends WQPToolsActivity {
                 sp.edit().putBoolean("rem_isCheck",false).commit();
                 sp.edit().putString("USER_NAME", "").commit();
                 sp.edit().putString("PASSWORD", "").commit();
+                sp.edit().putString("user_name", "").commit();
 
                 finish();
                 Intent intent_login = new Intent(MissionActivity.this, LoginActivity.class);

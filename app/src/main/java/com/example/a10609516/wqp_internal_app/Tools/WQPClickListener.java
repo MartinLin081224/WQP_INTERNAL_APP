@@ -38,7 +38,7 @@ import okhttp3.Response;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class WQPClickListener extends com.example.a10609516.wqp_internal_app.Tools.WQPToolsActivity implements View.OnClickListener {
+public class WQPClickListener extends WQPToolsActivity implements View.OnClickListener {
 
     private Context mContext;
     private String user_id_data;
@@ -155,7 +155,7 @@ public class WQPClickListener extends com.example.a10609516.wqp_internal_app.Too
             case R.id.home_txt:
                 try{
                     // delay 1 second
-                    Thread.sleep(100);
+                    Thread.sleep(200);
                     if (home.equals("1")) {
                         Intent intent0 = new Intent(mContext, HomeActivity.class);
                         mContext.startActivity(intent0);
@@ -169,7 +169,7 @@ public class WQPClickListener extends com.example.a10609516.wqp_internal_app.Too
             case R.id.exchange_txt:
                 try{
                     // delay 1 second
-                    Thread.sleep(100);
+                    Thread.sleep(200);
                     if (exchange.equals("1")) {
                         Intent intent10 = new Intent(mContext, ApplyExchangeActivity.class);
                         mContext.startActivity(intent10);
@@ -185,7 +185,7 @@ public class WQPClickListener extends com.example.a10609516.wqp_internal_app.Too
             case R.id.schedule_txt:
                 try{
                     // delay 1 second
-                    Thread.sleep(100);
+                    Thread.sleep(200);
                     if (schedule.equals("1")) {
                         Intent intent11 = new Intent(mContext, ScheduleActivity.class);
                         mContext.startActivity(intent11);
@@ -201,7 +201,7 @@ public class WQPClickListener extends com.example.a10609516.wqp_internal_app.Too
             case R.id.calendar_txt:
                 try{
                     // delay 1 second
-                    Thread.sleep(100);
+                    Thread.sleep(200);
                     if (calendar.equals("1")) {
                         Intent intent12 = new Intent(mContext, CalendarActivity.class);
                         mContext.startActivity(intent12);
@@ -217,7 +217,7 @@ public class WQPClickListener extends com.example.a10609516.wqp_internal_app.Too
             case R.id.mission_txt:
                 try{
                     // delay 1 second
-                    Thread.sleep(100);
+                    Thread.sleep(200);
                     if (mission.equals("1")) {
                         Intent intent13 = new Intent(mContext, MissionActivity.class);
                         mContext.startActivity(intent13);
@@ -233,7 +233,7 @@ public class WQPClickListener extends com.example.a10609516.wqp_internal_app.Too
             case R.id.bonus_txt:
                 try{
                     // delay 1 second
-                    Thread.sleep(100);
+                    Thread.sleep(200);
                     if (bonus.equals("1")) {
                         Intent intent14 = new Intent(mContext, PointsActivity.class);
                         mContext.startActivity(intent14);
@@ -250,7 +250,7 @@ public class WQPClickListener extends com.example.a10609516.wqp_internal_app.Too
             case R.id.points_txt:
                 try{
                     // delay 1 second
-                    Thread.sleep(100);
+                    Thread.sleep(200);
                     if (points.equals("1")) {
                         Intent intent15 = new Intent(mContext, EngPointsActivity.class);
                         mContext.startActivity(intent15);
@@ -266,7 +266,7 @@ public class WQPClickListener extends com.example.a10609516.wqp_internal_app.Too
             case R.id.miss_report_txt:
                 try{
                     // delay 1 second
-                    Thread.sleep(100);
+                    Thread.sleep(200);
                     if (miss_report.equals("1")) {
                         Intent intent16 = new Intent(mContext, MissCountActivity.class);
                         mContext.startActivity(intent16);
@@ -282,7 +282,7 @@ public class WQPClickListener extends com.example.a10609516.wqp_internal_app.Too
             case R.id.gps_txt:
                 try{
                     // delay 1 second
-                    Thread.sleep(100);
+                    Thread.sleep(200);
                     if (gps.equals("1")) {
                         Intent intent17 = new Intent(mContext, GPSActivity.class);
                         mContext.startActivity(intent17);
@@ -298,7 +298,7 @@ public class WQPClickListener extends com.example.a10609516.wqp_internal_app.Too
             case R.id.quotation_txt:
                 try{
                     // delay 1 second
-                    Thread.sleep(100);
+                    Thread.sleep(200);
                     if (quotation.equals("1")) {
                         Intent intent20 = new Intent(mContext, QuotationActivity.class);
                         mContext.startActivity(intent20);
@@ -314,7 +314,7 @@ public class WQPClickListener extends com.example.a10609516.wqp_internal_app.Too
             case R.id.report_txt:
                 try{
                     // delay 1 second
-                    Thread.sleep(100);
+                    Thread.sleep(200);
                     if (report.equals("1")) {
                         Intent intent30 = new Intent(mContext, StationReportActivity.class);
                         mContext.startActivity(intent30);
@@ -330,7 +330,7 @@ public class WQPClickListener extends com.example.a10609516.wqp_internal_app.Too
             case R.id.report_search_txt:
                 try{
                     // delay 1 second
-                    Thread.sleep(100);
+                    Thread.sleep(200);
                     if (report_search.equals("1")) {
                         Intent intent31 = new Intent(mContext, StationReportSearchActivity.class);
                         mContext.startActivity(intent31);
@@ -346,7 +346,7 @@ public class WQPClickListener extends com.example.a10609516.wqp_internal_app.Too
             case R.id.inventory_txt:
                 try{
                     // delay 1 second
-                    Thread.sleep(100);
+                    Thread.sleep(200);
                     if (inventory.equals("1")) {
                         Intent intent40 = new Intent(mContext, InventoryActivity.class);
                         mContext.startActivity(intent40);
@@ -362,7 +362,7 @@ public class WQPClickListener extends com.example.a10609516.wqp_internal_app.Too
             case R.id.picking_txt:
                 try{
                     // delay 1 second
-                    Thread.sleep(100);
+                    Thread.sleep(200);
                     if (picking.equals("1")) {
                         Intent intent41 = new Intent(mContext, OrderSearchActivity.class);
                         mContext.startActivity(intent41);
@@ -378,7 +378,7 @@ public class WQPClickListener extends com.example.a10609516.wqp_internal_app.Too
             case R.id.requisition_txt:
                 try{
                     // delay 1 second
-                    Thread.sleep(100);
+                    Thread.sleep(200);
                     if (requisition.equals("1")) {
                         Intent intent50 = new Intent(mContext, RequisitionActivity.class);
                         mContext.startActivity(intent50);
@@ -394,7 +394,7 @@ public class WQPClickListener extends com.example.a10609516.wqp_internal_app.Too
             case R.id.progress_txt:
                 try{
                     // delay 1 second
-                    Thread.sleep(100);
+                    Thread.sleep(200);
                     if (progress.equals("1")) {
                         Intent intent51 = new Intent(mContext, RequisitionSearchActivity.class);
                         mContext.startActivity(intent51);
@@ -410,7 +410,7 @@ public class WQPClickListener extends com.example.a10609516.wqp_internal_app.Too
             case R.id.version_info_txt:
                 try{
                     // delay 1 second
-                    Thread.sleep(100);
+                    Thread.sleep(200);
                     if (version_info.equals("1")) {
                         Intent intent60 = new Intent(mContext, VersionActivity.class);
                         mContext.startActivity(intent60);
