@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.a10609516.wqp_os_app.Works.GPSActivity">
+    tools:context=".Works.GPSActivity">
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -14,21 +14,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context="com.example.a10609516.myapplication.Workers.GPSActivity">
+            android:orientation="vertical">
 
             <LinearLayout
                 android:id="@+id/gps_search_llt"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="15dp"
-                android:background="@drawable/bg_layered_green"
+                android:background="@drawable/bg_blue"
                 android:orientation="vertical"
                 android:weightSum="1"
                 app:layout_constraintHorizontal_bias="0.518"
@@ -51,6 +49,7 @@
                     android:layout_weight="0.05"
                     android:gravity="center"
                     android:text="GPS位置打卡查詢"
+                    android:textColor="@color/WQP_White"
                     android:textSize="20sp" />
 
                 <LinearLayout
@@ -66,12 +65,9 @@
                         android:layout_weight="0.001"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="8dp"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentTop="true"
                         android:layout_gravity="center"
                         android:text="開始日期:"
-                        android:textColor="@color/WQP_Blue"
+                        android:textColor="@color/WQP_White"
                         android:textSize="18sp" />
 
                     <Button
@@ -79,7 +75,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_weight="3"
-                        android:layout_alignParentTop="true"
                         android:layout_gravity="center"
                         android:background="#F5F5F5"
                         android:gravity="center"
@@ -116,12 +111,9 @@
                         android:layout_weight="0.001"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="8dp"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentTop="true"
                         android:layout_gravity="center"
                         android:text="結束日期:"
-                        android:textColor="@color/WQP_Blue"
+                        android:textColor="@color/WQP_White"
                         android:textSize="18sp" />
 
                     <Button
@@ -129,7 +121,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_weight="3"
-                        android:layout_alignParentTop="true"
                         android:layout_gravity="center"
                         android:background="#F5F5F5"
                         android:gravity="center"
@@ -165,12 +156,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentTop="true"
                         android:layout_gravity="center"
                         android:text="工務姓名:"
-                        android:textColor="@color/WQP_Blue"
+                        android:textColor="@color/WQP_White"
                         android:textSize="18sp" />
 
                     <EditText
@@ -194,7 +182,7 @@
                     android:layout_marginTop="3dp"
                     android:layout_marginBottom="5dp"
                     android:layout_weight="0.05"
-                    android:background="@color/WQP_Blue"
+                    android:background="@drawable/form_orange_btn"
                     android:text="查詢"
                     android:textColor="@color/WQP_White"
                     android:textSize="20sp"
@@ -212,15 +200,12 @@
                 android:layout_marginBottom="5dp"
                 android:orientation="vertical"
                 android:visibility="gone"
-                android:background="@drawable/bg_layered_blue"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
+                android:background="@drawable/bg_blue"
                 app:layout_constraintTop_toBottomOf="@+id/gps_search_llt">
 
             </LinearLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
 
     </ScrollView>
 

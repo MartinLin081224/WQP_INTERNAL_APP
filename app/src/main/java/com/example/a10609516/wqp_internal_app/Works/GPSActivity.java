@@ -58,6 +58,7 @@ public class GPSActivity extends WQPToolsActivity {
 
     private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 100;
 
+    private Context mContext = this;
     private String LOG = "GPSActivity";
 
     @Override
@@ -160,7 +161,15 @@ public class GPSActivity extends WQPToolsActivity {
     private void SetToolBar() {
         TextView log_out_txt = findViewById(R.id.log_out_txt);
         TextView id_txt = findViewById(R.id.id_txt);
-        id_txt.setText("林裕淵");
+        //接收LoginActivity傳過來的值
+        SharedPreferences user_name = getSharedPreferences("user_name", MODE_PRIVATE);
+        String U_name = user_name.getString("U_name", "");
+        this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                id_txt.setText(U_name);
+            }
+        });
 
         toolbar.setTitle("工務打卡GPS");
         toolbar.setNavigationIcon(R.drawable.icon_menu);
@@ -313,6 +322,7 @@ public class GPSActivity extends WQPToolsActivity {
                     dynamically_name.setGravity(Gravity.CENTER);
                     //dynamically_name.setWidth(50);
                     dynamically_name.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
+                    dynamically_name.setTextColor(mContext.getResources().getColor(R.color.WQP_White));
 
                     //顯示每筆LinearLayout的打卡日期
                     TextView dynamically_date;
@@ -320,6 +330,7 @@ public class GPSActivity extends WQPToolsActivity {
                     dynamically_date.setText("打卡日期 : " + JArrayList.get(1).substring(0, 10));
                     dynamically_date.setGravity(Gravity.CENTER);
                     dynamically_date.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
+                    dynamically_date.setTextColor(mContext.getResources().getColor(R.color.WQP_White));
 
                     //顯示每筆LinearLayout的打卡時間
                     TextView dynamically_time;
@@ -327,6 +338,7 @@ public class GPSActivity extends WQPToolsActivity {
                     dynamically_time.setText("打卡時間 : " + JArrayList.get(2));
                     dynamically_time.setGravity(Gravity.CENTER);
                     dynamically_time.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
+                    dynamically_time.setTextColor(mContext.getResources().getColor(R.color.WQP_White));
 
                     //顯示每筆LinearLayout的GPS位置
                     TextView dynamically_gps;
@@ -335,6 +347,7 @@ public class GPSActivity extends WQPToolsActivity {
                     dynamically_gps.setGravity(Gravity.CENTER);
                     //dynamically_gps.setWidth(50);
                     dynamically_gps.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
+                    dynamically_gps.setTextColor(mContext.getResources().getColor(R.color.WQP_White));
 
                     //設置每筆TableLayout的分隔線
                     TextView dynamically_txt = new TextView(GPSActivity.this);
@@ -353,7 +366,7 @@ public class GPSActivity extends WQPToolsActivity {
                     //dynamically_btn[loc].setText("Google Map");
                     //dynamically_btn[loc].setPadding(10, 0, 10, 0);
                     dynamically_btn[loc].setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
-                    dynamically_btn[loc].setTextColor(Color.rgb(6, 102, 219));
+                    dynamically_btn[loc].setTextColor(mContext.getResources().getColor(R.color.WQP_White));
                     dynamically_btn[loc].setId(loc);
                     dynamically_btn[loc].setOnClickListener(new View.OnClickListener() {
                         @Override

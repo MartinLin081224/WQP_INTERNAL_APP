@@ -169,9 +169,9 @@ public class HomeActivity extends WQPToolsActivity {
      */
     private void SetToolBar() {
         log_out_txt = findViewById(R.id.log_out_txt);
-        TextView id_txt = findViewById(R.id.id_txt);
+        //TextView id_txt = findViewById(R.id.id_txt);
 
-        //接收LoginActivity傳過來的值
+        /*//接收LoginActivity傳過來的值
         SharedPreferences user_name = getSharedPreferences("user_name", MODE_PRIVATE);
         String U_name = user_name.getString("U_name", "");
         this.runOnUiThread(new Runnable() {
@@ -179,7 +179,7 @@ public class HomeActivity extends WQPToolsActivity {
             public void run() {
                 id_txt.setText(U_name);
             }
-        });
+        });*/
 
         toolbar.setTitle("首頁");
         toolbar.setNavigationIcon(R.drawable.icon_menu);
@@ -264,6 +264,13 @@ public class HomeActivity extends WQPToolsActivity {
                 String user_name = jsonObject.getString("MV002");
                 SharedPreferences sharedPreferences_name = getSharedPreferences("user_name", MODE_PRIVATE);
                 sharedPreferences_name.edit().putString("U_name", user_name).apply();
+                TextView id_txt = findViewById(R.id.id_txt);
+                this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        id_txt.setText(user_name);
+                    }
+                });
             }
         } catch (Exception e) {
             e.printStackTrace();

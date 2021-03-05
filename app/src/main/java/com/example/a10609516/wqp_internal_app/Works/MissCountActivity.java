@@ -114,7 +114,15 @@ public class MissCountActivity extends WQPToolsActivity {
     private void SetToolBar() {
         TextView log_out_txt = findViewById(R.id.log_out_txt);
         TextView id_txt = findViewById(R.id.id_txt);
-        id_txt.setText("林裕淵");
+        //接收LoginActivity傳過來的值
+        SharedPreferences user_name = getSharedPreferences("user_name", MODE_PRIVATE);
+        String U_name = user_name.getString("U_name", "");
+        this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                id_txt.setText(U_name);
+            }
+        });
 
         toolbar.setTitle("各區未回報數量");
         toolbar.setNavigationIcon(R.drawable.icon_menu);
