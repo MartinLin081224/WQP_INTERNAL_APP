@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "732941640885",
+    "firebase_url": "https://wqp-os-app-default-rtdb.firebaseio.com",
+    "project_id": "wqp-os-app",
+    "storage_bucket": "wqp-os-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:732941640885:android:7a234700f8012f54fc8afc",
+        "android_client_info": {
+          "package_name": "com.example.a10609516.wqp_internal_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "732941640885-sbu7sl1q4u88qpuu564kgjl5unlcsdd3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAykmJlx6stS5hdEu9xLVj4Zx45f5EMZ28"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "732941640885-sbu7sl1q4u88qpuu564kgjl5unlcsdd3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

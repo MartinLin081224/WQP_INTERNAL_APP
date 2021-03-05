@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--3個層的順序即為顯示時的疊加順序-->
+    <!--背景色-->
+    <item android:id="@android:id/background">
+        <shape>
+            <corners android:radius="5dip" />
+
+            <solid android:color="@color/WQP_White" />
+        </shape>
+    </item>
+
+    <!--二級進度條的顏色-->
+    <item android:id="@android:id/secondaryProgress">
+        <clip>
+            <shape>
+                <corners android:radius="5dip" />
+
+                <gradient
+                    android:centerColor="#0047AB"
+                    android:centerX="1.0"
+                    android:endColor="@color/WQP_Green"
+                    android:startColor="#66CDAA" />
+            </shape>
+        </clip>
+    </item>
+
+    <!--一級進度條的顏色，也可以直接替換成圖片-->
+    <item android:id="@android:id/progress">
+        <clip>
+            <shape>
+                <corners android:radius="5dip" />
+
+                <solid android:color="@color/WQP_White" />
+            </shape>
+        </clip>
+    </item>
+
+</layer-list>

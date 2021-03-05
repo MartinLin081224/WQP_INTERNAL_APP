@@ -1,0 +1,790 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:orientation="vertical"
+                android:background="@drawable/frame_line">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="5dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/underline_1dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="任務狀態 : "
+                        android:textColor="@color/WQP_Black"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/status_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="處理中"
+                        android:textColor="@color/WQP_Black"
+                        android:textStyle="bold"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="5dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/underline_1dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="處理狀況 : "
+                        android:textColor="@color/WQP_Black"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <Spinner
+                        android:id="@+id/type_spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/WQP_Black"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/unless_llt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="5dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/underline_1dp"
+                    android:visibility="gone">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/unless_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="無效派工 : "
+                            android:textColor="@color/WQP_Black"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <Spinner
+                            android:id="@+id/unless_spinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/unless_txt"
+                            android:textColor="@color/WQP_Black"
+                            android:textSize="18sp" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/censor_llt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="5dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/underline_1dp"
+                    android:visibility="gone">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/censor_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="檢修類別 : "
+                            android:textColor="@color/WQP_Black"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <Spinner
+                            android:id="@+id/censor_spinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/censor_txt"
+                            android:textColor="@color/WQP_Black"
+                            android:textSize="18sp" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/pay_llt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="5dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/underline_1dp"
+                    android:visibility="gone">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/pay_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="付款方式 : "
+                            android:textColor="@color/WQP_Black"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <Spinner
+                            android:id="@+id/pay_spinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/pay_txt"
+                            android:textColor="@color/WQP_Black"
+                            android:textSize="18sp" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/is_get_llt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="5dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/underline_1dp"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="是否要收款 : "
+                        android:textColor="@color/WQP_Black"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <CheckBox
+                        android:id="@+id/is_get_money_checkBox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:onClick="onCheckboxClicked"
+                        android:text="收款"
+                        android:textColor="@color/WQP_Black"
+                        android:textSize="18sp"
+                        android:buttonTint="@color/WQP_Blue"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/receivable_llt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="5dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/underline_1dp"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="應收金額 : "
+                        android:textColor="@color/WQP_Black"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/receivable_money_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/WQP_Black"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/have_get_llt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="5dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/underline_1dp"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="是否已收款 : "
+                        android:textColor="@color/WQP_Black"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <CheckBox
+                        android:id="@+id/have_get_money_checkBox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:onClick="onCheckboxClicked"
+                        android:text="已收款"
+                        android:textColor="@color/WQP_Black"
+                        android:textSize="18sp"
+                        android:buttonTint="@color/WQP_Blue"/>
+
+                    <CheckBox
+                        android:id="@+id/not_get_money_checkBox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="center_vertical"
+                        android:onClick="onCheckboxClicked"
+                        android:text="未收款"
+                        android:textColor="@color/WQP_Black"
+                        android:textSize="18sp"
+                        android:buttonTint="@color/WQP_Blue"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/eng_money_llt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="5dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/underline_1dp"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="實收金額 : "
+                        android:textColor="@color/WQP_Black"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/eng_money_edt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:layout_weight="0.9"
+                        android:cursorVisible="false"
+                        android:gravity="center_vertical"
+                        android:hint="金額"
+                        android:textColor="@color/WQP_Black"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="5dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="8dp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/underline_1dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="現場狀況回報 : "
+                        android:textColor="@color/WQP_Black"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/eng_report_edt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:layout_weight="0.9"
+                        android:cursorVisible="false"
+                        android:gravity="center_vertical"
+                        android:hint="描述"
+                        android:textColor="@color/WQP_Black"
+                        android:textSize="18sp"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="5dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="8dp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/underline_1dp"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="GPS位置 : "
+                        android:textColor="@color/WQP_Black"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/gps_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/WQP_Black"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/photo_llt"
+                style="@style/Album.MatchParent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:orientation="vertical"
+                android:background="@drawable/bg_blue"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/shape_line_dash"
+                    android:gravity="center"
+                    android:text="附件"
+                    android:textColor="@color/WQP_White"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+                <!--<LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="5dp">
+
+                    <Button
+                        android:id="@+id/preview_btn"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@color/WQP_Blue"
+                        android:text="預覽"
+                        android:textColor="#F5F5F5"
+                        android:textSize="20sp"/>
+
+                    <Button
+                        android:id="@+id/choice_btn"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="20dp"
+                        android:background="@color/WQP_Blue"
+                        android:text="選擇"
+                        android:textColor="#F5F5F5"
+                        android:textSize="20sp"/>
+
+                </LinearLayout>-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:id="@+id/first_photo_llt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="5dp"
+                            android:orientation="vertical"
+                            android:background="@drawable/photo_line">
+
+                            <TextView
+                                android:id="@+id/first_photo_txt"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text=""
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/WQP_White"
+                                android:background="@color/WQP_Green"/>
+
+                            <include layout="@layout/activity_list_content1"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/second_photo_llt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="10dp"
+                            android:orientation="vertical"
+                            android:background="@drawable/photo_line">
+
+                            <TextView
+                                android:id="@+id/second_photo_txt"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text=""
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/WQP_White"
+                                android:background="@color/WQP_Green"/>
+
+                            <include layout="@layout/activity_list_content2"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:id="@+id/third_photo_llt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="5dp"
+                            android:orientation="vertical"
+                            android:background="@drawable/photo_line">
+
+                            <TextView
+                                android:id="@+id/third_photo_txt"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text=""
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/WQP_White"
+                                android:background="@color/WQP_Green"/>
+
+                            <include layout="@layout/activity_list_content3"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/fourth_photo_llt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="10dp"
+                            android:orientation="vertical"
+                            android:background="@drawable/photo_line">
+
+                            <TextView
+                                android:id="@+id/fourth_photo_txt"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text=""
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/WQP_White"
+                                android:background="@color/WQP_Green"/>
+
+                            <include layout="@layout/activity_list_content4"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:id="@+id/fifth_photo_llt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="5dp"
+                            android:orientation="vertical"
+                            android:background="@drawable/photo_line">
+
+                            <TextView
+                                android:id="@+id/fifth_photo_txt"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text=""
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/WQP_White"
+                                android:background="@color/WQP_Green"/>
+
+                            <include layout="@layout/activity_list_content5"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/sixth_photo_llt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="10dp"
+                            android:orientation="vertical"
+                            android:background="@drawable/photo_line">
+
+                            <TextView
+                                android:id="@+id/sixth_photo_txt"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text=""
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/WQP_White"
+                                android:background="@color/WQP_Green"/>
+
+                            <include layout="@layout/activity_list_content6"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:id="@+id/seventh_photo_llt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="5dp"
+                            android:orientation="vertical"
+                            android:background="@drawable/photo_line">
+
+                            <TextView
+                                android:id="@+id/seventh_photo_txt"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text=""
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/WQP_White"
+                                android:background="@color/WQP_Green"/>
+
+                            <include layout="@layout/activity_list_content7"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/eighth_photo_llt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="10dp"
+                            android:orientation="vertical"
+                            android:background="@drawable/photo_line">
+
+                            <TextView
+                                android:id="@+id/eighth_photo_txt"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text=""
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/WQP_White"
+                                android:background="@color/WQP_Green"/>
+
+                            <include layout="@layout/activity_list_content8"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:id="@+id/ninth_photo_llt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="5dp"
+                            android:orientation="vertical"
+                            android:background="@drawable/photo_line">
+
+                            <TextView
+                                android:id="@+id/ninth_photo_txt"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text=""
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/WQP_White"
+                                android:background="@color/WQP_Green"/>
+
+                            <include layout="@layout/activity_list_content9"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/tenth_photo_llt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="10dp"
+                            android:orientation="vertical"
+                            android:background="@drawable/photo_line"
+                            android:visibility="invisible">
+
+                            <TextView
+                                android:id="@+id/tenth_photo_txt"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text=""
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/WQP_White"
+                                android:background="@color/WQP_Green"/>
+
+                            <include layout="@layout/activity_list_content10"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/report_llt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <Button
+            android:id="@+id/report_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/WQP_Blue"
+            android:textColor="@color/WQP_White"
+            android:text="回報"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+</LinearLayout>

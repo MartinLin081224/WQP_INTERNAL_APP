@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="@android:color/black">
+        <shape android:shape="rectangle">
+            <!--設定圓角，當設置的圓角半徑很大，就可變成弧形邊了-->
+            <corners android:radius="30dip" />
+            <!--邊框-->
+            <stroke android:width="2dip" android:color="@color/WQP_Blue" />
+            <!--漸層顏色-->
+            <!--<gradient android:angle="0" android:endColor="#005D92" android:startColor="#5EB9D4" />-->
+            <solid android:color="#80AEAFAF"/>
+
+        </shape>
+    </item>
+</selector>
