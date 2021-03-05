@@ -67,7 +67,8 @@ public class HomeActivity extends WQPToolsActivity {
         sendRequestWithOkHttpOfTokenID();
         //與OkHttp建立連線(Menu權限)
         sendRequestWithOkHttpForMenuAuthority();
-
+        //與OKHttp連線(藉由登入輸入的員工ID取得員工姓名)
+        sendRequestWithOkHttpForUserName();
     }
 
     //取得控制項物件
@@ -213,6 +214,60 @@ public class HomeActivity extends WQPToolsActivity {
                 startActivity(intent_login);
             }
         });
+    }
+
+    /**
+     * 與OKHttp連線(藉由登入輸入的員工ID取得員工姓名)
+     */
+    private void sendRequestWithOkHttpForUserName() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                SharedPreferences user_id = getSharedPreferences("user_id", MODE_PRIVATE);
+                user_id_data = user_id.getString("ID", "");
+                Log.e(LOG, "U_ACC:" + user_id_data);
+                try {
+                    OkHttpClient client = new OkHttpClient();
+                    //POST
+                    RequestBody requestBody = new FormBody.Builder()
+                            .add("U_ACC", user_id_data)
+                            .build();
+                    Request request = new Request.Builder()
+                            .url("http://a.wqp-water.com.tw/WQP_OS/UserName.php")
+                            //.url("http://192.168.0.172/WQP_OS/UserName.php")
+                            .post(requestBody)
+                            .build();
+                    Response response = client.newCall(request).execute();
+                    String responseData = response.body().string();
+                    Log.i(LOG, requestBody.toString());
+                    Log.i(LOG, response.toString());
+                    Log.i(LOG, responseData);
+                    parseJSONWithJSONObjectForUserName(responseData);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+    /**
+     * 獲得JSON字串並解析成String字串
+     *在TextView上SHOW出回傳的員工姓名
+     * @param jsonData
+     */
+    private void parseJSONWithJSONObjectForUserName(String jsonData) {
+        try {
+            JSONArray jsonArray = new JSONArray(jsonData);
+            for (int i = 0; i < jsonArray.length(); i++) {
+                //JSON格式改為字串
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                String user_name = jsonObject.getString("MV002");
+                SharedPreferences sharedPreferences_name = getSharedPreferences("user_name", MODE_PRIVATE);
+                sharedPreferences_name.edit().putString("U_name", user_name).apply();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
