@@ -148,8 +148,6 @@ public class WQPClickListener extends WQPToolsActivity implements View.OnClickLi
 
         sendRequestWithOkHttpForMenuAuthority();
 
-
-
         switch (v.getId()) {
             // Your click even code for all activities
             case R.id.home_txt:
