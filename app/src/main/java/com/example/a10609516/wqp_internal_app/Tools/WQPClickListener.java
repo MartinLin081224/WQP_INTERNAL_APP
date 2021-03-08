@@ -166,6 +166,8 @@ public class WQPClickListener extends WQPToolsActivity implements View.OnClickLi
                 } catch(InterruptedException e){
                     e.printStackTrace();
                 }
+                break;
+
             case R.id.exchange_txt:
                 try{
                     // delay 1 second
@@ -244,7 +246,6 @@ public class WQPClickListener extends WQPToolsActivity implements View.OnClickLi
                 } catch(InterruptedException e){
                     e.printStackTrace();
                 }
-
                 break;
 
             case R.id.points_txt:

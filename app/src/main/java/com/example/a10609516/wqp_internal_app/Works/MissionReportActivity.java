@@ -326,9 +326,13 @@ public class MissionReportActivity extends WQPToolsActivity {
                     if (unless_spinner.getSelectedItemId() == 0 ){
                         Toast.makeText(MissionReportActivity.this, "【請選擇無效派工原因】", Toast.LENGTH_SHORT).show();
                     } else {
-                        //與OkHttp建立連線(任務回報-離開目的-無效派工)
-                        sendRequestWithOkHttpForMissionReportUnless();
-                        finish();
+                        if ((RM003.equals("8") || RM003.equals("9")) && censor_spinner.getSelectedItemId() == 0) {
+                            Toast.makeText(MissionReportActivity.this, "【請選擇檢修類別】", Toast.LENGTH_SHORT).show();
+                        } else {
+                            //與OkHttp建立連線(任務回報-離開目的-無效派工)
+                            sendRequestWithOkHttpForMissionReportUnless();
+                            finish();
+                        }
                     }
                 }
 
@@ -445,6 +449,11 @@ public class MissionReportActivity extends WQPToolsActivity {
                     photo_llt.setVisibility(View.VISIBLE);
                 }
             } else if (type_spinner.getSelectedItemId() == 3) {
+                if ((RM003.equals("8") || RM003.equals("9"))) {
+                    censor_llt.setVisibility(View.VISIBLE);
+                } else {
+                    censor_llt.setVisibility(View.GONE);
+                }
                 unless_llt.setVisibility(View.VISIBLE);
                 pay_llt.setVisibility(View.VISIBLE);
                 is_get_llt.setVisibility(View.VISIBLE);

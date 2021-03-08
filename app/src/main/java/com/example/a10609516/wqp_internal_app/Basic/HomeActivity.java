@@ -10,12 +10,22 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.a10609516.wqp_internal_app.Boss.ApplyExchangeActivity;
+import com.example.a10609516.wqp_internal_app.Boss.ExchangeActivity;
+import com.example.a10609516.wqp_internal_app.Clerk.QuotationActivity;
+import com.example.a10609516.wqp_internal_app.DepartmentAndDIY.StationReportActivity;
+import com.example.a10609516.wqp_internal_app.DepartmentAndDIY.StationReportSearchActivity;
+import com.example.a10609516.wqp_internal_app.Manager.InventoryActivity;
+import com.example.a10609516.wqp_internal_app.Manager.OrderSearchActivity;
 import com.example.a10609516.wqp_internal_app.R;
 import com.example.a10609516.wqp_internal_app.Tools.WQPClickListener;
 import com.example.a10609516.wqp_internal_app.Tools.WQPToolsActivity;
 import com.example.a10609516.wqp_internal_app.Works.CalendarActivity;
 import com.example.a10609516.wqp_internal_app.Works.EngPointsActivity;
+import com.example.a10609516.wqp_internal_app.Works.GPSActivity;
+import com.example.a10609516.wqp_internal_app.Works.MissCountActivity;
 import com.example.a10609516.wqp_internal_app.Works.MissionActivity;
 import com.example.a10609516.wqp_internal_app.Works.PointsActivity;
 import com.example.a10609516.wqp_internal_app.Works.ScheduleActivity;
@@ -41,7 +51,9 @@ public class HomeActivity extends WQPToolsActivity {
     private DrawerLayout drawer;
     private Toolbar toolbar;
 
-    private ImageView schedule_imv, calendar_imv, mission_imv, bonus_imv, points_imv;
+    private ImageView exchange_imv, schedule_imv, calendar_imv, mission_imv, bonus_imv, points_imv,
+            miss_report_imv, gps_imv, quotation_imv, report_imv, report_search_imv, inventory_imv,
+            picking_imv, requisition_imv, progress_imv;
     private String user_id_data;
 
     private String home, exchange, schedule, calendar, mission,
@@ -76,52 +88,291 @@ public class HomeActivity extends WQPToolsActivity {
         toolbar = findViewById(R.id.toolbar);
         nav_view = findViewById(R.id.nav_view);
         drawer = findViewById(R.id.drawer_layout);
+        exchange_imv = findViewById(R.id.exchange_imv);
         schedule_imv = findViewById(R.id.schedule_imv);
         calendar_imv = findViewById(R.id.calendar_imv);
         mission_imv = findViewById(R.id.mission_imv);
         bonus_imv = findViewById(R.id.bonus_imv);
         points_imv = findViewById(R.id.points_imv);
+        miss_report_imv = findViewById(R.id.miss_report_imv);
+        gps_imv = findViewById(R.id.gps_imv);
+        quotation_imv = findViewById(R.id.quotation_imv);
+        report_imv = findViewById(R.id.report_imv);
+        report_search_imv = findViewById(R.id.report_search_imv);
+        inventory_imv = findViewById(R.id.inventory_imv);
+        picking_imv = findViewById(R.id.picking_imv);
+        requisition_imv = findViewById(R.id.requisition_imv);
+        progress_imv = findViewById(R.id.progress_imv);
+
+        exchange_imv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try{
+                    // delay 1 second
+                    Thread.sleep(200);
+                    if (exchange.equals("1")) {
+                        Intent intent10 = new Intent(mContext, ApplyExchangeActivity.class);
+                        mContext.startActivity(intent10);
+                    } else {
+                        Toast.makeText(mContext, "【換貨申請單】無執行權限", Toast.LENGTH_SHORT).show();
+                    }
+                } catch(InterruptedException e){
+                    e.printStackTrace();
+                }
+            }
+        });
 
         schedule_imv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent1 = new Intent(HomeActivity.this, ScheduleActivity.class);
-                startActivity(intent1);
+                try{
+                    // delay 1 second
+                    Thread.sleep(200);
+                    if (schedule.equals("1")) {
+                        Intent intent11 = new Intent(mContext, ScheduleActivity.class);
+                        mContext.startActivity(intent11);
+                    } else {
+                        Toast.makeText(mContext, "【行程資訊】無執行權限", Toast.LENGTH_SHORT).show();
+                    }
+                } catch(InterruptedException e){
+                    e.printStackTrace();
+                }
             }
         });
 
         calendar_imv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent2 = new Intent(HomeActivity.this, CalendarActivity.class);
-                startActivity(intent2);
+                try{
+                    // delay 1 second
+                    Thread.sleep(200);
+                    if (calendar.equals("1")) {
+                        Intent intent12 = new Intent(mContext, CalendarActivity.class);
+                        mContext.startActivity(intent12);
+                    } else {
+                        Toast.makeText(mContext, "【派工行事曆】無執行權限", Toast.LENGTH_SHORT).show();
+                    }
+                } catch(InterruptedException e){
+                    e.printStackTrace();
+                }
             }
         });
 
         mission_imv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent3 = new Intent(HomeActivity.this, MissionActivity.class);
-                startActivity(intent3);
+                try{
+                    // delay 1 second
+                    Thread.sleep(200);
+                    if (mission.equals("1")) {
+                        Intent intent13 = new Intent(mContext, MissionActivity.class);
+                        mContext.startActivity(intent13);
+                    } else {
+                        Toast.makeText(mContext, "【派工任務】無執行權限", Toast.LENGTH_SHORT).show();
+                    }
+                } catch(InterruptedException e){
+                    e.printStackTrace();
+                }
             }
         });
 
         bonus_imv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent4 = new Intent(HomeActivity.this, PointsActivity.class);
-                startActivity(intent4);
+                try{
+                    // delay 1 second
+                    Thread.sleep(200);
+                    if (bonus.equals("1")) {
+                        Intent intent14 = new Intent(mContext, PointsActivity.class);
+                        mContext.startActivity(intent14);
+                    } else {
+                        Toast.makeText(mContext, "【點數總覽】無執行權限", Toast.LENGTH_SHORT).show();
+                    }
+                } catch(InterruptedException e){
+                    e.printStackTrace();
+                }
             }
         });
 
         points_imv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent5 = new Intent(HomeActivity.this, EngPointsActivity.class);
-                startActivity(intent5);
+                try{
+                    // delay 1 second
+                    Thread.sleep(200);
+                    if (points.equals("1")) {
+                        Intent intent15 = new Intent(mContext, EngPointsActivity.class);
+                        mContext.startActivity(intent15);
+                    } else {
+                        Toast.makeText(mContext, "【點數明細】無執行權限", Toast.LENGTH_SHORT).show();
+                    }
+                } catch(InterruptedException e){
+                    e.printStackTrace();
+                }
             }
         });
 
+        miss_report_imv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try{
+                    // delay 1 second
+                    Thread.sleep(200);
+                    if (miss_report.equals("1")) {
+                        Intent intent16 = new Intent(mContext, MissCountActivity.class);
+                        mContext.startActivity(intent16);
+                    } else {
+                        Toast.makeText(mContext, "【各區未回報數量】無執行權限", Toast.LENGTH_SHORT).show();
+                    }
+                } catch(InterruptedException e){
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        gps_imv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try{
+                    // delay 1 second
+                    Thread.sleep(200);
+                    if (gps.equals("1")) {
+                        Intent intent17 = new Intent(mContext, GPSActivity.class);
+                        mContext.startActivity(intent17);
+                    } else {
+                        Toast.makeText(mContext, "【工務打卡GPS】無執行權限", Toast.LENGTH_SHORT).show();
+                    }
+                } catch(InterruptedException e){
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        quotation_imv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try{
+                    // delay 1 second
+                    Thread.sleep(200);
+                    if (quotation.equals("1")) {
+                        Intent intent20 = new Intent(mContext, QuotationActivity.class);
+                        mContext.startActivity(intent20);
+                    } else {
+                        Toast.makeText(mContext, "【報價單審核】無執行權限", Toast.LENGTH_SHORT).show();
+                    }
+                } catch(InterruptedException e){
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        report_imv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try{
+                    // delay 1 second
+                    Thread.sleep(200);
+                    if (report.equals("1")) {
+                        Intent intent30 = new Intent(mContext, StationReportActivity.class);
+                        mContext.startActivity(intent30);
+                    } else {
+                        Toast.makeText(mContext, "【日報上傳作業】無執行權限", Toast.LENGTH_SHORT).show();
+                    }
+                } catch(InterruptedException e){
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        report_search_imv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try{
+                    // delay 1 second
+                    Thread.sleep(200);
+                    if (report_search.equals("1")) {
+                        Intent intent31 = new Intent(mContext, StationReportSearchActivity.class);
+                        mContext.startActivity(intent31);
+                    } else {
+                        Toast.makeText(mContext, "【日報查詢/修正】無執行權限", Toast.LENGTH_SHORT).show();
+                    }
+                } catch(InterruptedException e){
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        inventory_imv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try{
+                    // delay 1 second
+                    Thread.sleep(200);
+                    if (inventory.equals("1")) {
+                        Intent intent40 = new Intent(mContext, InventoryActivity.class);
+                        mContext.startActivity(intent40);
+                    } else {
+                        Toast.makeText(mContext, "【盤點單】無執行權限", Toast.LENGTH_SHORT).show();
+                    }
+                } catch(InterruptedException e){
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        picking_imv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try{
+                    // delay 1 second
+                    Thread.sleep(200);
+                    if (picking.equals("1")) {
+                        Intent intent41 = new Intent(mContext, OrderSearchActivity.class);
+                        mContext.startActivity(intent41);
+                    } else {
+                        Toast.makeText(mContext, "【撿料單】無執行權限", Toast.LENGTH_SHORT).show();
+                    }
+                } catch(InterruptedException e){
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        requisition_imv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try{
+                    // delay 1 second
+                    Thread.sleep(200);
+                    if (requisition.equals("1")) {
+                        Intent intent50 = new Intent(mContext, RequisitionActivity.class);
+                        mContext.startActivity(intent50);
+                    } else {
+                        Toast.makeText(mContext, "【需求申請單】無執行權限", Toast.LENGTH_SHORT).show();
+                    }
+                } catch(InterruptedException e){
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        progress_imv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try{
+                    // delay 1 second
+                    Thread.sleep(200);
+                    if (progress.equals("1")) {
+                        Intent intent51 = new Intent(mContext, RequisitionSearchActivity.class);
+                        mContext.startActivity(intent51);
+                    } else {
+                        Toast.makeText(mContext, "【進度查詢】無執行權限", Toast.LENGTH_SHORT).show();
+                    }
+                } catch(InterruptedException e){
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     /**

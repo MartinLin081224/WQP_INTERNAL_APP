@@ -116,8 +116,8 @@ public class OrderSearchActivity extends WQPToolsActivity {
                 if (String.valueOf(company_spinner.getSelectedItem()).equals("請選擇")) {
                     Toast.makeText(OrderSearchActivity.this, "【請選擇公司別】", Toast.LENGTH_SHORT).show();
                 } else {
-                    InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
-                    imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+                    /*InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+                    imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);*/
                     //讓quotation_TableLayout資料清空
                     search_tlt.removeAllViews();
                     //separate_llt、order_search_llt、quotation_TableLayout、title_llt
