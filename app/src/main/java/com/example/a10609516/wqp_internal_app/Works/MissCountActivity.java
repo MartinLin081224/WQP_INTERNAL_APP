@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -38,10 +39,13 @@ public class MissCountActivity extends WQPToolsActivity {
 
     private SharedPreferences sp;
 
-    private LinearLayout miss_llt;
+
     private LinearLayout nav_view;
     private DrawerLayout drawer;
     private Toolbar toolbar;
+
+    private LinearLayout miss_llt;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     private Context mContext = this;
     private String LOG = "MissCountActivity";
@@ -68,6 +72,18 @@ public class MissCountActivity extends WQPToolsActivity {
         nav_view = findViewById(R.id.nav_view);
         drawer = findViewById(R.id.drawer_layout);
         miss_llt = (LinearLayout) findViewById(R.id.miss_llt);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.refresh_layout);
+
+        //UI介面下拉刷新
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mSwipeRefreshLayout.setRefreshing(false);
+                miss_llt.removeAllViews();
+                //與OKHttp連線(GroupMissCount)工務未回報派工數量
+                sendRequestWithOkHttpForMissCount();
+            }
+        });
     }
 
     /**
