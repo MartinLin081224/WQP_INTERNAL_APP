@@ -59,6 +59,7 @@
                             android:id="@+id/exchange_imv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:src="@drawable/icon_exchange_search"
                             android:scaleType="centerInside"/>
 
@@ -165,6 +166,7 @@
                             android:id="@+id/schedule_imv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:src="@drawable/icon_schedule"
                             android:scaleType="centerInside"/>
 
@@ -191,6 +193,7 @@
                             android:id="@+id/calendar_imv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:src="@drawable/icon_calendar"
                             android:scaleType="centerInside"/>
 
@@ -216,6 +219,7 @@
                             android:id="@+id/mission_imv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:src="@drawable/icon_mission"
                             android:scaleType="centerInside"/>
 
@@ -248,6 +252,7 @@
                             android:id="@+id/bonus_imv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:src="@drawable/icon_pie"
                             android:scaleType="centerInside"/>
 
@@ -274,6 +279,7 @@
                             android:id="@+id/points_imv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:src="@drawable/icon_details"
                             android:scaleType="centerInside"/>
 
@@ -353,6 +359,7 @@
                             android:id="@+id/miss_report_imv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:src="@drawable/icon_miss_count"
                             android:scaleType="centerInside"/>
 
@@ -379,6 +386,7 @@
                             android:id="@+id/gps_imv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:src="@drawable/icon_gps"
                             android:scaleType="centerInside"/>
 
@@ -461,6 +469,7 @@
                             android:id="@+id/quotation_imv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:src="@drawable/icon_quotation"
                             android:scaleType="centerInside"/>
 
@@ -568,6 +577,7 @@
                             android:id="@+id/report_imv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:src="@drawable/icon_report"
                             android:scaleType="centerInside"/>
 
@@ -594,6 +604,7 @@
                             android:id="@+id/report_search_imv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:src="@drawable/icon_report_search"
                             android:scaleType="centerInside"/>
 
@@ -676,6 +687,7 @@
                             android:id="@+id/inventory_imv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:src="@drawable/icon_inventory"
                             android:scaleType="centerInside"/>
 
@@ -702,6 +714,7 @@
                             android:id="@+id/picking_imv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:src="@drawable/icon_pick"
                             android:scaleType="centerInside"/>
 
@@ -784,6 +797,7 @@
                             android:id="@+id/requisition_imv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:src="@drawable/icon_requisition"
                             android:scaleType="centerInside"/>
 
@@ -810,6 +824,7 @@
                             android:id="@+id/progress_imv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:src="@drawable/icon_progress"
                             android:scaleType="centerInside"/>
 

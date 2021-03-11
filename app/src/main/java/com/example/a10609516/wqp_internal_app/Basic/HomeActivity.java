@@ -659,6 +659,8 @@ public class HomeActivity extends WQPToolsActivity {
     protected void onRestart() {
         super.onRestart();
         Log.e(LOG, "onRestart");
+        //取得TokenID的OKHttp
+        sendRequestWithOkHttpOfTokenID();
     }
 
     @Override

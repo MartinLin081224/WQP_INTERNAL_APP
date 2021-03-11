@@ -218,7 +218,8 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/WQP_White"
                     android:textSize="18sp"
-                    android:inputType="number"/>
+                    android:inputType="number"
+                    android:backgroundTint="@color/WQP_White"/>
 
                 <Button
                     android:id="@+id/factory_id_btn"
@@ -335,7 +336,8 @@
                     android:layout_height="wrap_content"
                     android:inputType="numberDecimal"
                     android:textColor="@color/WQP_White"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:backgroundTint="@color/WQP_White"/>
 
                 <TextView
                     android:id="@+id/unit_txt2"

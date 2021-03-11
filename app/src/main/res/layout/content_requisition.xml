@@ -186,7 +186,8 @@
                     android:layout_marginRight="10dp"
                     android:visibility="invisible"
                     android:textColor="@color/WQP_White"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp"
+                    android:backgroundTint="@color/WQP_White"/>
 
             </LinearLayout>
 
@@ -214,7 +215,8 @@
                     android:layout_marginRight="10dp"
                     android:textColor="@color/WQP_White"
                     android:textSize="18sp"
-                    android:inputType="textMultiLine"/>
+                    android:inputType="textMultiLine"
+                    android:backgroundTint="@color/WQP_White"/>
 
             </LinearLayout>
 
@@ -326,7 +328,8 @@
                         android:layout_marginRight="10dp"
                         android:visibility="invisible"
                         android:textColor="@color/WQP_White"
-                        android:textSize="18sp"/>
+                        android:textSize="18sp"
+                        android:backgroundTint="@color/WQP_White"/>
 
                 </LinearLayout>
 
@@ -353,7 +356,8 @@
                         android:layout_marginRight="10dp"
                         android:layout_weight="1"
                         android:textColor="@color/WQP_White"
-                        android:textSize="18sp" />
+                        android:textSize="18sp"
+                        android:backgroundTint="@color/WQP_White"/>
 
                 </LinearLayout>
 
@@ -418,7 +422,8 @@
                         android:layout_weight="1"
                         android:layout_marginRight="10dp"
                         android:textColor="@color/WQP_White"
-                        android:textSize="18sp"/>
+                        android:textSize="18sp"
+                        android:backgroundTint="@color/WQP_White"/>
 
                 </LinearLayout>
 
@@ -445,7 +450,8 @@
                         android:layout_weight="1"
                         android:layout_marginRight="10dp"
                         android:textColor="@color/WQP_White"
-                        android:textSize="18sp"/>
+                        android:textSize="18sp"
+                        android:backgroundTint="@color/WQP_White"/>
 
                 </LinearLayout>
 
@@ -473,7 +479,8 @@
                         android:layout_marginRight="10dp"
                         android:textColor="@color/WQP_White"
                         android:textSize="18sp"
-                        android:inputType="number"/>
+                        android:inputType="number"
+                        android:backgroundTint="@color/WQP_White"/>
 
                 </LinearLayout>
 
@@ -514,7 +521,8 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginRight="10dp"
                         android:textColor="@color/WQP_White"
-                        android:textSize="18sp"/>
+                        android:textSize="18sp"
+                        android:backgroundTint="@color/WQP_White"/>
 
                 </LinearLayout>
 
@@ -555,7 +563,8 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginRight="10dp"
                         android:textColor="@color/WQP_White"
-                        android:textSize="18sp"/>
+                        android:textSize="18sp"
+                        android:backgroundTint="@color/WQP_White"/>
 
                 </LinearLayout>
 

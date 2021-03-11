@@ -73,7 +73,8 @@
                 android:textColor="@color/WQP_White"
                 android:textColorHint="@color/WQP_White"
                 android:textSize="18sp"
-                android:inputType="number"/>
+                android:inputType="number"
+                android:backgroundTint="@color/WQP_White"/>
 
             <EditText
                 android:id="@+id/money_edt"
@@ -87,7 +88,8 @@
                 android:textColor="@color/WQP_White"
                 android:textColorHint="@color/WQP_White"
                 android:textSize="18sp"
-                android:inputType="number"/>
+                android:inputType="number"
+                android:backgroundTint="@color/WQP_White"/>
 
         </LinearLayout>
 

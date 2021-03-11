@@ -118,7 +118,8 @@
                         android:ems="10"
                         android:hint="報價單號"
                         android:inputType="number"
-                        android:textColorHint="@color/WQP_White"/>
+                        android:textColorHint="@color/WQP_White"
+                        android:backgroundTint="@color/WQP_White"/>
 
                 </LinearLayout>
 
@@ -149,7 +150,8 @@
                         android:ems="10"
                         android:hint="客戶代號"
                         android:inputType="textPersonName"
-                        android:textColorHint="@color/WQP_White"/>
+                        android:textColorHint="@color/WQP_White"
+                        android:backgroundTint="@color/WQP_White"/>
 
                 </LinearLayout>
 
@@ -180,7 +182,8 @@
                         android:ems="10"
                         android:hint="業務員編"
                         android:inputType="number"
-                        android:textColorHint="@color/WQP_White"/>
+                        android:textColorHint="@color/WQP_White"
+                        android:backgroundTint="@color/WQP_White"/>
 
                 </LinearLayout>
 

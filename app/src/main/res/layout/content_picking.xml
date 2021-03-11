@@ -350,7 +350,8 @@
                             android:textColor="@color/WQP_White"
                             android:textSize="18sp"
                             android:hint="請輸入數量"
-                            android:textColorHint="@color/WQP_White"/>
+                            android:textColorHint="@color/WQP_White"
+                            android:backgroundTint="@color/WQP_White"/>
 
                         <TextView
                             android:id="@+id/unit_txt"
@@ -384,7 +385,8 @@
                             android:layout_marginRight="15dp"
                             android:inputType="textMultiLine"
                             android:textColor="@color/WQP_White"
-                            android:textSize="18sp" />
+                            android:textSize="18sp"
+                            android:backgroundTint="@color/WQP_White"/>
 
                     </LinearLayout>
 

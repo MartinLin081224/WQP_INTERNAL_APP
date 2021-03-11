@@ -91,7 +91,8 @@
                 android:gravity="center"
                 android:textColor="@color/WQP_White"
                 android:textSize="20sp"
-                android:inputType="number"/>
+                android:inputType="number"
+                android:backgroundTint="@color/WQP_White"/>
 
         </LinearLayout>
 
@@ -121,7 +122,8 @@
                 android:gravity="center"
                 android:textColor="@color/WQP_White"
                 android:textSize="20sp"
-                android:inputType="number"/>
+                android:inputType="number"
+                android:backgroundTint="@color/WQP_White"/>
 
         </LinearLayout>
 

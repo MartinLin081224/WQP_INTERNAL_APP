@@ -4,6 +4,7 @@
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/WQP_Blue</item>
         <item name="colorPrimaryDark">@color/WQP_Blue</item>
+        <item name="colorAccent">@color/WQP_White</item>
         <!--<item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/black</item>
         &lt;!&ndash; Secondary brand color. &ndash;&gt;
@@ -18,6 +19,7 @@
     <style name="Theme.WQP_OS_APP.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="colorAccent">@color/WQP_White</item>
     </style>
 
     <style name="Theme.WQP_OS_APP.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
