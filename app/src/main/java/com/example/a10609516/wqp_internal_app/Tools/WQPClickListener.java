@@ -14,6 +14,7 @@ import com.example.a10609516.wqp_internal_app.Basic.RequisitionSearchActivity;
 import com.example.a10609516.wqp_internal_app.Basic.VersionActivity;
 import com.example.a10609516.wqp_internal_app.Boss.ApplyExchangeActivity;
 import com.example.a10609516.wqp_internal_app.Clerk.QuotationActivity;
+import com.example.a10609516.wqp_internal_app.DepartmentAndDIY.SetupDemandActivity;
 import com.example.a10609516.wqp_internal_app.DepartmentAndDIY.StationReportActivity;
 import com.example.a10609516.wqp_internal_app.DepartmentAndDIY.StationReportSearchActivity;
 import com.example.a10609516.wqp_internal_app.Manager.InventoryActivity;
@@ -38,20 +39,14 @@ import okhttp3.Response;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class WQPClickListener extends WQPToolsActivity implements View.OnClickListener {
+public class WQPClickListener implements View.OnClickListener {
 
     private Context mContext;
     private String user_id_data;
     private String home, exchange, schedule, calendar, mission,
             bonus, points, miss_report, gps, quotation,
-            report, report_search, inventory, picking, requisition,
-            progress, version_info;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
+            report, report_search, set_up, inventory, picking,
+            requisition, progress, version_info;
 
     /**
      * 與OkHttp建立連線(Menu權限)
@@ -113,6 +108,7 @@ public class WQPClickListener extends WQPToolsActivity implements View.OnClickLi
                 quotation =jsonObject.getString("QUOTATION");
                 report =jsonObject.getString("REPORT");
                 report_search =jsonObject.getString("REPORT_SEARCH");
+                set_up =jsonObject.getString("SET_UP");
                 inventory =jsonObject.getString("INVENTORY");
                 picking =jsonObject.getString("PICKING");
                 requisition =jsonObject.getString("REQUISITION");
@@ -131,6 +127,7 @@ public class WQPClickListener extends WQPToolsActivity implements View.OnClickLi
                 Log.e("MENU : quotation -", quotation);
                 Log.e("MENU : report -", report);
                 Log.e("MENU : report_search -", report_search);
+                Log.e("MENU : set_up -", set_up);
                 Log.e("MENU : inventory -", inventory);
                 Log.e("MENU : picking -", picking);
                 Log.e("MENU : requisition -", requisition);
@@ -146,9 +143,9 @@ public class WQPClickListener extends WQPToolsActivity implements View.OnClickLi
     public void onClick(View v) {
         mContext = v.getContext();
 
-        sendRequestWithOkHttpForMenuAuthority();
+        //sendRequestWithOkHttpForMenuAuthority();
 
-        switch (v.getId()) {
+        /*switch (v.getId()) {
             // Your click even code for all activities
             case R.id.home_txt:
                 try{
@@ -342,6 +339,22 @@ public class WQPClickListener extends WQPToolsActivity implements View.OnClickLi
                 }
                 break;
 
+            case R.id.setup_txt:
+                try{
+                    // delay 1 second
+                    Thread.sleep(300);
+                    if (set_up.equals("1")) {
+                        Intent intent31 = new Intent(mContext, SetupDemandActivity.class);
+                        mContext.startActivity(intent31);
+                    } else {
+                        Toast.makeText(mContext, "【安裝查詢表】無執行權限", Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+                } catch(InterruptedException e){
+                    e.printStackTrace();
+                }
+                break;
+
             case R.id.inventory_txt:
                 try{
                     // delay 1 second
@@ -424,6 +437,6 @@ public class WQPClickListener extends WQPToolsActivity implements View.OnClickLi
 
             default:
                 break;
-        }
+        }*/
     }
 }

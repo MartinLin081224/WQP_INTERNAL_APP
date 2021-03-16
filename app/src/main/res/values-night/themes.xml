@@ -19,7 +19,7 @@
     <style name="Theme.WQP_OS_APP.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="colorAccent">@color/WQP_White</item>
+        <item name="colorAccent">@color/WQP_Gray</item>
     </style>
 
     <style name="Theme.WQP_OS_APP.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

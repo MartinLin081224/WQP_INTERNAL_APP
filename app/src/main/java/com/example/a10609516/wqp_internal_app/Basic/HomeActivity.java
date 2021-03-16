@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.example.a10609516.wqp_internal_app.Boss.ApplyExchangeActivity;
 import com.example.a10609516.wqp_internal_app.Boss.ExchangeActivity;
 import com.example.a10609516.wqp_internal_app.Clerk.QuotationActivity;
+import com.example.a10609516.wqp_internal_app.DepartmentAndDIY.SetupDemandActivity;
 import com.example.a10609516.wqp_internal_app.DepartmentAndDIY.StationReportActivity;
 import com.example.a10609516.wqp_internal_app.DepartmentAndDIY.StationReportSearchActivity;
 import com.example.a10609516.wqp_internal_app.Manager.InventoryActivity;
@@ -58,8 +59,11 @@ public class HomeActivity extends WQPToolsActivity {
 
     private String home, exchange, schedule, calendar, mission,
             bonus, points, miss_report, gps, quotation,
-            report, report_search, inventory, picking, requisition,
+            report, report_search, set_up, inventory, picking, requisition,
             progress, version_info;
+    private TextView menu_home, menu_exchange, menu_schedule, menu_calendar, menu_mission, menu_bonus, menu_points,
+            menu_miss_report, menu_gps, menu_quotation, menu_report, menu_report_search, menu_setup,
+            menu_inventory, menu_picking, menu_req, menu_progress, menu_version_info;
 
     private Context mContext = this;
     private String LOG = "HomeActivity";
@@ -71,16 +75,17 @@ public class HomeActivity extends WQPToolsActivity {
         setContentView(R.layout.activity_home);
         //取得控制項物件
         initViews();
-        //Menu的onClickListener
-        MenuListener();
         //設置Toolbar
         SetToolBar();
+        //Menu的onClickListener
+        MenuListener();
         //取得TokenID的OKHttp
         sendRequestWithOkHttpOfTokenID();
         //與OkHttp建立連線(Menu權限)
         sendRequestWithOkHttpForMenuAuthority();
         //與OKHttp連線(藉由登入輸入的員工ID取得員工姓名)
         sendRequestWithOkHttpForUserName();
+
     }
 
     //取得控制項物件
@@ -103,14 +108,34 @@ public class HomeActivity extends WQPToolsActivity {
         picking_imv = findViewById(R.id.picking_imv);
         requisition_imv = findViewById(R.id.requisition_imv);
         progress_imv = findViewById(R.id.progress_imv);
+        menu_home = findViewById(R.id.menu_home);
+        menu_exchange = findViewById(R.id.menu_exchange);
+        menu_schedule = findViewById(R.id.menu_schedule);
+        menu_calendar = findViewById(R.id.menu_calendar);
+        menu_mission = findViewById(R.id.menu_mission);
+        menu_bonus = findViewById(R.id.menu_bonus);
+        menu_points = findViewById(R.id.menu_points);
+        menu_miss_report = findViewById(R.id.menu_miss_report);
+        menu_gps = findViewById(R.id.menu_gps);
+        menu_quotation = findViewById(R.id.menu_quotation);
+        menu_report = findViewById(R.id.menu_report);
+        menu_report_search = findViewById(R.id.menu_report_search);
+        menu_setup = findViewById(R.id.menu_setup);
+        menu_inventory = findViewById(R.id.menu_inventory);
+        menu_picking = findViewById(R.id.menu_picking);
+        menu_req = findViewById(R.id.menu_req);
+        menu_progress = findViewById(R.id.menu_progress);
+        menu_version_info = findViewById(R.id.menu_version_info);
 
         exchange_imv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //與OkHttp建立連線(Menu權限)
+                sendRequestWithOkHttpForMenuAuthority();
                 try{
                     // delay 1 second
                     Thread.sleep(200);
-                    if (exchange.equals("1")) {
+                    if (menu_exchange.getText().toString().equals("1")) {
                         Intent intent10 = new Intent(mContext, ApplyExchangeActivity.class);
                         mContext.startActivity(intent10);
                     } else {
@@ -125,10 +150,12 @@ public class HomeActivity extends WQPToolsActivity {
         schedule_imv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //與OkHttp建立連線(Menu權限)
+                sendRequestWithOkHttpForMenuAuthority();
                 try{
                     // delay 1 second
                     Thread.sleep(200);
-                    if (schedule.equals("1")) {
+                    if (menu_schedule.getText().toString().equals("1")) {
                         Intent intent11 = new Intent(mContext, ScheduleActivity.class);
                         mContext.startActivity(intent11);
                     } else {
@@ -143,10 +170,12 @@ public class HomeActivity extends WQPToolsActivity {
         calendar_imv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //與OkHttp建立連線(Menu權限)
+                sendRequestWithOkHttpForMenuAuthority();
                 try{
                     // delay 1 second
                     Thread.sleep(200);
-                    if (calendar.equals("1")) {
+                    if (menu_calendar.getText().toString().equals("1")) {
                         Intent intent12 = new Intent(mContext, CalendarActivity.class);
                         mContext.startActivity(intent12);
                     } else {
@@ -161,10 +190,12 @@ public class HomeActivity extends WQPToolsActivity {
         mission_imv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //與OkHttp建立連線(Menu權限)
+                sendRequestWithOkHttpForMenuAuthority();
                 try{
                     // delay 1 second
                     Thread.sleep(200);
-                    if (mission.equals("1")) {
+                    if (menu_mission.getText().toString().equals("1")) {
                         Intent intent13 = new Intent(mContext, MissionActivity.class);
                         mContext.startActivity(intent13);
                     } else {
@@ -179,10 +210,12 @@ public class HomeActivity extends WQPToolsActivity {
         bonus_imv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //與OkHttp建立連線(Menu權限)
+                sendRequestWithOkHttpForMenuAuthority();
                 try{
                     // delay 1 second
                     Thread.sleep(200);
-                    if (bonus.equals("1")) {
+                    if (menu_bonus.getText().toString().equals("1")) {
                         Intent intent14 = new Intent(mContext, PointsActivity.class);
                         mContext.startActivity(intent14);
                     } else {
@@ -197,10 +230,12 @@ public class HomeActivity extends WQPToolsActivity {
         points_imv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //與OkHttp建立連線(Menu權限)
+                sendRequestWithOkHttpForMenuAuthority();
                 try{
                     // delay 1 second
                     Thread.sleep(200);
-                    if (points.equals("1")) {
+                    if (menu_points.getText().toString().equals("1")) {
                         Intent intent15 = new Intent(mContext, EngPointsActivity.class);
                         mContext.startActivity(intent15);
                     } else {
@@ -215,10 +250,12 @@ public class HomeActivity extends WQPToolsActivity {
         miss_report_imv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //與OkHttp建立連線(Menu權限)
+                sendRequestWithOkHttpForMenuAuthority();
                 try{
                     // delay 1 second
                     Thread.sleep(200);
-                    if (miss_report.equals("1")) {
+                    if (menu_miss_report.getText().toString().equals("1")) {
                         Intent intent16 = new Intent(mContext, MissCountActivity.class);
                         mContext.startActivity(intent16);
                     } else {
@@ -233,10 +270,12 @@ public class HomeActivity extends WQPToolsActivity {
         gps_imv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //與OkHttp建立連線(Menu權限)
+                sendRequestWithOkHttpForMenuAuthority();
                 try{
                     // delay 1 second
                     Thread.sleep(200);
-                    if (gps.equals("1")) {
+                    if (menu_gps.getText().toString().equals("1")) {
                         Intent intent17 = new Intent(mContext, GPSActivity.class);
                         mContext.startActivity(intent17);
                     } else {
@@ -251,10 +290,12 @@ public class HomeActivity extends WQPToolsActivity {
         quotation_imv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //與OkHttp建立連線(Menu權限)
+                sendRequestWithOkHttpForMenuAuthority();
                 try{
                     // delay 1 second
                     Thread.sleep(200);
-                    if (quotation.equals("1")) {
+                    if (menu_quotation.getText().toString().equals("1")) {
                         Intent intent20 = new Intent(mContext, QuotationActivity.class);
                         mContext.startActivity(intent20);
                     } else {
@@ -269,10 +310,12 @@ public class HomeActivity extends WQPToolsActivity {
         report_imv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //與OkHttp建立連線(Menu權限)
+                sendRequestWithOkHttpForMenuAuthority();
                 try{
                     // delay 1 second
                     Thread.sleep(200);
-                    if (report.equals("1")) {
+                    if (menu_report.getText().toString().equals("1")) {
                         Intent intent30 = new Intent(mContext, StationReportActivity.class);
                         mContext.startActivity(intent30);
                     } else {
@@ -287,10 +330,12 @@ public class HomeActivity extends WQPToolsActivity {
         report_search_imv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //與OkHttp建立連線(Menu權限)
+                sendRequestWithOkHttpForMenuAuthority();
                 try{
                     // delay 1 second
                     Thread.sleep(200);
-                    if (report_search.equals("1")) {
+                    if (menu_report_search.getText().toString().equals("1")) {
                         Intent intent31 = new Intent(mContext, StationReportSearchActivity.class);
                         mContext.startActivity(intent31);
                     } else {
@@ -305,10 +350,12 @@ public class HomeActivity extends WQPToolsActivity {
         inventory_imv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //與OkHttp建立連線(Menu權限)
+                sendRequestWithOkHttpForMenuAuthority();
                 try{
                     // delay 1 second
                     Thread.sleep(200);
-                    if (inventory.equals("1")) {
+                    if (menu_inventory.getText().toString().equals("1")) {
                         Intent intent40 = new Intent(mContext, InventoryActivity.class);
                         mContext.startActivity(intent40);
                     } else {
@@ -323,10 +370,12 @@ public class HomeActivity extends WQPToolsActivity {
         picking_imv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //與OkHttp建立連線(Menu權限)
+                sendRequestWithOkHttpForMenuAuthority();
                 try{
                     // delay 1 second
                     Thread.sleep(200);
-                    if (picking.equals("1")) {
+                    if (menu_picking.getText().toString().equals("1")) {
                         Intent intent41 = new Intent(mContext, OrderSearchActivity.class);
                         mContext.startActivity(intent41);
                     } else {
@@ -341,10 +390,12 @@ public class HomeActivity extends WQPToolsActivity {
         requisition_imv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //與OkHttp建立連線(Menu權限)
+                sendRequestWithOkHttpForMenuAuthority();
                 try{
                     // delay 1 second
                     Thread.sleep(200);
-                    if (requisition.equals("1")) {
+                    if (menu_req.getText().toString().equals("1")) {
                         Intent intent50 = new Intent(mContext, RequisitionActivity.class);
                         mContext.startActivity(intent50);
                     } else {
@@ -359,10 +410,12 @@ public class HomeActivity extends WQPToolsActivity {
         progress_imv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //與OkHttp建立連線(Menu權限)
+                sendRequestWithOkHttpForMenuAuthority();
                 try{
                     // delay 1 second
                     Thread.sleep(200);
-                    if (progress.equals("1")) {
+                    if (menu_progress.getText().toString().equals("1")) {
                         Intent intent51 = new Intent(mContext, RequisitionSearchActivity.class);
                         mContext.startActivity(intent51);
                     } else {
@@ -380,39 +433,294 @@ public class HomeActivity extends WQPToolsActivity {
      */
     private void MenuListener() {
         TextView home_txt = findViewById(R.id.home_txt);
-        home_txt.setOnClickListener(new WQPClickListener());
+        //home_txt.setOnClickListener(new WQPClickListener());
         TextView exchange_txt = findViewById(R.id.exchange_txt);
-        exchange_txt.setOnClickListener(new WQPClickListener());
+        //exchange_txt.setOnClickListener(new WQPClickListener());
         TextView schedule_txt = findViewById(R.id.schedule_txt);
-        schedule_txt.setOnClickListener(new WQPClickListener());
+        //schedule_txt.setOnClickListener(new WQPClickListener());
         TextView calendar_txt = findViewById(R.id.calendar_txt);
-        calendar_txt.setOnClickListener(new WQPClickListener());
+        //calendar_txt.setOnClickListener(new WQPClickListener());
         TextView mission_txt = findViewById(R.id.mission_txt);
-        mission_txt.setOnClickListener(new WQPClickListener());
+        //mission_txt.setOnClickListener(new WQPClickListener());
         TextView bonus_txt = findViewById(R.id.bonus_txt);
-        bonus_txt.setOnClickListener(new WQPClickListener());
+        //bonus_txt.setOnClickListener(new WQPClickListener());
         TextView points_txt = findViewById(R.id.points_txt);
-        points_txt.setOnClickListener(new WQPClickListener());
+        //points_txt.setOnClickListener(new WQPClickListener());
         TextView miss_report_txt = findViewById(R.id.miss_report_txt);
-        miss_report_txt.setOnClickListener(new WQPClickListener());
+        //miss_report_txt.setOnClickListener(new WQPClickListener());
         TextView gps_txt = findViewById(R.id.gps_txt);
-        gps_txt.setOnClickListener(new WQPClickListener());
+        //gps_txt.setOnClickListener(new WQPClickListener());
         TextView quotation_txt = findViewById(R.id.quotation_txt);
-        quotation_txt.setOnClickListener(new WQPClickListener());
+        //quotation_txt.setOnClickListener(new WQPClickListener());
         TextView report_txt = findViewById(R.id.report_txt);
-        report_txt.setOnClickListener(new WQPClickListener());
+        //report_txt.setOnClickListener(new WQPClickListener());
         TextView report_search_txt = findViewById(R.id.report_search_txt);
-        report_search_txt.setOnClickListener(new WQPClickListener());
+        //report_search_txt.setOnClickListener(new WQPClickListener());
+        TextView setup_txt = findViewById(R.id.setup_txt);
+        //setup_txt.setOnClickListener(new WQPClickListener());
         TextView inventory_txt = findViewById(R.id.inventory_txt);
-        inventory_txt.setOnClickListener(new WQPClickListener());
+        //inventory_txt.setOnClickListener(new WQPClickListener());
         TextView picking_txt = findViewById(R.id.picking_txt);
-        picking_txt.setOnClickListener(new WQPClickListener());
+        //picking_txt.setOnClickListener(new WQPClickListener());
         TextView requisition_txt = findViewById(R.id.requisition_txt);
-        requisition_txt.setOnClickListener(new WQPClickListener());
+        //requisition_txt.setOnClickListener(new WQPClickListener());
         TextView progress_txt = findViewById(R.id.progress_txt);
-        progress_txt.setOnClickListener(new WQPClickListener());
+        //progress_txt.setOnClickListener(new WQPClickListener());
         TextView version_info_txt = findViewById(R.id.version_info_txt);
-        version_info_txt.setOnClickListener(new WQPClickListener());
+        //version_info_txt.setOnClickListener(new WQPClickListener());
+
+        home_txt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //與OkHttp建立連線(Menu權限)
+                sendRequestWithOkHttpForMenuAuthority();
+                if (menu_home.getText().toString().equals("1")) {
+                    Intent intent0 = new Intent(mContext, HomeActivity.class);
+                    mContext.startActivity(intent0);
+                } else {
+                    Toast.makeText(mContext, "【首頁】無執行權限", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        exchange_txt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //與OkHttp建立連線(Menu權限)
+                sendRequestWithOkHttpForMenuAuthority();
+                if (menu_exchange.getText().toString().equals("1")) {
+                    Intent intent10 = new Intent(mContext, ApplyExchangeActivity.class);
+                    mContext.startActivity(intent10);
+                } else {
+                    Toast.makeText(mContext, "【換貨申請單】無執行權限", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        schedule_txt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //與OkHttp建立連線(Menu權限)
+                sendRequestWithOkHttpForMenuAuthority();
+                if (menu_schedule.getText().toString().equals("1")) {
+                    Intent intent11 = new Intent(mContext, ScheduleActivity.class);
+                    mContext.startActivity(intent11);
+                } else {
+                    Toast.makeText(mContext, "【行程資訊】無執行權限", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        calendar_txt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //與OkHttp建立連線(Menu權限)
+                sendRequestWithOkHttpForMenuAuthority();
+                if (menu_calendar.getText().toString().equals("1")) {
+                    Intent intent12 = new Intent(mContext, CalendarActivity.class);
+                    mContext.startActivity(intent12);
+                } else {
+                    Toast.makeText(mContext, "【派工行事曆】無執行權限", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        mission_txt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //與OkHttp建立連線(Menu權限)
+                sendRequestWithOkHttpForMenuAuthority();
+                if (menu_mission.getText().toString().equals("1")) {
+                    Intent intent13 = new Intent(mContext, MissionActivity.class);
+                    mContext.startActivity(intent13);
+                } else {
+                    Toast.makeText(mContext, "【派工任務】無執行權限", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        bonus_txt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //與OkHttp建立連線(Menu權限)
+                sendRequestWithOkHttpForMenuAuthority();
+                if (menu_bonus.getText().toString().equals("1")) {
+                    Intent intent14 = new Intent(mContext, PointsActivity.class);
+                    mContext.startActivity(intent14);
+                } else {
+                    Toast.makeText(mContext, "【點數總覽】無執行權限", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        points_txt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //與OkHttp建立連線(Menu權限)
+                sendRequestWithOkHttpForMenuAuthority();
+                if (menu_points.getText().toString().equals("1")) {
+                    Intent intent15 = new Intent(mContext, EngPointsActivity.class);
+                    mContext.startActivity(intent15);
+                } else {
+                    Toast.makeText(mContext, "【點數明細】無執行權限", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        miss_report_txt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //與OkHttp建立連線(Menu權限)
+                sendRequestWithOkHttpForMenuAuthority();
+                if (menu_miss_report.getText().toString().equals("1")) {
+                    Intent intent16 = new Intent(mContext, MissCountActivity.class);
+                    mContext.startActivity(intent16);
+                } else {
+                    Toast.makeText(mContext, "【各區未回報數量】無執行權限", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        gps_txt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //與OkHttp建立連線(Menu權限)
+                sendRequestWithOkHttpForMenuAuthority();
+                if (menu_gps.getText().toString().equals("1")) {
+                    Intent intent17 = new Intent(mContext, GPSActivity.class);
+                    mContext.startActivity(intent17);
+                } else {
+                    Toast.makeText(mContext, "【工務打卡GPS】無執行權限", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        quotation_txt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //與OkHttp建立連線(Menu權限)
+                sendRequestWithOkHttpForMenuAuthority();
+                if (menu_quotation.getText().toString().equals("1")) {
+                    Intent intent20 = new Intent(mContext, QuotationActivity.class);
+                    mContext.startActivity(intent20);
+                } else {
+                    Toast.makeText(mContext, "【報價單審核】無執行權限", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        report_txt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //與OkHttp建立連線(Menu權限)
+                sendRequestWithOkHttpForMenuAuthority();
+                if (menu_report.getText().toString().equals("1")) {
+                    Intent intent30 = new Intent(mContext, StationReportActivity.class);
+                    mContext.startActivity(intent30);
+                } else {
+                    Toast.makeText(mContext, "【日報上傳作業】無執行權限", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        report_search_txt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //與OkHttp建立連線(Menu權限)
+                sendRequestWithOkHttpForMenuAuthority();
+                if (menu_report_search.getText().toString().equals("1")) {
+                    Intent intent31 = new Intent(mContext, StationReportSearchActivity.class);
+                    mContext.startActivity(intent31);
+                } else {
+                    Toast.makeText(mContext, "【日報查詢/修正】無執行權限", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        setup_txt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //與OkHttp建立連線(Menu權限)
+                sendRequestWithOkHttpForMenuAuthority();
+                if (menu_setup.getText().toString().equals("1")) {
+                    Intent intent31 = new Intent(mContext, SetupDemandActivity.class);
+                    mContext.startActivity(intent31);
+                } else {
+                    Toast.makeText(mContext, "【安裝查詢表】無執行權限", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        inventory_txt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //與OkHttp建立連線(Menu權限)
+                sendRequestWithOkHttpForMenuAuthority();
+                if (menu_inventory.getText().toString().equals("1")) {
+                    Intent intent40 = new Intent(mContext, InventoryActivity.class);
+                    mContext.startActivity(intent40);
+                } else {
+                    Toast.makeText(mContext, "【盤點單】無執行權限", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
+        picking_txt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //與OkHttp建立連線(Menu權限)
+                sendRequestWithOkHttpForMenuAuthority();
+                if (menu_picking.getText().toString().equals("1")) {
+                    Intent intent41 = new Intent(mContext, OrderSearchActivity.class);
+                    mContext.startActivity(intent41);
+                } else {
+                    Toast.makeText(mContext, "【撿料單】無執行權限", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        requisition_txt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //與OkHttp建立連線(Menu權限)
+                sendRequestWithOkHttpForMenuAuthority();
+                if (menu_req.getText().toString().equals("1")) {
+                    Intent intent50 = new Intent(mContext, RequisitionActivity.class);
+                    mContext.startActivity(intent50);
+                } else {
+                    Toast.makeText(mContext, "【需求申請單】無執行權限", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        progress_txt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //與OkHttp建立連線(Menu權限)
+                sendRequestWithOkHttpForMenuAuthority();
+                if (menu_progress.getText().toString().equals("1")) {
+                    Intent intent51 = new Intent(mContext, RequisitionSearchActivity.class);
+                    mContext.startActivity(intent51);
+                } else {
+                    Toast.makeText(mContext, "【進度查詢】無執行權限", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        version_info_txt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //與OkHttp建立連線(Menu權限)
+                sendRequestWithOkHttpForMenuAuthority();
+                if (menu_version_info.getText().toString().equals("1")) {
+                    Intent intent60 = new Intent(mContext, VersionActivity.class);
+                    mContext.startActivity(intent60);
+                } else {
+                    Toast.makeText(mContext, "【版本資訊】無執行權限", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     /**
@@ -459,6 +767,7 @@ public class HomeActivity extends WQPToolsActivity {
                 sp.edit().putString("USER_NAME", "").commit();
                 sp.edit().putString("PASSWORD", "").commit();
                 sp.edit().putString("user_name", "").commit();
+                sp.edit().putString("MENU", "").commit();
 
                 finish();
                 Intent intent_login = new Intent(HomeActivity.this, LoginActivity.class);
@@ -626,6 +935,7 @@ public class HomeActivity extends WQPToolsActivity {
                 quotation =jsonObject.getString("QUOTATION");
                 report =jsonObject.getString("REPORT");
                 report_search =jsonObject.getString("REPORT_SEARCH");
+                set_up =jsonObject.getString("SET_UP");
                 inventory =jsonObject.getString("INVENTORY");
                 picking =jsonObject.getString("PICKING");
                 requisition =jsonObject.getString("REQUISITION");
@@ -644,11 +954,57 @@ public class HomeActivity extends WQPToolsActivity {
                 Log.e("MENU : quotation -", quotation);
                 Log.e("MENU : report -", report);
                 Log.e("MENU : report_search -", report_search);
+                Log.e("MENU : set_up -", set_up);
                 Log.e("MENU : inventory -", inventory);
                 Log.e("MENU : picking -", picking);
                 Log.e("MENU : requisition -", requisition);
                 Log.e("MENU : progress -", progress);
                 Log.e("MENU : version_info -", version_info);
+
+                this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        menu_home.setText(home);
+                        menu_exchange.setText(exchange);
+                        menu_schedule.setText(schedule);
+                        menu_calendar.setText(calendar);
+                        menu_mission.setText(mission);
+                        menu_bonus.setText(bonus);
+                        menu_points.setText(points);
+                        menu_miss_report.setText(miss_report);
+                        menu_gps.setText(gps);
+                        menu_quotation.setText(quotation);
+                        menu_report.setText(report);
+                        menu_report_search.setText(report_search);
+                        menu_setup.setText(set_up);
+                        menu_inventory.setText(inventory);
+                        menu_picking.setText(picking);
+                        menu_req.setText(requisition);
+                        menu_progress.setText(progress);
+                        menu_version_info.setText(version_info);
+                    }
+                });
+
+                SharedPreferences sharedPreferences_menu = getSharedPreferences("MENU", MODE_PRIVATE);
+                sharedPreferences_menu.edit().putString("menu_home", menu_home.getText().toString()).apply();
+                sharedPreferences_menu.edit().putString("menu_exchange", menu_exchange.getText().toString()).apply();
+                sharedPreferences_menu.edit().putString("menu_schedule", menu_schedule.getText().toString()).apply();
+                sharedPreferences_menu.edit().putString("menu_calendar", menu_calendar.getText().toString()).apply();
+                sharedPreferences_menu.edit().putString("menu_mission", menu_mission.getText().toString()).apply();
+                sharedPreferences_menu.edit().putString("menu_bonus", menu_bonus.getText().toString()).apply();
+                sharedPreferences_menu.edit().putString("menu_points", menu_points.getText().toString()).apply();
+                sharedPreferences_menu.edit().putString("menu_miss_report", menu_miss_report.getText().toString()).apply();
+                sharedPreferences_menu.edit().putString("menu_gps", menu_gps.getText().toString()).apply();
+                sharedPreferences_menu.edit().putString("menu_quotation", menu_quotation.getText().toString()).apply();
+                sharedPreferences_menu.edit().putString("menu_report", menu_report.getText().toString()).apply();
+                sharedPreferences_menu.edit().putString("menu_report_search", menu_report_search.getText().toString()).apply();
+                sharedPreferences_menu.edit().putString("menu_setup", menu_setup.getText().toString()).apply();
+                sharedPreferences_menu.edit().putString("menu_inventory", menu_inventory.getText().toString()).apply();
+                sharedPreferences_menu.edit().putString("menu_picking", menu_picking.getText().toString()).apply();
+                sharedPreferences_menu.edit().putString("menu_req", menu_req.getText().toString()).apply();
+                sharedPreferences_menu.edit().putString("menu_progress", menu_progress.getText().toString()).apply();
+                sharedPreferences_menu.edit().putString("menu_version_info", menu_version_info.getText().toString()).apply();
+
             }
         } catch (Exception e) {
             e.printStackTrace();

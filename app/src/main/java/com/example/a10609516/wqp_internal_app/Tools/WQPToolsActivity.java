@@ -61,7 +61,7 @@ public class WQPToolsActivity extends AppCompatActivity {
         //確認是否有最新版本，進行更新
         CheckFirebaseVersion();
         //與OkHttp建立連線(Menu權限)
-        sendRequestWithOkHttpForMenuAuthority();
+        //sendRequestWithOkHttpForMenuAuthority();
     }
 
     /**
