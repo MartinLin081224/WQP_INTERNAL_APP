@@ -1,10 +1,13 @@
 package com.example.a10609516.wqp_internal_app.Works;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Typeface;
+import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -35,13 +38,17 @@ import com.example.a10609516.wqp_internal_app.Manager.OrderSearchActivity;
 import com.example.a10609516.wqp_internal_app.R;
 import com.example.a10609516.wqp_internal_app.Tools.WQPClickListener;
 import com.example.a10609516.wqp_internal_app.Tools.WQPToolsActivity;
+import com.example.easywaylocation.Listener;
+import com.example.easywaylocation.LocationData;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -51,7 +58,14 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class MissionActivity extends WQPToolsActivity {
+import com.example.easywaylocation.EasyWayLocation;
+import com.example.easywaylocation.GetLocationDetail;
+import com.example.easywaylocation.Listener;
+import com.example.easywaylocation.LocationData;
+
+import static com.example.easywaylocation.EasyWayLocation.LOCATION_SETTING_REQUEST_CODE;
+
+public class MissionActivity extends WQPToolsActivity implements Listener, LocationData.AddressCallBack {
 
     private SharedPreferences sp;
     private TextView no_report_txt, reported_txt, closed_txt;
@@ -63,6 +77,10 @@ public class MissionActivity extends WQPToolsActivity {
     private LinearLayout nav_view, nav_mission;
     private DrawerLayout drawer;
     private Toolbar toolbar;
+
+    private EasyWayLocation easyWayLocation;
+    GetLocationDetail getLocationDetail;
+    private TextView location, latLong;
 
     private Context mContext = this;
 
@@ -78,8 +96,19 @@ public class MissionActivity extends WQPToolsActivity {
         MenuListener();
         //設置Toolbar
         SetToolBar();
+
+        getLocationDetail = new GetLocationDetail(this, this);
+        easyWayLocation = new EasyWayLocation(this, false,this);
+        if (permissionIsGranted()) {
+            doLocationWork();
+        } else {
+            // Permission not granted, ask for it
+            //testLocationRequest.requestPermission(121);
+        }
+
         nav_mission.removeAllViews();
         status = "0";
+
         //與OkHttp建立連線(t查詢為回報之任務明細)
         sendRequestWithOkHttpForMissionUnReported();
     }
@@ -96,6 +125,8 @@ public class MissionActivity extends WQPToolsActivity {
         no_report_txt = findViewById(R.id.no_report_txt);
         reported_txt = findViewById(R.id.reported_txt);
         closed_txt = findViewById(R.id.closed_txt);
+        location = findViewById(R.id.location);
+        latLong = findViewById(R.id.latlong);
 
         //UI介面下拉刷新
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -1345,6 +1376,51 @@ public class MissionActivity extends WQPToolsActivity {
             super.handleMessage(msg);
         }
     };
+
+    public boolean permissionIsGranted() {
+
+        int permissionState = ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION);
+
+        return permissionState == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private void doLocationWork() {
+        easyWayLocation.startLocation();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == LOCATION_SETTING_REQUEST_CODE) {
+            easyWayLocation.onActivityResult(resultCode);
+        }
+    }
+
+    @Override
+    public void locationOn() {
+        Toast.makeText(this, "Location On", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void currentLocation(Location location) {
+        StringBuilder data = new StringBuilder();
+        data.append(location.getLatitude());
+        data.append(" , ");
+        data.append(location.getLongitude());
+        latLong.setText(data);
+        getLocationDetail.getAddress(location.getLatitude(), location.getLongitude(), "xyz");
+    }
+
+    @Override
+    public void locationCancelled() {
+        Toast.makeText(this, "Location Cancelled", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void locationData(LocationData locationData) {
+        location.setText(locationData.getFull_address());
+    }
 
     @Override
     protected void onRestart() {

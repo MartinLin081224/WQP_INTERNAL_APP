@@ -41,7 +41,7 @@ public class VersionActivity extends WQPToolsActivity {
     private DrawerLayout drawer;
     private Toolbar toolbar;
 
-    private TextView detail_txt0, detail_txt1;
+    private TextView detail_txt0, detail_txt1, detail_txt2;
 
     private Context mContext = this;
 
@@ -68,8 +68,9 @@ public class VersionActivity extends WQPToolsActivity {
         toolbar = findViewById(R.id.toolbar);
         nav_view = findViewById(R.id.nav_view);
         drawer = findViewById(R.id.drawer_layout);
-        detail_txt0 = (TextView) findViewById(R.id.detail_txt0);
-        detail_txt1 = (TextView) findViewById(R.id.detail_txt1);
+        detail_txt0 = findViewById(R.id.detail_txt0);
+        detail_txt1 = findViewById(R.id.detail_txt1);
+        detail_txt2 = findViewById(R.id.detail_txt2);
     }
 
     /**
@@ -387,7 +388,7 @@ public class VersionActivity extends WQPToolsActivity {
             }
         });
 
-        toolbar.setTitle("行程資訊");
+        toolbar.setTitle("版本資訊");
         toolbar.setNavigationIcon(R.drawable.icon_menu);
         setSupportActionBar(toolbar);
 
@@ -432,6 +433,7 @@ public class VersionActivity extends WQPToolsActivity {
             public void run() {
                 detail_txt0.setText("1.內部使用APP_更新版");
                 detail_txt1.setText("1.修正部分人員閃退問題");
+                detail_txt2.setText("1.修正部分人員閃退、無法回報問題");
             }
         });
     }

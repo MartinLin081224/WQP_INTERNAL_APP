@@ -894,8 +894,8 @@ public class HomeActivity extends WQPToolsActivity {
                             .build();
                     Log.e("MENU", user_id_data);
                     Request request = new Request.Builder()
-                            .url("http://192.168.0.172/WQP_OS/UserMenuAuthority.php")
-                            //.url("http://a.wqp-water.com.tw/WQP_OS/UserMenuAuthority.php")
+                            //.url("http://192.168.0.172/WQP_OS/UserMenuAuthority.php")
+                            .url("http://a.wqp-water.com.tw/WQP_OS/UserMenuAuthority.php")
                             .post(requestBody)
                             .build();
                     Response response = client.newCall(request).execute();

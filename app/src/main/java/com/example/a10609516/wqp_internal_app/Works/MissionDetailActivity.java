@@ -7,9 +7,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import android.util.TypedValue;
@@ -38,12 +40,16 @@ import com.example.a10609516.wqp_internal_app.Manager.OrderSearchActivity;
 import com.example.a10609516.wqp_internal_app.R;
 import com.example.a10609516.wqp_internal_app.Tools.WQPClickListener;
 import com.example.a10609516.wqp_internal_app.Tools.WQPToolsActivity;
+import com.example.easywaylocation.EasyWayLocation;
+import com.example.easywaylocation.GetLocationDetail;
+import com.example.easywaylocation.LocationData;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
@@ -54,7 +60,14 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class MissionDetailActivity extends WQPToolsActivity {
+import com.example.easywaylocation.EasyWayLocation;
+import com.example.easywaylocation.GetLocationDetail;
+import com.example.easywaylocation.Listener;
+import com.example.easywaylocation.LocationData;
+
+import static com.example.easywaylocation.EasyWayLocation.LOCATION_SETTING_REQUEST_CODE;
+
+public class MissionDetailActivity extends WQPToolsActivity implements Listener, LocationData.AddressCallBack {
 
     private SharedPreferences sp;
 
@@ -73,9 +86,15 @@ public class MissionDetailActivity extends WQPToolsActivity {
             maintain_datetime, pay_mode, get_money, have_get, is_money, is_get, manger_remark, work_remark, content_result;
 
     private String LOG = "MissionDetailActivity";
-    private String commandStr;
+    private String commandStr, GPS;
+    private double latitude, longitude;
     private LocationManager locationManager;
+    private LocationListener locationListener;
     private Context mContext = this;
+
+    private EasyWayLocation easyWayLocation;
+    GetLocationDetail getLocationDetail;
+    private TextView location, latLong;
 
     public static final int MY_PERMISSION_ACCESS_LOCATION = 11;
 
@@ -91,12 +110,23 @@ public class MissionDetailActivity extends WQPToolsActivity {
         MenuListener();
         //設置Toolbar
         SetToolBar();
-        //與OkHttp建立連線(t查詢工務是否已讀任務)
+
+        getLocationDetail = new GetLocationDetail(this, this);
+        easyWayLocation = new EasyWayLocation(this, false,this);
+        if (permissionIsGranted()) {
+            doLocationWork();
+        } else {
+            // Permission not granted, ask for it
+            //testLocationRequest.requestPermission(121);
+        }
+
+        //與OkHttp建立連線(查詢工務是否已讀任務)
         sendRequestWithOkHttpForMissionReadCheck();
-        //與OkHttp建立連線(t取得派工任務明細)
+        //與OkHttp建立連線(取得派工任務明細)
         sendRequestWithOkHttpForMissionDetail();
-        //與OkHttp建立連線(t取得派工任務Log)
+        //與OkHttp建立連線(取得派工任務Log)
         sendRequestWithOkHttpForMissionLog();
+
     }
 
     /**
@@ -122,6 +152,8 @@ public class MissionDetailActivity extends WQPToolsActivity {
         work_remark_txt = findViewById(R.id.work_remark_txt);
         location_imv = findViewById(R.id.location_imv);
         report_button = findViewById(R.id.report_button);
+        location = findViewById(R.id.location);
+        latLong = findViewById(R.id.latlong);
 
         location_imv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -562,7 +594,7 @@ public class MissionDetailActivity extends WQPToolsActivity {
                 R_COUNT = jsonObject.getString("R_COUNT");
 
                 if (R_COUNT.equals("0")) {
-                    //與OkHttp建立連線(t寫入工務已讀任務)
+                    //與OkHttp建立連線(寫入工務已讀任務)
                     sendRequestWithOkHttpForMissionRead();
                 }
             }
@@ -586,9 +618,12 @@ public class MissionDetailActivity extends WQPToolsActivity {
                 Bundle bundle = getIntent().getExtras();
                 rm002 = bundle.getString("rm002").trim();
 
+                //String read_GPS = latLong.getText().toString();
+
                 locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
                 //利用locationManager.getLastKnownLocation取得當下的位置資料
-                if (ActivityCompat.checkSelfPermission(MissionDetailActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(MissionDetailActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                if (ActivityCompat.checkSelfPermission(MissionDetailActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                        && ActivityCompat.checkSelfPermission(MissionDetailActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     // TODO: Consider calling
                     //    ActivityCompat#requestPermissions
                     // here to request the missing permissions, and then overriding
@@ -601,10 +636,52 @@ public class MissionDetailActivity extends WQPToolsActivity {
                             MY_PERMISSION_ACCESS_LOCATION);
                     return;
                 }
-                Location location = locationManager.getLastKnownLocation(commandStr);
-                String GPS = location.getLatitude() + ", " + location.getLongitude();
 
-                Log.e(LOG, " 緯度 : " + location.getLatitude() + "經度 : " + location.getLongitude());
+                //定義位置監聽器，接收來自LocationManager的通知。
+                locationListener = new LocationListener(){
+                    //位置管理服務利用requestLocationUpdates(String , long , float , LocationListener)方法註冊位置監聽器後，這些方法就會被呼叫。
+                    //Provider狀態改變時呼叫此方法。
+                    public void onStatusChanged(String provider , int status , Bundle extras){
+
+                    }
+                    //位置改變時呼叫此方法。
+                    @Override
+                    public void onLocationChanged(Location location) {
+                        // TODO Auto-generated method stub
+                        System.out.println("onLocationChanged");
+                    }
+
+                    //用戶關閉provider時呼叫此方法。
+                    @Override
+                    public void onProviderDisabled(String provider) {
+                        // TODO Auto-generated method stub
+                        System.out.println("onProviderDisabled");
+
+                    }
+
+                    //用戶啟動provider時呼叫此方法。
+                    @Override
+                    public void onProviderEnabled(String provider) {
+                        // TODO Auto-generated method stub
+                        System.out.println("onProviderEnabled");
+                    }
+                };
+
+                //Location location = locationManager.getLastKnownLocation(commandStr);
+                LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+                Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListener, Looper.getMainLooper());
+
+                if ( location != null) {
+                    latitude = location.getLatitude();
+                    longitude = location.getLongitude();
+                    GPS = latitude + ", " + longitude;
+                    //Log.e(LOG, " 緯度 : " + location.getLatitude() + "經度 : " + location.getLongitude());
+                }
+                String read_GPS = latitude + ", " + longitude;
+
+                //Log.e(LOG, " 緯度 : " + location.getLatitude() + "經度 : " + location.getLongitude());
 
                 Log.e(LOG, user_id_data);
                 Log.e(LOG , rm002);
@@ -615,7 +692,7 @@ public class MissionDetailActivity extends WQPToolsActivity {
                     RequestBody requestBody = new FormBody.Builder()
                             .add("U_ACC", user_id_data)
                             .add("RM002", rm002)
-                            .add("GPS", GPS)
+                            .add("GPS", read_GPS)
                             .build();
                     Log.e(LOG, user_id_data);
                     Request request = new Request.Builder()
@@ -1078,6 +1155,51 @@ public class MissionDetailActivity extends WQPToolsActivity {
         }
     };
 
+    public boolean permissionIsGranted() {
+
+        int permissionState = ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION);
+
+        return permissionState == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private void doLocationWork() {
+        easyWayLocation.startLocation();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == LOCATION_SETTING_REQUEST_CODE) {
+            easyWayLocation.onActivityResult(resultCode);
+        }
+    }
+
+    @Override
+    public void locationOn() {
+        Toast.makeText(this, "Location On", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void currentLocation(Location location) {
+        StringBuilder data = new StringBuilder();
+        data.append(location.getLatitude());
+        data.append(" , ");
+        data.append(location.getLongitude());
+        latLong.setText(data);
+        getLocationDetail.getAddress(location.getLatitude(), location.getLongitude(), "xyz");
+    }
+
+    @Override
+    public void locationCancelled() {
+        Toast.makeText(this, "Location Cancelled", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void locationData(LocationData locationData) {
+        location.setText(locationData.getFull_address());
+    }
+
     @Override
     protected void onRestart() {
         super.onRestart();
@@ -1085,8 +1207,15 @@ public class MissionDetailActivity extends WQPToolsActivity {
         //與OkHttp建立連線(t取得派工任務明細)
         sendRequestWithOkHttpForMissionDetail();
         log_llt.removeAllViews();
-        //與OkHttp建立連線(t取得派工任務Log)
-        sendRequestWithOkHttpForMissionLog();
+        try{
+            // delay 1 second
+            Thread.sleep(200);
+            //與OkHttp建立連線(t取得派工任務Log)
+            sendRequestWithOkHttpForMissionLog();
+        } catch(InterruptedException e){
+            e.printStackTrace();
+        }
+
     }
 
     @Override
@@ -1099,12 +1228,14 @@ public class MissionDetailActivity extends WQPToolsActivity {
     protected void onResume() {
         super.onResume();
         Log.e(LOG, "onResume");
+        easyWayLocation.startLocation();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         Log.e(LOG, "onPause");
+        easyWayLocation.endUpdates();
     }
 
     @Override

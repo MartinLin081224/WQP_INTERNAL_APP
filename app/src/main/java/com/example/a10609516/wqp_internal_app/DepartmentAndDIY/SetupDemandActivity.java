@@ -67,7 +67,7 @@ public class SetupDemandActivity extends WQPToolsActivity {
         SetToolBar();
         nav_setup.removeAllViews();
         status = "0";
-        //與OkHttp建立連線(t查詢為回報之任務明細)
+        //與OkHttp建立連線(查詢為回報之任務明細)
         //sendRequestWithOkHttpForMissionUnReported();
     }
 
@@ -370,8 +370,8 @@ public class SetupDemandActivity extends WQPToolsActivity {
             @Override
             public void onClick(View view) {
                 if (menu_setup.equals("1")) {
-                    Intent intent31 = new Intent(mContext, SetupDemandActivity.class);
-                    mContext.startActivity(intent31);
+                    Intent intent32 = new Intent(mContext, SetupDemandActivity.class);
+                    mContext.startActivity(intent32);
                 } else {
                     Toast.makeText(mContext, "【安裝查詢表】無執行權限", Toast.LENGTH_SHORT).show();
                 }

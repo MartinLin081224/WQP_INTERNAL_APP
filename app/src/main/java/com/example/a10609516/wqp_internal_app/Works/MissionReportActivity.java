@@ -27,6 +27,10 @@ import android.widget.Toast;
 import com.example.a10609516.wqp_internal_app.R;
 import com.example.a10609516.wqp_internal_app.Tools.Adapter;
 import com.example.a10609516.wqp_internal_app.Tools.WQPToolsActivity;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.yanzhenjie.album.Action;
 import com.yanzhenjie.album.Album;
 import com.yanzhenjie.album.AlbumFile;
@@ -118,6 +122,8 @@ public class MissionReportActivity extends WQPToolsActivity {
         sendRequestWithOkHttpForReportType();
         //設置收款金額的代入與取消
         //HaveGetMoney();
+        //抓取設備GPS位置
+        GPSLocation();
         //照片選擇器
         AlbumGlide1();
         AlbumGlide2();
@@ -294,7 +300,7 @@ public class MissionReportActivity extends WQPToolsActivity {
                         } else {
                             if ((image_view1.getVisibility() == View.VISIBLE || image_view2.getVisibility() == View.VISIBLE || image_view3.getVisibility() == View.VISIBLE ||
                                     image_view4.getVisibility() == View.VISIBLE || image_view5.getVisibility() == View.VISIBLE) ||
-                                    ((image_view7.getVisibility() == View.VISIBLE || image_view8.getVisibility() == View.VISIBLE ) && RM003.equals("4"))){
+                                    ((image_view7.getVisibility() == View.VISIBLE || image_view8.getVisibility() == View.VISIBLE) && RM003.equals("4"))) {
                                 Toast.makeText(MissionReportActivity.this, "【請上傳現場照片(*為必傳項目)】", Toast.LENGTH_SHORT).show();
                             } else {
                                 //與OkHttp建立連線(任務回報-離開目的)
@@ -323,7 +329,7 @@ public class MissionReportActivity extends WQPToolsActivity {
                         }
                     }
                 } else if (type_spinner.getSelectedItemId() == 3) {
-                    if (unless_spinner.getSelectedItemId() == 0 ){
+                    if (unless_spinner.getSelectedItemId() == 0) {
                         Toast.makeText(MissionReportActivity.this, "【請選擇無效派工原因】", Toast.LENGTH_SHORT).show();
                     } else {
                         if ((RM003.equals("8") || RM003.equals("9")) && censor_spinner.getSelectedItemId() == 0) {
@@ -439,7 +445,8 @@ public class MissionReportActivity extends WQPToolsActivity {
                     have_get_llt.setVisibility(View.VISIBLE);
                     eng_money_llt.setVisibility(View.VISIBLE);
                     photo_llt.setVisibility(View.GONE);
-                } else {
+                } else if ((RM003.equals("4") || RM003.equals("5") || RM003.equals("6"))) {
+                    censor_llt.setVisibility(View.GONE);
                     unless_llt.setVisibility(View.GONE);
                     pay_llt.setVisibility(View.VISIBLE);
                     is_get_llt.setVisibility(View.VISIBLE);
@@ -447,6 +454,15 @@ public class MissionReportActivity extends WQPToolsActivity {
                     have_get_llt.setVisibility(View.VISIBLE);
                     eng_money_llt.setVisibility(View.VISIBLE);
                     photo_llt.setVisibility(View.VISIBLE);
+                } else {
+                    censor_llt.setVisibility(View.GONE);
+                    unless_llt.setVisibility(View.GONE);
+                    pay_llt.setVisibility(View.VISIBLE);
+                    is_get_llt.setVisibility(View.VISIBLE);
+                    receivable_llt.setVisibility(View.VISIBLE);
+                    have_get_llt.setVisibility(View.VISIBLE);
+                    eng_money_llt.setVisibility(View.VISIBLE);
+                    photo_llt.setVisibility(View.GONE);
                 }
             } else if (type_spinner.getSelectedItemId() == 3) {
                 if ((RM003.equals("8") || RM003.equals("9"))) {
@@ -678,7 +694,7 @@ public class MissionReportActivity extends WQPToolsActivity {
                 rm002 = bundle.getString("rm002").trim();
 
                 Log.e(LOG, user_id_data);
-                Log.e(LOG , rm002);
+                Log.e(LOG, rm002);
 
                 try {
                     OkHttpClient client = new OkHttpClient();
@@ -1598,7 +1614,7 @@ public class MissionReportActivity extends WQPToolsActivity {
             }
         });
 
-        Log.e(LOG + "BBBB","1. " + savePath1);
+        Log.e(LOG + "BBBB", "1. " + savePath1);
 
     }
 
@@ -1647,7 +1663,7 @@ public class MissionReportActivity extends WQPToolsActivity {
             }
         });
 
-        Log.e(LOG + "BBBB","2. " + savePath2);
+        Log.e(LOG + "BBBB", "2. " + savePath2);
 
     }
 
@@ -1697,7 +1713,7 @@ public class MissionReportActivity extends WQPToolsActivity {
             }
         });
 
-        Log.e(LOG + "BBBB","3. " + savePath3);
+        Log.e(LOG + "BBBB", "3. " + savePath3);
 
     }
 
@@ -1747,7 +1763,7 @@ public class MissionReportActivity extends WQPToolsActivity {
             }
         });
 
-        Log.e(LOG + "BBBB","4. " + savePath4);
+        Log.e(LOG + "BBBB", "4. " + savePath4);
 
     }
 
@@ -1797,7 +1813,7 @@ public class MissionReportActivity extends WQPToolsActivity {
             }
         });
 
-        Log.e(LOG + "BBBB","5. " + savePath5);
+        Log.e(LOG + "BBBB", "5. " + savePath5);
 
     }
 
@@ -1847,7 +1863,7 @@ public class MissionReportActivity extends WQPToolsActivity {
             }
         });
 
-        Log.e(LOG + "BBBB","6. " + savePath6);
+        Log.e(LOG + "BBBB", "6. " + savePath6);
 
     }
 
@@ -1898,7 +1914,7 @@ public class MissionReportActivity extends WQPToolsActivity {
             }
         });
 
-        Log.e(LOG + "BBBB","7. " + savePath7);
+        Log.e(LOG + "BBBB", "7. " + savePath7);
 
     }
 
@@ -1950,7 +1966,7 @@ public class MissionReportActivity extends WQPToolsActivity {
             }
         });
 
-        Log.e(LOG + "BBBB","8. " + savePath8);
+        Log.e(LOG + "BBBB", "8. " + savePath8);
 
     }
 
@@ -2002,7 +2018,7 @@ public class MissionReportActivity extends WQPToolsActivity {
             }
         });
 
-        Log.e(LOG + "BBBB","9. " + savePath9);
+        Log.e(LOG + "BBBB", "9. " + savePath9);
 
     }
 
@@ -2085,12 +2101,13 @@ public class MissionReportActivity extends WQPToolsActivity {
                 }
 
                 //定義位置監聽器，接收來自LocationManager的通知。
-                locationListener = new LocationListener(){
+                locationListener = new LocationListener() {
                     //位置管理服務利用requestLocationUpdates(String , long , float , LocationListener)方法註冊位置監聽器後，這些方法就會被呼叫。
                     //Provider狀態改變時呼叫此方法。
-                    public void onStatusChanged(String provider , int status , Bundle extras){
+                    public void onStatusChanged(String provider, int status, Bundle extras) {
 
                     }
+
                     //位置改變時呼叫此方法。
                     @Override
                     public void onLocationChanged(Location location) {
@@ -2115,12 +2132,12 @@ public class MissionReportActivity extends WQPToolsActivity {
                 };
 
                 //Location location = locationManager.getLastKnownLocation(commandStr);
-                LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+                LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
                 Location location = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 
                 locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 0, locationListener, Looper.getMainLooper());
 
-                if ( location != null) {
+                if (location != null) {
                     latitude = location.getLatitude();
                     longitude = location.getLongitude();
                     GPS = latitude + ", " + longitude;
@@ -2163,7 +2180,7 @@ public class MissionReportActivity extends WQPToolsActivity {
                             .build();
                     Log.e(LOG, user_id_data);
                     Log.e(LOG, rm002);
-                    Log.e(LOG, GPS);
+                    Log.e(LOG, report_GPS);
                     Log.e(LOG, ML008);
                     Log.e(LOG, RM015);
                     Log.e(LOG, RM016);
@@ -2222,12 +2239,13 @@ public class MissionReportActivity extends WQPToolsActivity {
                 }
 
                 //定義位置監聽器，接收來自LocationManager的通知。
-                locationListener = new LocationListener(){
+                locationListener = new LocationListener() {
                     //位置管理服務利用requestLocationUpdates(String , long , float , LocationListener)方法註冊位置監聽器後，這些方法就會被呼叫。
                     //Provider狀態改變時呼叫此方法。
-                    public void onStatusChanged(String provider , int status , Bundle extras){
+                    public void onStatusChanged(String provider, int status, Bundle extras) {
 
                     }
+
                     //位置改變時呼叫此方法。
                     @Override
                     public void onLocationChanged(Location location) {
@@ -2252,16 +2270,16 @@ public class MissionReportActivity extends WQPToolsActivity {
                 };
 
                 //Location location = locationManager.getLastKnownLocation(commandStr);
-                LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+                LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
                 Location location = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 
                 locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 0, locationListener, Looper.getMainLooper());
 
-                if ( location != null) {
+                if (location != null) {
                     latitude = location.getLatitude();
                     longitude = location.getLongitude();
                     GPS = latitude + ", " + longitude;
-                    Log.e(LOG, " 緯度 : " + location.getLatitude() + "經度 : " + location.getLongitude());
+                    //Log.e(LOG, " 緯度 : " + location.getLatitude() + "經度 : " + location.getLongitude());
                 }
                 String report_GPS = latitude + ", " + longitude;
 
@@ -2299,8 +2317,8 @@ public class MissionReportActivity extends WQPToolsActivity {
                             .add("RM021", RM021)
                             .build();
                     Log.e(LOG, user_id_data);
-                    Log.e(LOG, rm002);
-                    Log.e(LOG, GPS);
+                    Log.e(LOG, "RM002 " + rm002);
+                    Log.e(LOG, "GPS " + report_GPS);
                     Log.e(LOG, ML008);
                     Log.e(LOG, RM015);
                     Log.e(LOG, RM016);
@@ -2359,12 +2377,13 @@ public class MissionReportActivity extends WQPToolsActivity {
                 }
 
                 //定義位置監聽器，接收來自LocationManager的通知。
-                locationListener = new LocationListener(){
+                locationListener = new LocationListener() {
                     //位置管理服務利用requestLocationUpdates(String , long , float , LocationListener)方法註冊位置監聽器後，這些方法就會被呼叫。
                     //Provider狀態改變時呼叫此方法。
-                    public void onStatusChanged(String provider , int status , Bundle extras){
+                    public void onStatusChanged(String provider, int status, Bundle extras) {
 
                     }
+
                     //位置改變時呼叫此方法。
                     @Override
                     public void onLocationChanged(Location location) {
@@ -2389,12 +2408,12 @@ public class MissionReportActivity extends WQPToolsActivity {
                 };
 
                 //Location location = locationManager.getLastKnownLocation(commandStr);
-                LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+                LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
                 Location location = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 
                 locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 0, locationListener, Looper.getMainLooper());
 
-                if ( location != null) {
+                if (location != null) {
                     latitude = location.getLatitude();
                     longitude = location.getLongitude();
                     GPS = latitude + ", " + longitude;
@@ -2437,7 +2456,7 @@ public class MissionReportActivity extends WQPToolsActivity {
                             .build();
                     Log.e(LOG, user_id_data);
                     Log.e(LOG, rm002);
-                    Log.e(LOG, GPS);
+                    Log.e(LOG, report_GPS);
                     Log.e(LOG, ML008);
                     Log.e(LOG, RM015);
                     Log.e(LOG, RM016);
@@ -2486,12 +2505,13 @@ public class MissionReportActivity extends WQPToolsActivity {
         }
 
         //定義位置監聽器，接收來自LocationManager的通知。
-        locationListener = new LocationListener(){
+        locationListener = new LocationListener() {
             //位置管理服務利用requestLocationUpdates(String , long , float , LocationListener)方法註冊位置監聽器後，這些方法就會被呼叫。
             //Provider狀態改變時呼叫此方法。
-            public void onStatusChanged(String provider , int status , Bundle extras){
+            public void onStatusChanged(String provider, int status, Bundle extras) {
 
             }
+
             //位置改變時呼叫此方法。
             @Override
             public void onLocationChanged(Location location) {
@@ -2516,12 +2536,12 @@ public class MissionReportActivity extends WQPToolsActivity {
         };
 
         //Location location = locationManager.getLastKnownLocation(commandStr);
-        LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-        Location location = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 0, locationListener);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListener);
 
-        if ( location != null) {
+        if (location != null) {
             double latitude = location.getLatitude();
             double longitude = location.getLongitude();
             GPS = latitude + ", " + longitude;
@@ -2549,6 +2569,17 @@ public class MissionReportActivity extends WQPToolsActivity {
         Log.e(LOG, "onResume");
         //◎LocationManager.NETWORK_PROVIDER //使用網路定位
         commandStr = LocationManager.GPS_PROVIDER;
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        locationManager.requestLocationUpdates("gps", 60000, 1, locationListener);
         //抓取設備GPS位置
         GPSLocation();
     }
@@ -2557,6 +2588,7 @@ public class MissionReportActivity extends WQPToolsActivity {
     protected void onPause() {
         super.onPause();
         Log.e(LOG, "onPause");
+        locationManager.removeUpdates(locationListener);
     }
 
     @Override
