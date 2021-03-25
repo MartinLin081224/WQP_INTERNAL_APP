@@ -436,7 +436,7 @@ public class VersionActivity extends WQPToolsActivity {
                 detail_txt1.setText("1.修正部分人員閃退問題");
                 detail_txt2.setText("1.修正部分人員閃退、無法回報問題");
                 detail_txt3.setText("1.抓了一些臭蟲\n" +
-                        "2.派工任務-未回報裡的逾期任務底色會變粉紅色");
+                                    "2.派工任務-未回報裡的逾期任務底色會變粉紅色");
             }
         });
     }
