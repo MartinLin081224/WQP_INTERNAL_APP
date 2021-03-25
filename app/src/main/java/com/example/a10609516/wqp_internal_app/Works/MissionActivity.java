@@ -44,7 +44,12 @@ import com.example.easywaylocation.LocationData;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
@@ -798,6 +803,25 @@ public class MissionActivity extends WQPToolsActivity implements Listener, Locat
                             }
                         }
                     });
+
+                    SimpleDateFormat CurrentTime= new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                    String currentDate = new SimpleDateFormat("yyyy-MM-dd  HH:mm", Locale.getDefault()).format(new Date());
+                    Log.e(LOG, "DATE : " + currentDate);
+
+                    try {
+                        Date get_date = CurrentTime.parse(currentDate);
+                        Date mission_date = CurrentTime.parse(JArrayList.get(2).trim());
+
+                        if(get_date.after(mission_date)) {
+                            Log.e(LOG,"逾期");
+                            id_rlt.setBackgroundColor(mContext.getResources().getColor(R.color.WQP_Pink));
+                        } else {
+                            Log.e(LOG,"未逾期");
+                        }
+                    } catch (ParseException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
 
                     LinearLayout.LayoutParams small_2pm = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1.7f);
                     LinearLayout.LayoutParams small_3pm = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 3.0f);

@@ -177,6 +177,7 @@ public class MissionDetailActivity extends WQPToolsActivity implements Listener,
                 Intent intent_report = new Intent(MissionDetailActivity.this, MissionReportActivity.class);
                 //接收MissionActivity傳過來的值
                 Bundle bundle = new Bundle();
+                bundle.putString("rm001", RM001.substring(0, RM001.indexOf(":|:")));
                 bundle.putString("rm002", rm002);
                 Log.e(LOG, "RM002 : " + rm002);
                 //intent_gps.putExtra("TitleText", TitleText);//可放所有基本類別

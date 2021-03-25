@@ -80,7 +80,7 @@ public class MissionReportActivity extends WQPToolsActivity {
     private String[] unless_list = new String[]{};
     private String[] censor_list = new String[]{};
     private String[] pay_list = new String[]{};
-    private String user_id_data, rm002, RM003, RM015, RM016, RM017, RM018, RM019, RM020, RM021, ML008;
+    private String user_id_data, rm001, rm002, RM003, RM015, RM016, RM017, RM018, RM019, RM020, RM021, ML008;
     private double latitude, longitude;
 
     private Adapter mAdapter1, mAdapter2, mAdapter3, mAdapter4, mAdapter5, mAdapter6, mAdapter7, mAdapter8, mAdapter9, mAdapter10;
@@ -691,7 +691,9 @@ public class MissionReportActivity extends WQPToolsActivity {
                 user_id_data = user_id.getString("ID", "");
                 //接收MissionActivity傳過來的值
                 Bundle bundle = getIntent().getExtras();
+                rm001 = bundle.getString("rm001").trim();
                 rm002 = bundle.getString("rm002").trim();
+
 
                 Log.e(LOG, user_id_data);
                 Log.e(LOG, rm002);
@@ -1583,13 +1585,13 @@ public class MissionReportActivity extends WQPToolsActivity {
         Log.e(LOG + "888", "1." + path1);
 
         image_file1 = new File(path1);
-        builder1.addFormDataPart("img", "m_pic_" + user_id_data + "_" + rm002 + "_" + RM003 + "_1_" + image_file1.getName(), RequestBody.create(MEDIA_TYPE_PNG, image_file1));
+        builder1.addFormDataPart("img", "m_pic_" + user_id_data + "_" + rm001 + "_" + rm002 + "_" + RM003 + "_1_" + image_file1.getName(), RequestBody.create(MEDIA_TYPE_PNG, image_file1));
 
         Log.e(LOG + "8888", image_file1.getName());
 
         String fileName = "C:\\xampp\\htdocs\\WQP_OS\\mission_report_pic\\";
         //savePath = savePath + fileName + image_file1.getName() + ",";
-        savePath1 = fileName + "m_pic_" + user_id_data + "_" + rm002 + "_" + RM003 + "_1_" + image_file1.getName();
+        savePath1 = fileName + "m_pic_" + user_id_data + "_" + rm001 + "_" + rm002 + "_" + RM003 + "_1_" + image_file1.getName();
 
         Log.e(LOG + "BBB", "1. " + savePath1);
 
@@ -1633,13 +1635,13 @@ public class MissionReportActivity extends WQPToolsActivity {
         Log.e(LOG + "888", "2." + path2);
 
         image_file2 = new File(path2);
-        builder2.addFormDataPart("img", "m_pic_" + user_id_data + "_" + rm002 + "_" + RM003 + "_2_" + image_file2.getName(), RequestBody.create(MEDIA_TYPE_PNG, image_file2));
+        builder2.addFormDataPart("img", "m_pic_" + user_id_data + "_" + rm001 + "_" + rm002 + "_" + RM003 + "_2_" + image_file2.getName(), RequestBody.create(MEDIA_TYPE_PNG, image_file2));
 
         Log.e(LOG + "8888", image_file2.getName());
 
         String fileName = "C:\\xampp\\htdocs\\WQP\\mission_report_pic\\";
         //savePath = savePath + fileName + image_file1.getName() + ",";
-        savePath2 = fileName + "m_pic_" + user_id_data + "_" + rm002 + "_" + RM003 + "_2_" + image_file2.getName();
+        savePath2 = fileName + "m_pic_" + user_id_data + "_" + rm001 + "_" + rm002 + "_" + RM003 + "_2_" + image_file2.getName();
 
         Log.e(LOG + "BBB", "2. " + savePath2);
 
@@ -1682,13 +1684,13 @@ public class MissionReportActivity extends WQPToolsActivity {
         Log.e(LOG + "888", "3." + path3);
 
         image_file3 = new File(path3);
-        builder3.addFormDataPart("img", "m_pic_" + user_id_data + "_" + rm002 + "_" + RM003 + "_3_" + image_file3.getName(), RequestBody.create(MEDIA_TYPE_PNG, image_file3));
+        builder3.addFormDataPart("img", "m_pic_" + user_id_data + "_" + rm001 + "_" + rm002 + "_" + RM003 + "_3_" + image_file3.getName(), RequestBody.create(MEDIA_TYPE_PNG, image_file3));
 
         Log.e(LOG + "8888", image_file3.getName());
 
         String fileName = "C:\\xampp\\htdocs\\WQP\\mission_report_pic\\";
         //savePath = savePath + fileName + image_file1.getName() + ",";
-        savePath3 = fileName + "m_pic_" + user_id_data + "_" + rm002 + "_" + RM003 + "_3_" + image_file3.getName();
+        savePath3 = fileName + "m_pic_" + user_id_data + "_" + rm001 + "_" + rm002 + "_" + RM003 + "_3_" + image_file3.getName();
 
         Log.e(LOG + "BBB", "3. " + savePath3);
 
@@ -1732,13 +1734,13 @@ public class MissionReportActivity extends WQPToolsActivity {
         Log.e(LOG + "888", "4." + path4);
 
         image_file4 = new File(path4);
-        builder4.addFormDataPart("img", "m_pic_" + user_id_data + "_" + rm002 + "_" + RM003 + "_4_" + image_file4.getName(), RequestBody.create(MEDIA_TYPE_PNG, image_file4));
+        builder4.addFormDataPart("img", "m_pic_" + user_id_data + "_" + rm001 + "_" + rm002 + "_" + RM003 + "_4_" + image_file4.getName(), RequestBody.create(MEDIA_TYPE_PNG, image_file4));
 
         Log.e(LOG + "8888", image_file4.getName());
 
         String fileName = "C:\\xampp\\htdocs\\WQP\\mission_report_pic\\";
         //savePath = savePath + fileName + image_file1.getName() + ",";
-        savePath4 = fileName + "m_pic_" + user_id_data + "_" + rm002 + "_" + RM003 + "_4_" + image_file4.getName();
+        savePath4 = fileName + "m_pic_" + user_id_data + "_" + rm001 + "_" + rm002 + "_" + RM003 + "_4_" + image_file4.getName();
 
         Log.e(LOG + "BBB", "4. " + savePath4);
 
@@ -1782,13 +1784,13 @@ public class MissionReportActivity extends WQPToolsActivity {
         Log.e(LOG + "888", " ,5." + path5);
 
         image_file5 = new File(path5);
-        builder5.addFormDataPart("img", "m_pic_" + user_id_data + "_" + rm002 + "_" + RM003 + "_5_" + image_file5.getName(), RequestBody.create(MEDIA_TYPE_PNG, image_file5));
+        builder5.addFormDataPart("img", "m_pic_" + user_id_data + "_" + rm001 + "_" + rm002 + "_" + RM003 + "_5_" + image_file5.getName(), RequestBody.create(MEDIA_TYPE_PNG, image_file5));
 
         Log.e(LOG + "8888", image_file5.getName());
 
         String fileName = "C:\\xampp\\htdocs\\WQP\\mission_report_pic\\";
         //savePath = savePath + fileName + image_file1.getName() + ",";
-        savePath5 = fileName + "m_pic_" + user_id_data + "_" + rm002 + "_" + RM003 + "_5_" + image_file5.getName();
+        savePath5 = fileName + "m_pic_" + user_id_data + "_" + rm001 + "_" + rm002 + "_" + RM003 + "_5_" + image_file5.getName();
 
         Log.e(LOG + "BBB", "5. " + savePath5);
 
@@ -1832,13 +1834,13 @@ public class MissionReportActivity extends WQPToolsActivity {
         Log.e(LOG + "888", "6." + path6);
 
         image_file6 = new File(path6);
-        builder6.addFormDataPart("img", "m_pic_" + user_id_data + "_" + rm002 + "_" + RM003 + "_6_" + image_file6.getName(), RequestBody.create(MEDIA_TYPE_PNG, image_file6));
+        builder6.addFormDataPart("img", "m_pic_" + user_id_data + "_" + rm001 + "_" + rm002 + "_" + RM003 + "_6_" + image_file6.getName(), RequestBody.create(MEDIA_TYPE_PNG, image_file6));
 
         Log.e(LOG + "8888", image_file6.getName());
 
         String fileName = "C:\\xampp\\htdocs\\WQP\\mission_report_pic\\";
         //savePath = savePath + fileName + image_file1.getName() + ",";
-        savePath6 = fileName + "m_pic_" + user_id_data + "_" + rm002 + "_" + RM003 + "_6_" + image_file6.getName();
+        savePath6 = fileName + "m_pic_" + user_id_data + "_" + rm001 + "_" + rm002 + "_" + RM003 + "_6_" + image_file6.getName();
 
         Log.e(LOG + "BBB", "6. " + savePath6);
 
@@ -1883,13 +1885,13 @@ public class MissionReportActivity extends WQPToolsActivity {
         Log.e(LOG + "888", "7." + path7);
 
         image_file7 = new File(path7);
-        builder7.addFormDataPart("img", "m_pic_" + user_id_data + "_" + rm002 + "_" + RM003 + "_7_" + image_file7.getName(), RequestBody.create(MEDIA_TYPE_PNG, image_file7));
+        builder7.addFormDataPart("img", "m_pic_" + user_id_data + "_" + rm001 + "_" + rm002 + "_" + RM003 + "_7_" + image_file7.getName(), RequestBody.create(MEDIA_TYPE_PNG, image_file7));
 
         Log.e(LOG + "8888", image_file7.getName());
 
         String fileName = "C:\\xampp\\htdocs\\WQP\\mission_report_pic\\";
         //savePath = savePath + fileName + image_file1.getName() + ",";
-        savePath7 = fileName + "m_pic_" + user_id_data + "_" + rm002 + "_" + RM003 + "_7_" + image_file7.getName();
+        savePath7 = fileName + "m_pic_" + user_id_data + "_" + rm001 + "_" + rm002 + "_" + RM003 + "_7_" + image_file7.getName();
 
         Log.e(LOG + "BBB", "7. " + savePath7);
 
@@ -1934,14 +1936,14 @@ public class MissionReportActivity extends WQPToolsActivity {
         Log.e(LOG + "888", "8." + path8);
 
         image_file8 = new File(path8);
-        builder8.addFormDataPart("img", "m_pic_" + user_id_data + "_" + rm002 + "_" + RM003 + "_8_" + image_file8.getName(), RequestBody.create(MEDIA_TYPE_PNG, image_file8));
+        builder8.addFormDataPart("img", "m_pic_" + user_id_data + "_" + rm001 + "_" + rm002 + "_" + RM003 + "_8_" + image_file8.getName(), RequestBody.create(MEDIA_TYPE_PNG, image_file8));
 
         Log.e(LOG + "8888", image_file8.getName());
 
         String fileName = "C:\\xampp\\htdocs\\WQP\\mission_report_pic\\";
         //savePath = savePath + fileName + image_file1.getName() + ",";
 
-        savePath8 = fileName + "m_pic_" + user_id_data + "_" + rm002 + "_" + RM003 + "_8_" + image_file8.getName();
+        savePath8 = fileName + "m_pic_" + user_id_data + "_" + rm001 + "_" + rm002 + "_" + RM003 + "_8_" + image_file8.getName();
 
         Log.e(LOG + "BBB", "8. " + savePath8);
 
@@ -1986,14 +1988,14 @@ public class MissionReportActivity extends WQPToolsActivity {
         Log.e(LOG + "888", "8." + path9);
 
         image_file9 = new File(path9);
-        builder9.addFormDataPart("img", "m_pic_" + user_id_data + "_" + rm002 + "_" + RM003 + "_9_" + image_file9.getName(), RequestBody.create(MEDIA_TYPE_PNG, image_file9));
+        builder9.addFormDataPart("img", "m_pic_" + user_id_data + "_" + rm001 + "_" + rm002 + "_" + RM003 + "_9_" + image_file9.getName(), RequestBody.create(MEDIA_TYPE_PNG, image_file9));
 
         Log.e(LOG + "8888", image_file9.getName());
 
         String fileName = "C:\\xampp\\htdocs\\WQP\\mission_report_pic\\";
         //savePath = savePath + fileName + image_file1.getName() + ",";
 
-        savePath9 = fileName + "m_pic_" + user_id_data + "_" + rm002 + "_" + RM003 + "_9_" + image_file9.getName();
+        savePath9 = fileName + "m_pic_" + user_id_data + "_" + rm001 + "_" + rm002 + "_" + RM003 + "_9_" + image_file9.getName();
 
         Log.e(LOG + "BBB", "9. " + savePath9);
 
@@ -2034,6 +2036,7 @@ public class MissionReportActivity extends WQPToolsActivity {
                 user_id_data = user_id.getString("ID", "");
                 //接收MissionActivity傳過來的值
                 Bundle bundle = getIntent().getExtras();
+                rm001 = bundle.getString("rm001").trim();
                 rm002 = bundle.getString("rm002").trim();
 
                 try {
@@ -2052,6 +2055,7 @@ public class MissionReportActivity extends WQPToolsActivity {
                             .add("FILE_NAME7", savePath7)
                             .add("FILE_NAME8", savePath8)
                             .add("FILE_NAME9", savePath9)
+                            .add("RM001", rm001)
                             .build();
                     Log.e(LOG, user_id_data);
                     Request request = new Request.Builder()
@@ -2081,6 +2085,7 @@ public class MissionReportActivity extends WQPToolsActivity {
                 user_id_data = user_id.getString("ID", "");
                 //接收MissionActivity傳過來的值
                 Bundle bundle = getIntent().getExtras();
+                rm001 = bundle.getString("rm001").trim();
                 rm002 = bundle.getString("rm002").trim();
 
                 locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
@@ -2219,6 +2224,7 @@ public class MissionReportActivity extends WQPToolsActivity {
                 user_id_data = user_id.getString("ID", "");
                 //接收MissionActivity傳過來的值
                 Bundle bundle = getIntent().getExtras();
+                rm001 = bundle.getString("rm001").trim();
                 rm002 = bundle.getString("rm002").trim();
 
                 locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
@@ -2357,6 +2363,7 @@ public class MissionReportActivity extends WQPToolsActivity {
                 user_id_data = user_id.getString("ID", "");
                 //接收MissionActivity傳過來的值
                 Bundle bundle = getIntent().getExtras();
+                rm001 = bundle.getString("rm001").trim();
                 rm002 = bundle.getString("rm002").trim();
 
                 locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);

@@ -41,7 +41,7 @@ public class VersionActivity extends WQPToolsActivity {
     private DrawerLayout drawer;
     private Toolbar toolbar;
 
-    private TextView detail_txt0, detail_txt1, detail_txt2;
+    private TextView detail_txt0, detail_txt1, detail_txt2, detail_txt3;
 
     private Context mContext = this;
 
@@ -71,6 +71,7 @@ public class VersionActivity extends WQPToolsActivity {
         detail_txt0 = findViewById(R.id.detail_txt0);
         detail_txt1 = findViewById(R.id.detail_txt1);
         detail_txt2 = findViewById(R.id.detail_txt2);
+        detail_txt3 = findViewById(R.id.detail_txt3);
     }
 
     /**
@@ -434,6 +435,8 @@ public class VersionActivity extends WQPToolsActivity {
                 detail_txt0.setText("1.內部使用APP_更新版");
                 detail_txt1.setText("1.修正部分人員閃退問題");
                 detail_txt2.setText("1.修正部分人員閃退、無法回報問題");
+                detail_txt3.setText("1.抓了一些臭蟲\n" +
+                        "2.派工任務-未回報裡的逾期任務底色會變粉紅色");
             }
         });
     }
