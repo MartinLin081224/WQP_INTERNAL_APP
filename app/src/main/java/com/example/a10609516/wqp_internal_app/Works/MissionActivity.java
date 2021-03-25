@@ -808,6 +808,7 @@ public class MissionActivity extends WQPToolsActivity implements Listener, Locat
                     String currentDate = new SimpleDateFormat("yyyy-MM-dd  HH:mm", Locale.getDefault()).format(new Date());
                     Log.e(LOG, "DATE : " + currentDate);
 
+                    //若任務逾期未回報該任務底色改為粉色
                     try {
                         Date get_date = CurrentTime.parse(currentDate);
                         Date mission_date = CurrentTime.parse(JArrayList.get(2).trim());
