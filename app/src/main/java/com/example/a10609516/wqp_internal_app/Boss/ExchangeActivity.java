@@ -33,7 +33,6 @@ import com.example.a10609516.wqp_internal_app.DepartmentAndDIY.StationReportSear
 import com.example.a10609516.wqp_internal_app.Manager.InventoryActivity;
 import com.example.a10609516.wqp_internal_app.Manager.OrderSearchActivity;
 import com.example.a10609516.wqp_internal_app.R;
-import com.example.a10609516.wqp_internal_app.Tools.WQPClickListener;
 import com.example.a10609516.wqp_internal_app.Tools.WQPToolsActivity;
 import com.example.a10609516.wqp_internal_app.Works.CalendarActivity;
 import com.example.a10609516.wqp_internal_app.Works.EngPointsActivity;
@@ -993,7 +992,7 @@ public class ExchangeActivity extends WQPToolsActivity {
             public void run() {
                 Log.e(LOG , exchange_id);
                 //接收LoginActivity傳過來的值
-                SharedPreferences user_id = getSharedPreferences("user_id_data", MODE_PRIVATE);
+                SharedPreferences user_id = getSharedPreferences("user_id", MODE_PRIVATE);
                 String user_id_data = user_id.getString("ID", "");
                 Log.e(LOG, user_id_data);
                 String applicant_name = applicant_txt.getText().toString();
@@ -1036,7 +1035,7 @@ public class ExchangeActivity extends WQPToolsActivity {
             public void run() {
                 Log.e(LOG , exchange_id);
                 //接收LoginActivity傳過來的值
-                SharedPreferences user_id = getSharedPreferences("user_id_data", MODE_PRIVATE);
+                SharedPreferences user_id = getSharedPreferences("user_id", MODE_PRIVATE);
                 String user_id_data = user_id.getString("ID", "");
                 Log.e(LOG, user_id_data);
                 String applicant_name = applicant_txt.getText().toString();
@@ -1051,6 +1050,8 @@ public class ExchangeActivity extends WQPToolsActivity {
                     reject_reason = warranty_reason;
                 } else if (other_checkBox.isChecked()) {
                     reject_reason = other_reason;
+                } else {
+                    reject_reason = "";
                 }
 
 

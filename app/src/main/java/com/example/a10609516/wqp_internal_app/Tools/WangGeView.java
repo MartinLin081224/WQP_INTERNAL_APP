@@ -40,7 +40,7 @@ public class WangGeView extends View {
         width = MeasureSpec.getSize(widthMeasureSpec);
         height = MeasureSpec.getSize(heightMeasureSpec);
         wSpace = width / 40;
-        hSpace = height / 10;
+        hSpace = height / 20;
         paint = new Paint();
         paint.setColor(Color.rgb(175,238,238));
         paint.setAntiAlias(true);

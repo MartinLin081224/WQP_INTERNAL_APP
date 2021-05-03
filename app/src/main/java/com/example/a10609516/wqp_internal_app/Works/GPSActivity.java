@@ -734,7 +734,7 @@ public class GPSActivity extends WQPToolsActivity {
             if (ActivityCompat.shouldShowRequestPermissionRationale(GPSActivity.this,
                     Manifest.permission.ACCESS_FINE_LOCATION)) {
                 new AlertDialog.Builder(GPSActivity.this)
-                        .setMessage("我真的沒有要做壞事, 給我權限吧?")
+                        .setMessage("麻煩提供此權限，若不提供，將會將會影響點數發放!")
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {

@@ -19,7 +19,6 @@ import com.example.a10609516.wqp_internal_app.DepartmentAndDIY.StationReportSear
 import com.example.a10609516.wqp_internal_app.Manager.InventoryActivity;
 import com.example.a10609516.wqp_internal_app.Manager.OrderSearchActivity;
 import com.example.a10609516.wqp_internal_app.R;
-import com.example.a10609516.wqp_internal_app.Tools.WQPClickListener;
 import com.example.a10609516.wqp_internal_app.Tools.WQPToolsActivity;
 import com.example.a10609516.wqp_internal_app.Works.CalendarActivity;
 import com.example.a10609516.wqp_internal_app.Works.EngPointsActivity;
@@ -41,7 +40,7 @@ public class VersionActivity extends WQPToolsActivity {
     private DrawerLayout drawer;
     private Toolbar toolbar;
 
-    private TextView detail_txt0, detail_txt1, detail_txt2, detail_txt3;
+    private TextView detail_txt0, detail_txt1, detail_txt2, detail_txt3, detail_txt4, detail_txt5;
 
     private Context mContext = this;
 
@@ -72,6 +71,8 @@ public class VersionActivity extends WQPToolsActivity {
         detail_txt1 = findViewById(R.id.detail_txt1);
         detail_txt2 = findViewById(R.id.detail_txt2);
         detail_txt3 = findViewById(R.id.detail_txt3);
+        detail_txt4 = findViewById(R.id.detail_txt4);
+        detail_txt5 = findViewById(R.id.detail_txt5);
     }
 
     /**
@@ -437,6 +438,9 @@ public class VersionActivity extends WQPToolsActivity {
                 detail_txt2.setText("1.修正部分人員閃退、無法回報問題");
                 detail_txt3.setText("1.抓了一些臭蟲\n" +
                                     "2.派工任務-未回報裡的逾期任務底色會變粉紅色");
+                detail_txt4.setText("1.抓了一些臭蟲\n" +
+                        "2.派工任務-要現金收款需有客戶電子簽名");
+                detail_txt5.setText("1.派工任務-修正*號照片上傳問題");
             }
         });
     }

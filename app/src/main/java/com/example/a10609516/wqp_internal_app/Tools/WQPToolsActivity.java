@@ -184,16 +184,16 @@ public class WQPToolsActivity extends AppCompatActivity {
     private void UsesPermission() {
         // Here, thisActivity is the current activity
         if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.CAMERA)
+                Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.CAMERA)) {
+                    Manifest.permission.ACCESS_FINE_LOCATION)) {
                 new AlertDialog.Builder(this)
-                        .setMessage("我真的沒有要做壞事, 給我權限吧?")
+                        .setMessage("麻煩提供此權限，若不提供，將會將會影響點數發放!")
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                ActivityCompat.requestPermissions((Activity) getApplicationContext(),
+                                ActivityCompat.requestPermissions((Activity) WQPToolsActivity.this,
                                         new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE
                                                 , Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.REQUEST_INSTALL_PACKAGES, Manifest.permission.ACCESS_FINE_LOCATION},
                                         MY_PERMISSIONS_REQUEST_READ_CONTACTS);
@@ -205,6 +205,7 @@ public class WQPToolsActivity extends AppCompatActivity {
                                 finish();
                             }
                         })
+                        .setCancelable(false)
                         .show();
             } else {
                 ActivityCompat.requestPermissions(this,
@@ -231,7 +232,6 @@ public class WQPToolsActivity extends AppCompatActivity {
                 }
                 return;
             }
-
             // other 'case' lines to check for other
             // permissions this app might request
         }
@@ -280,7 +280,9 @@ public class WQPToolsActivity extends AppCompatActivity {
                                                 }
                                             }.start();
                                         }
-                                    }).show();
+                                    })
+                            .setCancelable(false)
+                            .show();
                 }
             }
             @Override
@@ -310,6 +312,10 @@ public class WQPToolsActivity extends AppCompatActivity {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         }
+        //請求開啟儲存、相機權限、GPS
+        UsesPermission();
+        //確認是否有最新版本，進行更新
+        CheckFirebaseVersion();
     }
 
     @Override

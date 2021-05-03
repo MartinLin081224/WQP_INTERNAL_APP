@@ -13,7 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.a10609516.wqp_internal_app.Boss.ApplyExchangeActivity;
-import com.example.a10609516.wqp_internal_app.Boss.ExchangeActivity;
 import com.example.a10609516.wqp_internal_app.Clerk.QuotationActivity;
 import com.example.a10609516.wqp_internal_app.DepartmentAndDIY.SetupDemandActivity;
 import com.example.a10609516.wqp_internal_app.DepartmentAndDIY.StationReportActivity;
@@ -21,7 +20,6 @@ import com.example.a10609516.wqp_internal_app.DepartmentAndDIY.StationReportSear
 import com.example.a10609516.wqp_internal_app.Manager.InventoryActivity;
 import com.example.a10609516.wqp_internal_app.Manager.OrderSearchActivity;
 import com.example.a10609516.wqp_internal_app.R;
-import com.example.a10609516.wqp_internal_app.Tools.WQPClickListener;
 import com.example.a10609516.wqp_internal_app.Tools.WQPToolsActivity;
 import com.example.a10609516.wqp_internal_app.Works.CalendarActivity;
 import com.example.a10609516.wqp_internal_app.Works.EngPointsActivity;
@@ -844,6 +842,22 @@ public class HomeActivity extends WQPToolsActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
+                /*FirebaseInstanceId.getInstance().getInstanceId()
+                        .addOnCompleteListener(new OnCompleteListener() {
+                            @Override
+                            public void onComplete(@NonNull Task task) {
+                                if (!task.isSuccessful()) {
+                                    return;
+                                }
+                                if( task.getResult() == null)
+                                    return;
+                                // Get new Instance ID token
+                                String token = task.getResult().getToken();
+                                // Log and toast
+                                Log.i("MainActivity","token "+token);
+                            }
+                        });*/
+
                 //接收LoginActivity傳過來的值
                 SharedPreferences user_id = getSharedPreferences("user_id", MODE_PRIVATE);
                 user_id_data = user_id.getString("ID", "");

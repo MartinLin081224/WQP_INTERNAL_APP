@@ -92,17 +92,17 @@ public class EngSignatureActivity extends WQPToolsActivity {
         String _path = null;
         try {
             //接收LoginActivity傳過來的值
-            SharedPreferences user_id = getSharedPreferences("user_id_data" , MODE_PRIVATE);
+            SharedPreferences user_id = getSharedPreferences("user_id" , MODE_PRIVATE);
             String user_id_data = user_id.getString("ID" , "");
             Log.e(LOG,user_id_data);
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd_HHmmss");
             String date = simpleDateFormat.format(new java.util.Date());
             Bundle bundle = getIntent().getExtras();
-            String res_txt1 = bundle.getString("ResponseText1");
-            String res_txt2 = bundle.getString("ResponseText2");
+            String rm001 = bundle.getString("rm001");
+            String rm002 = bundle.getString("rm002");
             String sign_dir = getExternalFilesDir(Environment.DIRECTORY_PICTURES) + "/";
-            _path = sign_dir + "Sign_"  + res_txt1 + "-" + res_txt2 + "_" + user_id_data + "_" + date +".png";
-            sign_name = "Sign_" + res_txt1 + "-" + res_txt2 + "_" + user_id_data + "_" + date;
+            _path = sign_dir + "Sign_"  + rm001 + "-" + rm002 + "_" + user_id_data + "_" + date +".png";
+            sign_name = "Sign_" + rm001 + "-" + rm002 + "_" + user_id_data + "_" + date;
             Log.e("TAG",_path);
             byteArrayOutputStream = new ByteArrayOutputStream();
             mSignBitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
@@ -155,20 +155,20 @@ public class EngSignatureActivity extends WQPToolsActivity {
                 Log.i(LOG, user_id_data);
 
                 Bundle bundle = getIntent().getExtras();
-                String response_txt1 = bundle.getString("ResponseText1");
-                String response_txt2 = bundle.getString("ResponseText2");
+                String rm001 = bundle.getString("rm001");
+                String rm002 = bundle.getString("rm002");
                 try {
                     OkHttpClient client = new OkHttpClient();
                     //POST
                     RequestBody requestBody = new FormBody.Builder()
                             .add("User_id", user_id_data)
-                            .add("ESVD_SEQ_ID", response_txt1)
-                            .add("ESVD_SERVICE_NO", response_txt2)
+                            .add("RM001", rm001)
+                            .add("RM002", rm002)
                             .add("SIGN_FILE_NAME", sign_name + ".png")
                             .build();
                     Log.e(LOG, user_id_data);
-                    Log.e(LOG, response_txt1);
-                    Log.e(LOG, response_txt2);
+                    Log.e(LOG, rm001);
+                    Log.e(LOG, rm002);
                     Log.e(LOG, sign_name + ".png");
                     Request request = new Request.Builder()
                             .url("http://a.wqp-water.com.tw/WQP_OS/WorkSignatureLog.php")

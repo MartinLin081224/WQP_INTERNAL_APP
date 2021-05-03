@@ -38,10 +38,10 @@ import com.example.a10609516.wqp_internal_app.DepartmentAndDIY.StationReportSear
 import com.example.a10609516.wqp_internal_app.Manager.InventoryActivity;
 import com.example.a10609516.wqp_internal_app.Manager.OrderSearchActivity;
 import com.example.a10609516.wqp_internal_app.R;
-import com.example.a10609516.wqp_internal_app.Tools.WQPClickListener;
 import com.example.a10609516.wqp_internal_app.Tools.WQPToolsActivity;
 import com.example.easywaylocation.EasyWayLocation;
 import com.example.easywaylocation.GetLocationDetail;
+import com.example.easywaylocation.Listener;
 import com.example.easywaylocation.LocationData;
 
 import org.json.JSONArray;
@@ -60,11 +60,6 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-import com.example.easywaylocation.EasyWayLocation;
-import com.example.easywaylocation.GetLocationDetail;
-import com.example.easywaylocation.Listener;
-import com.example.easywaylocation.LocationData;
-
 import static com.example.easywaylocation.EasyWayLocation.LOCATION_SETTING_REQUEST_CODE;
 
 public class MissionDetailActivity extends WQPToolsActivity implements Listener, LocationData.AddressCallBack {
@@ -79,7 +74,7 @@ public class MissionDetailActivity extends WQPToolsActivity implements Listener,
     private Button report_button;
     private TextView customer_txt, no_txt, type_txt, status_txt, address_txt, mission_txt,
             engineer_txt, start_datetime_txt, end_datetime_txt, actual_datetime_txt, manager_remark_txt, work_remark_txt;
-    private String R_COUNT, U_name, rm002, RM001, RM0002, RM003, RM004, RM005, RM006, RM910, RM1112, RM013, RM014, RM022, RM023,
+    private String R_COUNT, U_name, rm002, rm003, RM001, RM0002, RM003, RM004, RM005, RM006, RM910, RM1112, RM013, RM014, RM022, RM023,
             ML001, ML002, ML004, ML005, ML006, ML008, O_ML009, N_ML009, O_ML010, N_ML010, O_ML011, N_ML011,
             O_ML012, N_ML012, O_ML013, N_ML013, O_ML014, N_ML014, O_ML015, N_ML015, O_ML016, N_ML016,
             O_ML017, N_ML017, O_ML018, N_ML018, O_ML019, N_ML019, O_ML020, N_ML020, O_ML021, N_ML021, ML024, ML_ID,
@@ -179,7 +174,9 @@ public class MissionDetailActivity extends WQPToolsActivity implements Listener,
                 Bundle bundle = new Bundle();
                 bundle.putString("rm001", RM001.substring(0, RM001.indexOf(":|:")));
                 bundle.putString("rm002", rm002);
+                bundle.putString("rm003", rm003);
                 Log.e(LOG, "RM002 : " + rm002);
+                Log.e(LOG, "RM003 : " + rm003);
                 //intent_gps.putExtra("TitleText", TitleText);//可放所有基本類別
                 intent_report.putExtras(bundle);//可放所有基本類別
                 startActivity(intent_report);
@@ -726,9 +723,11 @@ public class MissionDetailActivity extends WQPToolsActivity implements Listener,
                 //接收MissionActivity傳過來的值
                 Bundle bundle = getIntent().getExtras();
                 rm002 = bundle.getString("rm002").trim();
+                rm003 = bundle.getString("rm003").trim();
 
                 Log.e(LOG, user_id_data);
                 Log.e(LOG , rm002);
+                Log.e(LOG , "RM003 : " + rm003);
 
                 try {
                     OkHttpClient client = new OkHttpClient();
@@ -736,6 +735,7 @@ public class MissionDetailActivity extends WQPToolsActivity implements Listener,
                     RequestBody requestBody = new FormBody.Builder()
                             .add("U_ACC", user_id_data)
                             .add("RM002", rm002)
+                            .add("RM003", rm003)
                             .build();
                     Log.e(LOG, user_id_data);
                     Log.e(LOG, rm002);

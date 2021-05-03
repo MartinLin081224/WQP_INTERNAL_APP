@@ -36,8 +36,9 @@ import com.example.a10609516.wqp_internal_app.DepartmentAndDIY.StationReportSear
 import com.example.a10609516.wqp_internal_app.Manager.InventoryActivity;
 import com.example.a10609516.wqp_internal_app.Manager.OrderSearchActivity;
 import com.example.a10609516.wqp_internal_app.R;
-import com.example.a10609516.wqp_internal_app.Tools.WQPClickListener;
 import com.example.a10609516.wqp_internal_app.Tools.WQPToolsActivity;
+import com.example.easywaylocation.EasyWayLocation;
+import com.example.easywaylocation.GetLocationDetail;
 import com.example.easywaylocation.Listener;
 import com.example.easywaylocation.LocationData;
 
@@ -47,7 +48,6 @@ import org.json.JSONObject;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -62,11 +62,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-
-import com.example.easywaylocation.EasyWayLocation;
-import com.example.easywaylocation.GetLocationDetail;
-import com.example.easywaylocation.Listener;
-import com.example.easywaylocation.LocationData;
 
 import static com.example.easywaylocation.EasyWayLocation.LOCATION_SETTING_REQUEST_CODE;
 
@@ -647,7 +642,7 @@ public class MissionActivity extends WQPToolsActivity implements Listener, Locat
                 //HandlerMessage更新UI
                 Bundle b = new Bundle();
                 b.putStringArrayList("JSON_data", JArrayList);
-                Message msg = mHandler0.obtainMessage();
+                Message msg = mHandler.obtainMessage();
                 msg.setData(b);
                 msg.what = 1;
                 msg.sendToTarget();
@@ -657,210 +652,7 @@ public class MissionActivity extends WQPToolsActivity implements Listener, Locat
         }
     }
 
-    /**
-     * 更新UI
-     */
-    Handler mHandler0 = new Handler() {
-        @SuppressLint("HandlerLeak")
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case 1:
-                    LinearLayout small_llt0 = new LinearLayout(MissionActivity.this);
-                    small_llt0.setOrientation(LinearLayout.HORIZONTAL);
-                    LinearLayout small_llt1 = new LinearLayout(MissionActivity.this);
-                    small_llt1.setOrientation(LinearLayout.HORIZONTAL);
-                    LinearLayout small_llt2 = new LinearLayout(MissionActivity.this);
-                    small_llt2.setOrientation(LinearLayout.HORIZONTAL);
-                    LinearLayout big_llt1 = new LinearLayout(MissionActivity.this);
-                    big_llt1.setOrientation(LinearLayout.VERTICAL);
-                    LinearLayout big_llt2 = new LinearLayout(MissionActivity.this);
-                    big_llt2.setOrientation(LinearLayout.VERTICAL);
-                    big_llt2.setGravity(Gravity.CENTER);
-                    LinearLayout large_llt = new LinearLayout(MissionActivity.this);
-                    large_llt.setOrientation(LinearLayout.HORIZONTAL);
-                    LinearLayout XL_llt = new LinearLayout(MissionActivity.this);
-                    XL_llt.setOrientation(LinearLayout.VERTICAL);
-                    RelativeLayout id_rlt = new RelativeLayout(MissionActivity.this);
 
-                    Bundle jb = msg.getData();
-                    ArrayList<String> JArrayList = new ArrayList<String>();
-                    //int i = b.getStringArrayList("JSON_data").size();
-                    JArrayList = jb.getStringArrayList("JSON_data");
-
-                    //顯示每筆LinearLayout的Title
-                    TextView dynamically_title;
-                    dynamically_title = new TextView(MissionActivity.this);
-                    dynamically_title.setText("新任務通知");
-                    dynamically_title.setPadding(10, 10, 10, 0);
-                    dynamically_title.setGravity(Gravity.LEFT);
-                    //dynamically_title.setWidth(50);
-                    dynamically_title.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
-                    dynamically_title.setTextColor(mContext.getResources().getColor(R.color.WQP_Black));
-
-                    //顯示每筆LinearLayout的日期時間
-                    TextView dynamically_datetime;
-                    dynamically_datetime = new TextView(MissionActivity.this);
-                    dynamically_datetime.setText(JArrayList.get(0).trim().substring(0, JArrayList.get(0).length()-4));
-                    dynamically_datetime.setPadding(0, 10, 10, 0);
-                    dynamically_datetime.setGravity(Gravity.RIGHT);
-                    //dynamically_datetime.setWidth(50);
-                    dynamically_datetime.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
-                    dynamically_datetime.setTextColor(mContext.getResources().getColor(R.color.WQP_Black));
-
-                    //顯示每筆LinearLayout的派工編號
-                    TextView dynamically_rm002;
-                    dynamically_rm002 = new TextView(MissionActivity.this);
-                    dynamically_rm002.setText("您有新任務(" + JArrayList.get(1).trim() + ")");
-                    dynamically_rm002.setPadding(10, 0, 10, 0);
-                    dynamically_rm002.setGravity(Gravity.LEFT);
-                    dynamically_rm002.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
-                    dynamically_rm002.setTextColor(mContext.getResources().getColor(R.color.WQP_Gray));
-
-                    //顯示每筆LinearLayout的派工任務日期
-                    TextView dynamically_rm910;
-                    dynamically_rm910 = new TextView(MissionActivity.this);
-                    dynamically_rm910.setText("[" + JArrayList.get(2).trim() + "] ");
-                    dynamically_rm910.setPadding(10, 0, 10, 10);
-                    dynamically_rm910.setGravity(Gravity.LEFT);
-                    //dynamically_rm910.setWidth(50);
-                    dynamically_rm910.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
-                    dynamically_rm910.setTextColor(mContext.getResources().getColor(R.color.WQP_Gray));
-
-                    //顯示每筆LinearLayout的派工任務日期
-                    TextView dynamically_rm003;
-                    dynamically_rm003 = new TextView(MissionActivity.this);
-                    dynamically_rm003.setText(JArrayList.get(3).trim());
-                    dynamically_rm003.setPadding(10, 0, 10, 10);
-                    dynamically_rm003.setGravity(Gravity.LEFT);
-                    //dynamically_rm003.setWidth(50);
-                    dynamically_rm003.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
-                    dynamically_rm003.setTextColor(mContext.getResources().getColor(R.color.WQP_Gray));
-
-                    //顯示每筆派工任務是否已讀
-                    ImageView dynamically_imv;
-                    dynamically_imv = new ImageView(MissionActivity.this);
-                    dynamically_imv.setImageResource(R.drawable.icon_unread);
-                    dynamically_imv.setScaleType(ImageView.ScaleType.CENTER_CROP);
-
-                    //設置每筆LinearLayout的間隔分隔線
-                    TextView dynamically_txt0 = new TextView(MissionActivity.this);
-                    dynamically_txt0.setBackgroundColor(mContext.getResources().getColor(R.color.WQP_Blue));
-
-                    if(JArrayList.get(4).trim().equals("0")) {
-                        dynamically_title.setTypeface(null, Typeface.BOLD);
-                        dynamically_datetime.setTypeface(null, Typeface.BOLD);
-                        dynamically_rm002.setTypeface(null, Typeface.BOLD);
-                        dynamically_rm910.setTypeface(null, Typeface.BOLD);
-                        dynamically_rm003.setTypeface(null, Typeface.BOLD);
-                        dynamically_imv.setVisibility(View.VISIBLE);
-                    } else if (JArrayList.get(4).trim().equals("1")) {
-                        dynamically_title.setTypeface(null, Typeface.NORMAL);
-                        dynamically_datetime.setTypeface(null, Typeface.NORMAL);
-                        dynamically_rm002.setTypeface(null, Typeface.NORMAL);
-                        dynamically_rm910.setTypeface(null, Typeface.NORMAL);
-                        dynamically_rm003.setTypeface(null, Typeface.NORMAL);
-                        dynamically_imv.setVisibility(View.INVISIBLE);
-                    }
-
-                    //設置每筆TableLayout的Button監聽器、與動態新增Button的ID
-                    int loc = 0;
-                    for (int i = 0; i < dynamically_btn.length; i++) {
-                        if (dynamically_btn[i] == null) {
-                            loc = i;
-                            break;
-                        }
-                    }
-                    dynamically_btn[loc] = new Button(MissionActivity.this);
-                    //dynamically_btn[loc].setText("Google Map");
-                    dynamically_btn[loc].setAlpha(0);
-                    dynamically_btn[loc].setId(loc);
-                    dynamically_btn[loc].setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            for (int a = 0; a < dynamically_btn.length; a++) {
-                                if (v.getId() == dynamically_btn[a].getId()) {
-                                    Intent intent_ex = new Intent(MissionActivity.this, MissionDetailActivity.class);
-                                    LinearLayout id_llt = (LinearLayout) nav_mission.getChildAt(a);
-
-                                    RelativeLayout big_llt = (RelativeLayout) id_llt.getChildAt(1);
-                                    LinearLayout first_rlt = (LinearLayout) big_llt.getChildAt(0);
-                                    LinearLayout mission_llt = (LinearLayout) first_rlt.getChildAt(0);
-                                    LinearLayout detail_llt = (LinearLayout) mission_llt.getChildAt(1);
-                                    TextView no_txt = (TextView) detail_llt.getChildAt(0);
-                                    String rm002 = no_txt.getText().toString().replace("您有新任務(", "").replace(")", "");
-                                    //將SQL裡的資料傳到MapsActivity
-                                    Bundle bundle = new Bundle();
-                                    bundle.putString("rm002", rm002);
-                                    Log.e(LOG, "RM002 : " + rm002);
-                                    //intent_gps.putExtra("TitleText", TitleText);//可放所有基本類別
-                                    intent_ex.putExtras(bundle);//可放所有基本類別
-
-                                    startActivity(intent_ex);
-                                    //進入MapsActivity後 清空gps_llt的資料
-                                    nav_mission.removeAllViews();
-                                }
-                            }
-                        }
-                    });
-
-                    SimpleDateFormat CurrentTime= new SimpleDateFormat("yyyy-MM-dd HH:mm");
-                    String currentDate = new SimpleDateFormat("yyyy-MM-dd  HH:mm", Locale.getDefault()).format(new Date());
-                    Log.e(LOG, "DATE : " + currentDate);
-
-                    //若任務逾期未回報該任務底色改為粉色
-                    try {
-                        Date get_date = CurrentTime.parse(currentDate);
-                        Date mission_date = CurrentTime.parse(JArrayList.get(2).trim());
-
-                        if(get_date.after(mission_date)) {
-                            Log.e(LOG,"逾期");
-                            id_rlt.setBackgroundColor(mContext.getResources().getColor(R.color.WQP_Pink));
-                        } else {
-                            Log.e(LOG,"未逾期");
-                        }
-                    } catch (ParseException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
-
-                    LinearLayout.LayoutParams small_2pm = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1.7f);
-                    LinearLayout.LayoutParams small_3pm = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 3.0f);
-                    LinearLayout.LayoutParams btn_pm = new LinearLayout.LayoutParams(40, 40);
-                    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-
-                    small_llt0.addView(dynamically_title, small_2pm);
-                    small_llt0.addView(dynamically_datetime, small_3pm);
-                    small_llt1.addView(dynamically_rm002);
-                    small_llt2.addView(dynamically_rm910, small_3pm);
-                    small_llt2.addView(dynamically_rm003, small_2pm);
-
-                    big_llt1.addView(small_llt0);
-                    big_llt1.addView(small_llt1);
-                    big_llt1.addView(small_llt2);
-                    big_llt2.addView(dynamically_imv, btn_pm);
-
-                    large_llt.addView(big_llt1, new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 9));
-                    large_llt.addView(big_llt2, new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1));
-
-                    id_rlt.addView(large_llt, params);
-                    id_rlt.addView(dynamically_btn[loc], params);
-
-                    XL_llt.addView(dynamically_txt0, LinearLayout.LayoutParams.MATCH_PARENT, 3);
-                    XL_llt.addView(id_rlt);
-
-                    nav_mission.addView(XL_llt);
-
-                    LinearLayout first_llt = (LinearLayout) nav_mission.getChildAt(0);
-                    first_llt.getChildAt(0).setVisibility(View.GONE);
-
-                    break;
-                default:
-                    break;
-            }
-            super.handleMessage(msg);
-        }
-    };
 
     /**
      * 與OkHttp建立連線(t查詢已回報之任務明細)
@@ -937,7 +729,7 @@ public class MissionActivity extends WQPToolsActivity implements Listener, Locat
                 //HandlerMessage更新UI
                 Bundle b = new Bundle();
                 b.putStringArrayList("JSON_data", JArrayList);
-                Message msg = mHandler1.obtainMessage();
+                Message msg = mHandler.obtainMessage();
                 msg.setData(b);
                 msg.what = 1;
                 msg.sendToTarget();
@@ -946,191 +738,6 @@ public class MissionActivity extends WQPToolsActivity implements Listener, Locat
             e.printStackTrace();
         }
     }
-
-    /**
-     * 更新UI
-     */
-    Handler mHandler1 = new Handler() {
-        @SuppressLint("HandlerLeak")
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case 1:
-                    LinearLayout small_llt0 = new LinearLayout(MissionActivity.this);
-                    small_llt0.setOrientation(LinearLayout.HORIZONTAL);
-                    LinearLayout small_llt1 = new LinearLayout(MissionActivity.this);
-                    small_llt1.setOrientation(LinearLayout.HORIZONTAL);
-                    LinearLayout small_llt2 = new LinearLayout(MissionActivity.this);
-                    small_llt2.setOrientation(LinearLayout.HORIZONTAL);
-                    LinearLayout big_llt1 = new LinearLayout(MissionActivity.this);
-                    big_llt1.setOrientation(LinearLayout.VERTICAL);
-                    LinearLayout big_llt2 = new LinearLayout(MissionActivity.this);
-                    big_llt2.setOrientation(LinearLayout.VERTICAL);
-                    big_llt2.setGravity(Gravity.CENTER);
-                    LinearLayout large_llt = new LinearLayout(MissionActivity.this);
-                    large_llt.setOrientation(LinearLayout.HORIZONTAL);
-                    LinearLayout XL_llt = new LinearLayout(MissionActivity.this);
-                    XL_llt.setOrientation(LinearLayout.VERTICAL);
-                    RelativeLayout id_rlt = new RelativeLayout(MissionActivity.this);
-
-                    Bundle jb = msg.getData();
-                    ArrayList<String> JArrayList = new ArrayList<String>();
-                    //int i = b.getStringArrayList("JSON_data").size();
-                    JArrayList = jb.getStringArrayList("JSON_data");
-
-                    //顯示每筆LinearLayout的Title
-                    TextView dynamically_title;
-                    dynamically_title = new TextView(MissionActivity.this);
-                    dynamically_title.setText("新任務通知");
-                    dynamically_title.setPadding(10, 10, 10, 0);
-                    dynamically_title.setGravity(Gravity.LEFT);
-                    //dynamically_title.setWidth(50);
-                    dynamically_title.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
-                    dynamically_title.setTextColor(mContext.getResources().getColor(R.color.WQP_Black));
-
-                    //顯示每筆LinearLayout的日期時間
-                    TextView dynamically_datetime;
-                    dynamically_datetime = new TextView(MissionActivity.this);
-                    dynamically_datetime.setText(JArrayList.get(0).trim().substring(0, JArrayList.get(0).length()-4));
-                    dynamically_datetime.setPadding(0, 10, 10, 0);
-                    dynamically_datetime.setGravity(Gravity.RIGHT);
-                    //dynamically_datetime.setWidth(50);
-                    dynamically_datetime.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
-                    dynamically_datetime.setTextColor(mContext.getResources().getColor(R.color.WQP_Black));
-
-                    //顯示每筆LinearLayout的派工編號
-                    TextView dynamically_rm002;
-                    dynamically_rm002 = new TextView(MissionActivity.this);
-                    dynamically_rm002.setText("您有新任務(" + JArrayList.get(1).trim() + ")");
-                    dynamically_rm002.setPadding(10, 0, 10, 0);
-                    dynamically_rm002.setGravity(Gravity.LEFT);
-                    dynamically_rm002.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
-                    dynamically_rm002.setTextColor(mContext.getResources().getColor(R.color.WQP_Gray));
-
-                    //顯示每筆LinearLayout的派工任務日期
-                    TextView dynamically_rm910;
-                    dynamically_rm910 = new TextView(MissionActivity.this);
-                    dynamically_rm910.setText("[" + JArrayList.get(2).trim() + "] ");
-                    dynamically_rm910.setPadding(10, 0, 10, 10);
-                    dynamically_rm910.setGravity(Gravity.LEFT);
-                    //dynamically_rm910.setWidth(50);
-                    dynamically_rm910.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
-                    dynamically_rm910.setTextColor(mContext.getResources().getColor(R.color.WQP_Gray));
-
-                    //顯示每筆LinearLayout的派工任務日期
-                    TextView dynamically_rm003;
-                    dynamically_rm003 = new TextView(MissionActivity.this);
-                    dynamically_rm003.setText(JArrayList.get(3).trim());
-                    dynamically_rm003.setPadding(10, 0, 10, 10);
-                    dynamically_rm003.setGravity(Gravity.LEFT);
-                    //dynamically_rm003.setWidth(50);
-                    dynamically_rm003.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
-                    dynamically_rm003.setTextColor(mContext.getResources().getColor(R.color.WQP_Gray));
-
-                    //顯示每筆派工任務是否已讀
-                    ImageView dynamically_imv;
-                    dynamically_imv = new ImageView(MissionActivity.this);
-                    dynamically_imv.setImageResource(R.drawable.icon_unread);
-                    dynamically_imv.setScaleType(ImageView.ScaleType.CENTER_CROP);
-
-                    //設置每筆LinearLayout的間隔分隔線
-                    TextView dynamically_txt0 = new TextView(MissionActivity.this);
-                    dynamically_txt0.setBackgroundColor(mContext.getResources().getColor(R.color.WQP_Blue));
-
-                    if(JArrayList.get(4).trim().equals("0")) {
-                        dynamically_title.setTypeface(null, Typeface.BOLD);
-                        dynamically_datetime.setTypeface(null, Typeface.BOLD);
-                        dynamically_rm002.setTypeface(null, Typeface.BOLD);
-                        dynamically_rm910.setTypeface(null, Typeface.BOLD);
-                        dynamically_rm003.setTypeface(null, Typeface.BOLD);
-                        dynamically_imv.setVisibility(View.VISIBLE);
-                    } else if (JArrayList.get(4).trim().equals("1")) {
-                        dynamically_title.setTypeface(null, Typeface.NORMAL);
-                        dynamically_datetime.setTypeface(null, Typeface.NORMAL);
-                        dynamically_rm002.setTypeface(null, Typeface.NORMAL);
-                        dynamically_rm910.setTypeface(null, Typeface.NORMAL);
-                        dynamically_rm003.setTypeface(null, Typeface.NORMAL);
-                        dynamically_imv.setVisibility(View.INVISIBLE);
-                    }
-
-                    //設置每筆TableLayout的Button監聽器、與動態新增Button的ID
-                    int loc = 0;
-                    for (int i = 0; i < dynamically_btn.length; i++) {
-                        if (dynamically_btn[i] == null) {
-                            loc = i;
-                            break;
-                        }
-                    }
-                    dynamically_btn[loc] = new Button(MissionActivity.this);
-                    //dynamically_btn[loc].setText("Google Map");
-                    dynamically_btn[loc].setAlpha(0);
-                    dynamically_btn[loc].setId(loc);
-                    dynamically_btn[loc].setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            for (int a = 0; a < dynamically_btn.length; a++) {
-                                if (v.getId() == dynamically_btn[a].getId()) {
-                                    Intent intent_ex = new Intent(MissionActivity.this, MissionDetailActivity.class);
-                                    LinearLayout id_llt = (LinearLayout) nav_mission.getChildAt(a);
-
-                                    RelativeLayout big_llt = (RelativeLayout) id_llt.getChildAt(1);
-                                    LinearLayout first_rlt = (LinearLayout) big_llt.getChildAt(0);
-                                    LinearLayout mission_llt = (LinearLayout) first_rlt.getChildAt(0);
-                                    LinearLayout detail_llt = (LinearLayout) mission_llt.getChildAt(1);
-                                    TextView no_txt = (TextView) detail_llt.getChildAt(0);
-                                    String rm002 = no_txt.getText().toString().replace("您有新任務(", "").replace(")", "");
-                                    //將SQL裡的資料傳到MapsActivity
-                                    Bundle bundle = new Bundle();
-                                    bundle.putString("rm002", rm002);
-                                    Log.e(LOG, "RM002 : " + rm002);
-                                    //intent_gps.putExtra("TitleText", TitleText);//可放所有基本類別
-                                    intent_ex.putExtras(bundle);//可放所有基本類別
-
-                                    startActivity(intent_ex);
-                                    //進入MapsActivity後 清空gps_llt的資料
-                                    nav_mission.removeAllViews();
-                                }
-                            }
-                        }
-                    });
-
-                    LinearLayout.LayoutParams small_2pm = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1.7f);
-                    LinearLayout.LayoutParams small_3pm = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 3.0f);
-                    LinearLayout.LayoutParams btn_pm = new LinearLayout.LayoutParams(40, 40);
-                    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-
-                    small_llt0.addView(dynamically_title, small_2pm);
-                    small_llt0.addView(dynamically_datetime, small_3pm);
-                    small_llt1.addView(dynamically_rm002);
-                    small_llt2.addView(dynamically_rm910, small_3pm);
-                    small_llt2.addView(dynamically_rm003, small_2pm);
-
-                    big_llt1.addView(small_llt0);
-                    big_llt1.addView(small_llt1);
-                    big_llt1.addView(small_llt2);
-                    big_llt2.addView(dynamically_imv, btn_pm);
-
-                    large_llt.addView(big_llt1, new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 9));
-                    large_llt.addView(big_llt2, new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1));
-
-                    id_rlt.addView(large_llt, params);
-                    id_rlt.addView(dynamically_btn[loc], params);
-
-                    XL_llt.addView(dynamically_txt0, LinearLayout.LayoutParams.MATCH_PARENT, 3);
-                    XL_llt.addView(id_rlt);
-
-                    nav_mission.addView(XL_llt);
-
-                    LinearLayout first_llt = (LinearLayout) nav_mission.getChildAt(0);
-                    first_llt.getChildAt(0).setVisibility(View.GONE);
-
-                    break;
-                default:
-                    break;
-            }
-            super.handleMessage(msg);
-        }
-    };
 
     /**
      * 與OkHttp建立連線(t查詢已結案之任務明細)
@@ -1207,7 +814,7 @@ public class MissionActivity extends WQPToolsActivity implements Listener, Locat
                 //HandlerMessage更新UI
                 Bundle b = new Bundle();
                 b.putStringArrayList("JSON_data", JArrayList);
-                Message msg = mHandler2.obtainMessage();
+                Message msg = mHandler.obtainMessage();
                 msg.setData(b);
                 msg.what = 1;
                 msg.sendToTarget();
@@ -1220,7 +827,7 @@ public class MissionActivity extends WQPToolsActivity implements Listener, Locat
     /**
      * 更新UI
      */
-    Handler mHandler2 = new Handler() {
+    Handler mHandler = new Handler() {
         @SuppressLint("HandlerLeak")
         @Override
         public void handleMessage(Message msg) {
@@ -1259,14 +866,15 @@ public class MissionActivity extends WQPToolsActivity implements Listener, Locat
                     dynamically_title.setTextColor(mContext.getResources().getColor(R.color.WQP_Black));
 
                     //顯示每筆LinearLayout的日期時間
-                    TextView dynamically_datetime;
+                    /*TextView dynamically_datetime;
                     dynamically_datetime = new TextView(MissionActivity.this);
-                    dynamically_datetime.setText(JArrayList.get(0).trim().substring(0, JArrayList.get(0).length()-4));
+                    dynamically_datetime.setText(JArrayList.get(0).trim());
+                    //dynamically_datetime.setText(JArrayList.get(0).trim().substring(0, JArrayList.get(0).length()-4));
                     dynamically_datetime.setPadding(0, 10, 10, 0);
                     dynamically_datetime.setGravity(Gravity.RIGHT);
                     //dynamically_datetime.setWidth(50);
                     dynamically_datetime.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
-                    dynamically_datetime.setTextColor(mContext.getResources().getColor(R.color.WQP_Black));
+                    dynamically_datetime.setTextColor(mContext.getResources().getColor(R.color.WQP_Black));*/
 
                     //顯示每筆LinearLayout的派工編號
                     TextView dynamically_rm002;
@@ -1282,7 +890,7 @@ public class MissionActivity extends WQPToolsActivity implements Listener, Locat
                     dynamically_rm910 = new TextView(MissionActivity.this);
                     dynamically_rm910.setText("[" + JArrayList.get(2).trim() + "] ");
                     dynamically_rm910.setPadding(10, 0, 10, 10);
-                    dynamically_rm910.setGravity(Gravity.LEFT);
+                    dynamically_rm910.setGravity(Gravity.RIGHT);
                     //dynamically_rm910.setWidth(50);
                     dynamically_rm910.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
                     dynamically_rm910.setTextColor(mContext.getResources().getColor(R.color.WQP_Gray));
@@ -1309,14 +917,14 @@ public class MissionActivity extends WQPToolsActivity implements Listener, Locat
 
                     if(JArrayList.get(4).trim().equals("0")) {
                         dynamically_title.setTypeface(null, Typeface.BOLD);
-                        dynamically_datetime.setTypeface(null, Typeface.BOLD);
+                        //dynamically_datetime.setTypeface(null, Typeface.BOLD);
                         dynamically_rm002.setTypeface(null, Typeface.BOLD);
                         dynamically_rm910.setTypeface(null, Typeface.BOLD);
                         dynamically_rm003.setTypeface(null, Typeface.BOLD);
                         dynamically_imv.setVisibility(View.VISIBLE);
                     } else if (JArrayList.get(4).trim().equals("1")) {
                         dynamically_title.setTypeface(null, Typeface.NORMAL);
-                        dynamically_datetime.setTypeface(null, Typeface.NORMAL);
+                        //dynamically_datetime.setTypeface(null, Typeface.NORMAL);
                         dynamically_rm002.setTypeface(null, Typeface.NORMAL);
                         dynamically_rm910.setTypeface(null, Typeface.NORMAL);
                         dynamically_rm003.setTypeface(null, Typeface.NORMAL);
@@ -1349,10 +957,16 @@ public class MissionActivity extends WQPToolsActivity implements Listener, Locat
                                     LinearLayout detail_llt = (LinearLayout) mission_llt.getChildAt(1);
                                     TextView no_txt = (TextView) detail_llt.getChildAt(0);
                                     String rm002 = no_txt.getText().toString().replace("您有新任務(", "").replace(")", "");
+
+                                    LinearLayout detail_llt2 = (LinearLayout) mission_llt.getChildAt(2);
+                                    TextView type_txt = (TextView) detail_llt2.getChildAt(0);
+                                    String rm003 = type_txt.getText().toString();
                                     //將SQL裡的資料傳到MapsActivity
                                     Bundle bundle = new Bundle();
                                     bundle.putString("rm002", rm002);
+                                    bundle.putString("rm003", rm003);
                                     Log.e(LOG, "RM002 : " + rm002);
+                                    Log.e(LOG, "RM003 : " + rm003);
                                     //intent_gps.putExtra("TitleText", TitleText);//可放所有基本類別
                                     intent_ex.putExtras(bundle);//可放所有基本類別
 
@@ -1364,15 +978,38 @@ public class MissionActivity extends WQPToolsActivity implements Listener, Locat
                         }
                     });
 
+                    SimpleDateFormat CurrentTime= new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                    String currentDate = new SimpleDateFormat("yyyy-MM-dd  HH:mm", Locale.getDefault()).format(new Date());
+                    Log.e(LOG, "DATE : " + currentDate);
+
+                    //若任務逾期未回報該任務底色改為粉色
+                    try {
+                        Date get_date = CurrentTime.parse(currentDate);
+                        Date mission_date = CurrentTime.parse(JArrayList.get(2).trim());
+
+                        if (status.equals("0")) {
+                            if(get_date.after(mission_date)) {
+                                Log.e(LOG,"逾期");
+                                id_rlt.setBackgroundColor(mContext.getResources().getColor(R.color.WQP_Pink));
+                            } else {
+                                Log.e(LOG,"未逾期");
+                            }
+                        }
+
+                    } catch (ParseException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+
                     LinearLayout.LayoutParams small_2pm = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1.7f);
                     LinearLayout.LayoutParams small_3pm = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 3.0f);
                     LinearLayout.LayoutParams btn_pm = new LinearLayout.LayoutParams(40, 40);
                     RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 
                     small_llt0.addView(dynamically_title, small_2pm);
-                    small_llt0.addView(dynamically_datetime, small_3pm);
+                    //small_llt0.addView(dynamically_datetime, small_3pm);
+                    small_llt0.addView(dynamically_rm910, small_3pm);
                     small_llt1.addView(dynamically_rm002);
-                    small_llt2.addView(dynamically_rm910, small_3pm);
                     small_llt2.addView(dynamically_rm003, small_2pm);
 
                     big_llt1.addView(small_llt0);

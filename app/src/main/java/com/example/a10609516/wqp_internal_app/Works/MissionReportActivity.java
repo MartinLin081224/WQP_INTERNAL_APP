@@ -2,6 +2,7 @@ package com.example.a10609516.wqp_internal_app.Works;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -27,10 +28,6 @@ import android.widget.Toast;
 import com.example.a10609516.wqp_internal_app.R;
 import com.example.a10609516.wqp_internal_app.Tools.Adapter;
 import com.example.a10609516.wqp_internal_app.Tools.WQPToolsActivity;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.yanzhenjie.album.Action;
 import com.yanzhenjie.album.Album;
 import com.yanzhenjie.album.AlbumFile;
@@ -80,7 +77,7 @@ public class MissionReportActivity extends WQPToolsActivity {
     private String[] unless_list = new String[]{};
     private String[] censor_list = new String[]{};
     private String[] pay_list = new String[]{};
-    private String user_id_data, rm001, rm002, RM003, RM015, RM016, RM017, RM018, RM019, RM020, RM021, ML008;
+    private String user_id_data, rm001, rm002, rm003, RM003, RM015, RM016, RM017, RM018, RM019, RM020, RM021, ML008;
     private double latitude, longitude;
 
     private Adapter mAdapter1, mAdapter2, mAdapter3, mAdapter4, mAdapter5, mAdapter6, mAdapter7, mAdapter8, mAdapter9, mAdapter10;
@@ -203,6 +200,12 @@ public class MissionReportActivity extends WQPToolsActivity {
         //preview_btn = findViewById(R.id.preview_btn);
         //choice_btn = findViewById(R.id.choice_btn);
 
+        //接收MissionActivity傳過來的值
+        Bundle bundle = getIntent().getExtras();
+        rm001 = bundle.getString("rm001").trim();
+        rm002 = bundle.getString("rm002").trim();
+        rm003 = bundle.getString("rm003").trim();
+
         /*preview_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -296,11 +299,22 @@ public class MissionReportActivity extends WQPToolsActivity {
                         if (photo_llt.getVisibility() == View.GONE) {
                             //與OkHttp建立連線(任務回報-離開目的-檢修)
                             sendRequestWithOkHttpForMissionReportLeave();
-                            finish();
+                            if (pay_spinner.getSelectedItemId() == 1 && have_get_money_checkBox.isChecked()) {
+                                Intent intent_sign = new Intent(MissionReportActivity.this, EngSignatureActivity.class);
+                                //將資料傳到EngSignatureActivity
+                                Bundle bundle = new Bundle();
+                                bundle.putString("rm001", rm001);
+                                bundle.putString("rm002", rm002);
+                                intent_sign.putExtras(bundle);//可放所有基本類別
+                                startActivity(intent_sign);
+                            } else {
+                                finish();
+                            }
+
                         } else {
                             if ((image_view1.getVisibility() == View.VISIBLE || image_view2.getVisibility() == View.VISIBLE || image_view3.getVisibility() == View.VISIBLE ||
                                     image_view4.getVisibility() == View.VISIBLE || image_view5.getVisibility() == View.VISIBLE) ||
-                                    ((image_view7.getVisibility() == View.VISIBLE || image_view8.getVisibility() == View.VISIBLE) && RM003.equals("4"))) {
+                                    ((image_view6.getVisibility() == View.VISIBLE || image_view7.getVisibility() == View.VISIBLE) && RM003.equals("4"))) {
                                 Toast.makeText(MissionReportActivity.this, "【請上傳現場照片(*為必傳項目)】", Toast.LENGTH_SHORT).show();
                             } else {
                                 //與OkHttp建立連線(任務回報-離開目的)
@@ -311,13 +325,17 @@ public class MissionReportActivity extends WQPToolsActivity {
                                 uploadImage3();
                                 uploadImage4();
                                 uploadImage5();
-                                if (image_view6.getVisibility() == View.GONE) {
+
+                                if (RM003.equals("5") || RM003.equals("6")) {
                                     uploadImage6();
                                 }
 
                                 if (RM003.equals("4")) {
+                                    uploadImage6();
                                     uploadImage7();
-                                    uploadImage8();
+                                    if (image_view8.getVisibility() == View.GONE) {
+                                        uploadImage8();
+                                    }
                                     if (image_view9.getVisibility() == View.GONE) {
                                         uploadImage9();
                                     }
@@ -693,10 +711,11 @@ public class MissionReportActivity extends WQPToolsActivity {
                 Bundle bundle = getIntent().getExtras();
                 rm001 = bundle.getString("rm001").trim();
                 rm002 = bundle.getString("rm002").trim();
-
+                rm003 = bundle.getString("rm003").trim();
 
                 Log.e(LOG, user_id_data);
                 Log.e(LOG, rm002);
+                Log.e(LOG, rm003);
 
                 try {
                     OkHttpClient client = new OkHttpClient();
@@ -704,6 +723,7 @@ public class MissionReportActivity extends WQPToolsActivity {
                     RequestBody requestBody = new FormBody.Builder()
                             .add("U_ACC", user_id_data)
                             .add("RM002", rm002)
+                            .add("RM003", rm003)
                             .build();
                     Log.e(LOG, user_id_data);
                     Log.e(LOG, rm002);
@@ -783,9 +803,9 @@ public class MissionReportActivity extends WQPToolsActivity {
                             third_photo_txt.setText("*安裝後現場照片\n(水槽)");
                             fourth_photo_txt.setText("*安裝後現場照片\n(廚下)");
                             fifth_photo_txt.setText("*安裝水壓");
-                            sixth_photo_txt.setText("漏水斷路器");
-                            seventh_photo_txt.setText("*工具與保護墊");
-                            eighth_photo_txt.setText("*撕毀無效貼紙");
+                            sixth_photo_txt.setText("*工具與保護墊");
+                            seventh_photo_txt.setText("*撕毀無效貼紙");
+                            eighth_photo_txt.setText("漏水斷路器");
                             ninth_photo_txt.setText("減壓閥");
                         } else if (RM003.equals("5") || RM003.equals("6")) {
                             first_photo_txt.setText("*安裝前現場照片");

@@ -1,9 +1,11 @@
 package com.example.a10609516.wqp_internal_app.Basic;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,6 +20,7 @@ import com.example.a10609516.wqp_internal_app.R;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
@@ -73,14 +76,41 @@ public class LoginActivity extends AppCompatActivity {
         //登入按鈕監聽方法
         login_imv.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                userNameValue = id_edt.getText().toString();
-                passwordValue = pwd_edt.getText().toString();
-                //取得TokenID的OKHttp
-                sendRequestWithOkHttpOfTokenID();
-                //與OKHttp連線( )藉由登入輸入的員工ID取得員工姓名)
-                sendRequestWithOkHttpForUserName();
-                //與OKHttp連線(查詢輸入的帳號密碼是否正確)
-                sendRequestWithOkHttpForCheckUserAccount();
+                if (version_txt.getText().toString().equals("1.0.6")) {
+                    userNameValue = id_edt.getText().toString();
+                    passwordValue = pwd_edt.getText().toString();
+                    //取得TokenID的OKHttp
+                    sendRequestWithOkHttpOfTokenID();
+                    //與OKHttp連線( )藉由登入輸入的員工ID取得員工姓名)
+                    sendRequestWithOkHttpForUserName();
+                    //與OKHttp連線(查詢輸入的帳號密碼是否正確)
+                    sendRequestWithOkHttpForCheckUserAccount();
+                } else {
+                    Toast.makeText(getApplicationContext(), "請前往網站更新最新版本", Toast.LENGTH_SHORT);
+                    new AlertDialog.Builder(mContext)
+                            .setTitle("更新通知")
+                            .setMessage("檢測到軟體重大更新\n請更新最新版本")
+                            .setIcon(R.drawable.bwt_icon)
+                            .setNegativeButton("確定",
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog,
+                                                            int which) {
+                                            new Thread() {
+                                                @Override
+                                                public void run() {
+                                                    super.run();
+                                                    Uri uri = Uri.parse("http://m.wqp-water.com.tw/APP");
+                                                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                                                    startActivity(intent);
+                                                }
+                                            }.start();
+                                        }
+                                    })
+                            .setCancelable(false)
+                            .show();
+                }
+
             }
         });
     }

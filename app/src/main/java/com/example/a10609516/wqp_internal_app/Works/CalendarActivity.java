@@ -34,7 +34,6 @@ import com.example.a10609516.wqp_internal_app.DepartmentAndDIY.StationReportSear
 import com.example.a10609516.wqp_internal_app.Manager.InventoryActivity;
 import com.example.a10609516.wqp_internal_app.Manager.OrderSearchActivity;
 import com.example.a10609516.wqp_internal_app.R;
-import com.example.a10609516.wqp_internal_app.Tools.WQPClickListener;
 import com.example.a10609516.wqp_internal_app.Tools.WQPToolsActivity;
 
 import org.json.JSONArray;
@@ -641,6 +640,7 @@ public class CalendarActivity extends WQPToolsActivity {
                 String User_name2 = jsonObject.getString("EMPLOYEE_B");
                 String Group_name = jsonObject.getString("COMPANY");
                 String turn_id = jsonObject.getString("ID");
+                String ESVD_SERVICE_NO = jsonObject.getString("ESVD_SERVICE_NO");
 
                 //JSONArray加入SearchData資料
                 ArrayList<String> JArrayList = new ArrayList<String>();
@@ -654,6 +654,7 @@ public class CalendarActivity extends WQPToolsActivity {
                 JArrayList.add(User_name2);
                 JArrayList.add(Group_name);
                 JArrayList.add(turn_id);
+                JArrayList.add(ESVD_SERVICE_NO);
 
                 //HandlerMessage更新UI
                 Bundle b = new Bundle();
@@ -730,6 +731,7 @@ public class CalendarActivity extends WQPToolsActivity {
                 String User_name2 = jsonObject.getString("EMPLOYEE_B");
                 String Group_name = jsonObject.getString("COMPANY");
                 String turn_id = jsonObject.getString("ID");
+                String ESVD_SERVICE_NO = jsonObject.getString("ESVD_SERVICE_NO");
 
                 //JSONArray加入SearchData資料
                 ArrayList<String> JArrayList = new ArrayList<String>();
@@ -743,6 +745,7 @@ public class CalendarActivity extends WQPToolsActivity {
                 JArrayList.add(User_name2);
                 JArrayList.add(Group_name);
                 JArrayList.add(turn_id);
+                JArrayList.add(ESVD_SERVICE_NO);
 
                 //HandlerMessage更新UI
                 Bundle b = new Bundle();
@@ -810,6 +813,7 @@ public class CalendarActivity extends WQPToolsActivity {
                 String User_name2 = jsonObject.getString("EMPLOYEE_B");
                 String Group_name = jsonObject.getString("COMPANY");
                 String turn_id = jsonObject.getString("ID");
+                String ESVD_SERVICE_NO = jsonObject.getString("ESVD_SERVICE_NO");
 
                 //JSONArray加入SearchData資料
                 ArrayList<String> JArrayList = new ArrayList<String>();
@@ -823,6 +827,7 @@ public class CalendarActivity extends WQPToolsActivity {
                 JArrayList.add(User_name2);
                 JArrayList.add(Group_name);
                 JArrayList.add(turn_id);
+                JArrayList.add(ESVD_SERVICE_NO);
 
                 //HandlerMessage更新UI
                 Bundle b = new Bundle();
@@ -890,6 +895,7 @@ public class CalendarActivity extends WQPToolsActivity {
                 String User_name2 = jsonObject.getString("EMPLOYEE_B");
                 String Group_name = jsonObject.getString("COMPANY");
                 String turn_id = jsonObject.getString("ID");
+                String ESVD_SERVICE_NO = jsonObject.getString("ESVD_SERVICE_NO");
 
                 //JSONArray加入SearchData資料
                 ArrayList<String> JArrayList = new ArrayList<String>();
@@ -903,6 +909,7 @@ public class CalendarActivity extends WQPToolsActivity {
                 JArrayList.add(User_name2);
                 JArrayList.add(Group_name);
                 JArrayList.add(turn_id);
+                JArrayList.add(ESVD_SERVICE_NO);
 
                 //HandlerMessage更新UI
                 Bundle b = new Bundle();

@@ -7,7 +7,7 @@
     tools:context=".Works.EngSignatureActivity">
 
     <FrameLayout
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="60dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -23,20 +23,25 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         </com.example.a10609516.wqp_internal_app.Tools.SignView>
+
     </FrameLayout>
 
     <LinearLayout
         android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/commit_btn"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="15dp"
+            android:layout_weight="1"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="20dp"
+            android:textSize="18dp"
             android:gravity="center"
             android:textColor="@color/WQP_White"
             android:background="@drawable/form_blue_btn"
@@ -46,10 +51,12 @@
 
         <Button
             android:id="@+id/clear_btn"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:textSize="15dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="20dp"
+            android:textSize="18dp"
             android:gravity="center"
             android:textColor="@color/WQP_White"
             android:background="@drawable/form_orange_btn"
