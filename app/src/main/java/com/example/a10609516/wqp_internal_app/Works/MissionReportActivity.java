@@ -327,7 +327,9 @@ public class MissionReportActivity extends WQPToolsActivity {
                                 uploadImage5();
 
                                 if (RM003.equals("5") || RM003.equals("6")) {
-                                    uploadImage6();
+                                    if (image_view6.getVisibility() == View.GONE) {
+                                        uploadImage6();
+                                    }
                                 }
 
                                 if (RM003.equals("4")) {
@@ -342,6 +344,17 @@ public class MissionReportActivity extends WQPToolsActivity {
                                 }
                                 //與OkHttp建立連線(上傳照片路徑)
                                 sendRequestWithOkHttpForMissionPhoto();
+                                if (pay_spinner.getSelectedItemId() == 1 && have_get_money_checkBox.isChecked()) {
+                                    Intent intent_sign = new Intent(MissionReportActivity.this, EngSignatureActivity.class);
+                                    //將資料傳到EngSignatureActivity
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString("rm001", rm001);
+                                    bundle.putString("rm002", rm002);
+                                    intent_sign.putExtras(bundle);//可放所有基本類別
+                                    startActivity(intent_sign);
+                                } else {
+                                    finish();
+                                }
                                 finish();
                             }
                         }
@@ -2107,6 +2120,7 @@ public class MissionReportActivity extends WQPToolsActivity {
                 Bundle bundle = getIntent().getExtras();
                 rm001 = bundle.getString("rm001").trim();
                 rm002 = bundle.getString("rm002").trim();
+                rm003 = bundle.getString("rm003").trim();
 
                 locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
                 //利用locationManager.getLastKnownLocation取得當下的位置資料
@@ -2193,6 +2207,7 @@ public class MissionReportActivity extends WQPToolsActivity {
                     RequestBody requestBody = new FormBody.Builder()
                             .add("U_ACC", user_id_data)
                             .add("RM002", rm002)
+                            //.add("RM003", rm003)
                             .add("GPS", report_GPS)
                             .add("ML008", ML008)
                             .add("RM015", RM015)
@@ -2246,6 +2261,7 @@ public class MissionReportActivity extends WQPToolsActivity {
                 Bundle bundle = getIntent().getExtras();
                 rm001 = bundle.getString("rm001").trim();
                 rm002 = bundle.getString("rm002").trim();
+                rm003 = bundle.getString("rm003").trim();
 
                 locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
                 //利用locationManager.getLastKnownLocation取得當下的位置資料
@@ -2332,6 +2348,7 @@ public class MissionReportActivity extends WQPToolsActivity {
                     RequestBody requestBody = new FormBody.Builder()
                             .add("U_ACC", user_id_data)
                             .add("RM002", rm002)
+                            .add("RM003", rm003)
                             .add("GPS", report_GPS)
                             .add("ML008", ML008)
                             .add("RM015", RM015)
@@ -2385,6 +2402,7 @@ public class MissionReportActivity extends WQPToolsActivity {
                 Bundle bundle = getIntent().getExtras();
                 rm001 = bundle.getString("rm001").trim();
                 rm002 = bundle.getString("rm002").trim();
+                rm003 = bundle.getString("rm003").trim();
 
                 locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
                 //利用locationManager.getLastKnownLocation取得當下的位置資料
@@ -2471,6 +2489,7 @@ public class MissionReportActivity extends WQPToolsActivity {
                     RequestBody requestBody = new FormBody.Builder()
                             .add("U_ACC", user_id_data)
                             .add("RM002", rm002)
+                            .add("RM003", rm003)
                             .add("GPS", report_GPS)
                             .add("ML008", ML008)
                             .add("RM015", RM015)

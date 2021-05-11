@@ -842,36 +842,25 @@ public class HomeActivity extends WQPToolsActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                /*FirebaseInstanceId.getInstance().getInstanceId()
-                        .addOnCompleteListener(new OnCompleteListener() {
-                            @Override
-                            public void onComplete(@NonNull Task task) {
-                                if (!task.isSuccessful()) {
-                                    return;
-                                }
-                                if( task.getResult() == null)
-                                    return;
-                                // Get new Instance ID token
-                                String token = task.getResult().getToken();
-                                // Log and toast
-                                Log.i("MainActivity","token "+token);
-                            }
-                        });*/
-
                 //接收LoginActivity傳過來的值
                 SharedPreferences user_id = getSharedPreferences("user_id", MODE_PRIVATE);
                 user_id_data = user_id.getString("ID", "");
                 Log.e(LOG, "U_ACC:" + user_id_data);
-                //接收LoginActivity傳過來的值
+                //接收FCM傳過來的值
                 SharedPreferences token_id = getSharedPreferences("app_token_id", MODE_PRIVATE);
                 String app_token_id = token_id.getString("token_id", "");
                 Log.e("FCM", app_token_id);
+                //接收LoginActivity傳過來的值(version)
+                SharedPreferences fb_version = getSharedPreferences("fb_version", MODE_PRIVATE);
+                final String version = fb_version.getString("FB_VER", "");
+                Log.e(LOG, "ver : " + version);
                 try {
                     OkHttpClient client = new OkHttpClient();
                     //POST
                     RequestBody requestBody = new FormBody.Builder()
                             .add("User_id", user_id_data)
                             .add("Token_ID", app_token_id)
+                            .add("VERSION", version)
                             .build();
                     Log.e("FCM", user_id_data);
                     Request request = new Request.Builder()

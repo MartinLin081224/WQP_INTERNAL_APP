@@ -1,5 +1,6 @@
 package com.example.a10609516.wqp_internal_app.Works;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -61,7 +62,8 @@ public class EngSignatureActivity extends WQPToolsActivity {
             public void onClick(View arg0) {
                 saveSign(mView.getCachebBitmap());
                 sendRequestWithOkHttpOfSignature();
-                finish();
+                Intent intent_sign = new Intent(EngSignatureActivity.this, MissionActivity.class);
+                startActivity(intent_sign);
             }
         });
         clear_btn.setOnClickListener(new View.OnClickListener() {

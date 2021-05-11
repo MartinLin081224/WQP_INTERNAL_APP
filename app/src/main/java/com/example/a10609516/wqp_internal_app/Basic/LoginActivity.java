@@ -76,7 +76,7 @@ public class LoginActivity extends AppCompatActivity {
         //登入按鈕監聽方法
         login_imv.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (version_txt.getText().toString().equals("1.0.6")) {
+                if (version_txt.getText().toString().equals("1.0.7")) {
                     userNameValue = id_edt.getText().toString();
                     passwordValue = pwd_edt.getText().toString();
                     //取得TokenID的OKHttp

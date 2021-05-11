@@ -40,7 +40,7 @@ public class VersionActivity extends WQPToolsActivity {
     private DrawerLayout drawer;
     private Toolbar toolbar;
 
-    private TextView detail_txt0, detail_txt1, detail_txt2, detail_txt3, detail_txt4, detail_txt5;
+    private TextView detail_txt0, detail_txt1, detail_txt2, detail_txt3, detail_txt4, detail_txt5, detail_txt6;
 
     private Context mContext = this;
 
@@ -73,6 +73,7 @@ public class VersionActivity extends WQPToolsActivity {
         detail_txt3 = findViewById(R.id.detail_txt3);
         detail_txt4 = findViewById(R.id.detail_txt4);
         detail_txt5 = findViewById(R.id.detail_txt5);
+        detail_txt6 = findViewById(R.id.detail_txt6);
     }
 
     /**
@@ -441,6 +442,8 @@ public class VersionActivity extends WQPToolsActivity {
                 detail_txt4.setText("1.抓了一些臭蟲\n" +
                         "2.派工任務-要現金收款需有客戶電子簽名");
                 detail_txt5.setText("1.派工任務-修正*號照片上傳問題");
+                detail_txt6.setText("1.抓了一些臭蟲\n" +
+                        "2.派工任務-修正部分工無法回報離開的問題");
             }
         });
     }

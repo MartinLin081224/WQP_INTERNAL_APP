@@ -269,7 +269,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="0.6"
                 android:visibility="invisible"
-                android:text="1.0.6"/>
+                android:text="1.0.7"/>
 
         </LinearLayout>
 
@@ -278,7 +278,7 @@
             android:layout_height="0dp"
             android:layout_weight="0.6"
             android:gravity="center"
-            android:text="BWT Apps v1.0.6   Copyright © 2021 W.Q.P.CO.LTD"
+            android:text="BWT Apps v1.0.7   Copyright © 2021 W.Q.P.CO.LTD"
             android:textColor="@color/WQP_Blue"
             android:textStyle="bold" />/>
 
