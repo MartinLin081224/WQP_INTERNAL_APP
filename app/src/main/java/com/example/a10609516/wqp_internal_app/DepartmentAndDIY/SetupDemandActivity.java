@@ -92,7 +92,7 @@ public class SetupDemandActivity extends WQPToolsActivity {
                     //sendRequestWithOkHttpForMissionUnReported();
                 } else if (status.equals("1")) {
                     //與OkHttp建立連線(查詢已回報之任務明細)
-
+                    //sendRequestWithOkHttpForMissionReported();
                 }
             }
         });
