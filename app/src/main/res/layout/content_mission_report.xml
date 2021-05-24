@@ -329,7 +329,7 @@
                         android:hint="金額"
                         android:textColor="@color/WQP_Black"
                         android:textSize="18sp"
-                        android:backgroundTint="@color/WQP_White"/>
+                        android:backgroundTint="@color/WQP_Gray"/>
 
                 </LinearLayout>
 

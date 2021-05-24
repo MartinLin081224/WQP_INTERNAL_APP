@@ -1,7 +1,6 @@
 package com.example.a10609516.wqp_internal_app.Manager;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,7 +12,6 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,7 +36,6 @@ import com.example.a10609516.wqp_internal_app.DepartmentAndDIY.SetupDemandActivi
 import com.example.a10609516.wqp_internal_app.DepartmentAndDIY.StationReportActivity;
 import com.example.a10609516.wqp_internal_app.DepartmentAndDIY.StationReportSearchActivity;
 import com.example.a10609516.wqp_internal_app.R;
-import com.example.a10609516.wqp_internal_app.Tools.WQPClickListener;
 import com.example.a10609516.wqp_internal_app.Tools.WQPToolsActivity;
 import com.example.a10609516.wqp_internal_app.Works.CalendarActivity;
 import com.example.a10609516.wqp_internal_app.Works.EngPointsActivity;
@@ -470,10 +467,10 @@ public class OrderSearchActivity extends WQPToolsActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(drawer.isDrawerOpen(GravityCompat.START)) {
+                if (drawer.isDrawerOpen(GravityCompat.START)) {
                     drawer.closeDrawer(Gravity.LEFT); //CLOSE Nav Drawer!
                     Log.d(LOG, "Drawer : close");
-                }else{
+                } else {
                     drawer.openDrawer(Gravity.LEFT); //OPEN Nav Drawer!
                     Log.d(LOG, "Drawer : open");
                 }
@@ -485,8 +482,8 @@ public class OrderSearchActivity extends WQPToolsActivity {
             public void onClick(View view) {
                 sp = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
                 //清除登入界面的自動燈入和記住密碼的代碼
-                sp.edit().putBoolean("auto_isCheck",false).commit();
-                sp.edit().putBoolean("rem_isCheck",false).commit();
+                sp.edit().putBoolean("auto_isCheck", false).commit();
+                sp.edit().putBoolean("rem_isCheck", false).commit();
                 sp.edit().putString("USER_NAME", "").commit();
                 sp.edit().putString("PASSWORD", "").commit();
                 sp.edit().putString("user_name", "").commit();
@@ -810,11 +807,5 @@ public class OrderSearchActivity extends WQPToolsActivity {
     protected void onStop() {
         super.onStop();
         Log.e(LOG, "onStop");
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.e(LOG, "onDestroy");
     }
 }

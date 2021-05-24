@@ -132,7 +132,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="5dp"
                 android:layout_weight="0.5"
-                android:background="@drawable/cancel_button"
+                android:background="@drawable/cancellation_button"
                 android:text="取消確認"
                 android:textColor="@color/WQP_Blue"
                 android:textSize="20sp" />

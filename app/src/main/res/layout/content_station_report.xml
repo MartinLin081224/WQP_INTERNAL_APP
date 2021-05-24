@@ -180,8 +180,8 @@
                         android:gravity="center"
                         android:hint="*金額"
                         android:inputType="number"
-                        android:textColor="#F5F5F5"
-                        android:textColorHint="#F5F5F5"
+                        android:textColor="@color/WQP_White"
+                        android:textColorHint="@color/WQP_White"
                         android:textSize="18sp"
                         android:backgroundTint="@color/WQP_White"/>
 

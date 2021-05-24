@@ -144,7 +144,7 @@
                 android:layout_marginRight="5dp"
                 android:background="@drawable/check_button"
                 android:text="修改確認"
-                android:textColor="@color/WQP_White"
+                android:textColor="@color/WQP_Blue"
                 android:textSize="20sp"/>
 
             <Button
@@ -155,7 +155,7 @@
                 android:layout_marginLeft="5dp"
                 android:background="@drawable/cancel_button"
                 android:text="修改取消"
-                android:textColor="@color/WQP_White"
+                android:textColor="@color/WQP_Blue"
                 android:textSize="20sp"/>
 
         </LinearLayout>
@@ -175,7 +175,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/cancellation_button"
                 android:text="刪除明細?"
-                android:textColor="@color/WQP_White"
+                android:textColor="@color/WQP_Blue"
                 android:textSize="20sp"/>
 
             <Button
@@ -186,7 +186,7 @@
                 android:layout_marginLeft="5dp"
                 android:background="@drawable/delete_btn"
                 android:text="確定刪除"
-                android:textColor="@color/WQP_White"
+                android:textColor="@color/WQP_Blue"
                 android:textSize="20sp"
                 android:visibility="gone"/>
 

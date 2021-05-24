@@ -38,7 +38,6 @@ import com.example.a10609516.wqp_internal_app.Manager.InventoryActivity;
 import com.example.a10609516.wqp_internal_app.Manager.OrderSearchActivity;
 import com.example.a10609516.wqp_internal_app.R;
 import com.example.a10609516.wqp_internal_app.Tools.Adapter;
-import com.example.a10609516.wqp_internal_app.Tools.WQPClickListener;
 import com.example.a10609516.wqp_internal_app.Tools.WQPToolsActivity;
 import com.example.a10609516.wqp_internal_app.Works.CalendarActivity;
 import com.example.a10609516.wqp_internal_app.Works.EngPointsActivity;
@@ -265,6 +264,7 @@ public class StationReportSearchActivity extends WQPToolsActivity {
                 correct_llt.setVisibility(View.GONE);
                 //與OkHttp建立連線 取得日報資訊跟照片路徑ID
                 sendRequestWithOkHttpForStationReportSearchMaster();
+                detail_tlt.removeAllViews();
                 //與OkHttp建立連線 取得日報資訊明細
                 sendRequestWithOkHttpForStationReportSearchDetail();
                 Toast.makeText(StationReportSearchActivity.this, "修改取消", Toast.LENGTH_SHORT).show();
@@ -891,7 +891,7 @@ public class StationReportSearchActivity extends WQPToolsActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        adapter3 = new ArrayAdapter<String>(StationReportSearchActivity.this, android.R.layout.simple_spinner_item, count);
+                        adapter3 = new ArrayAdapter<String>(StationReportSearchActivity.this, R.layout.white_blod_spinner, count);
                         adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         count_spinner.setAdapter(adapter3);
                         //當迴圈與ResponseText內容一致時跳出迴圈 並顯示該ResponseText的Spinner位置
