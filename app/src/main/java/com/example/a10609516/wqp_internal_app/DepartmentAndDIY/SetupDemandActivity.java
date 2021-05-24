@@ -1,11 +1,5 @@
 package com.example.a10609516.wqp_internal_app.DepartmentAndDIY;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -28,7 +22,6 @@ import com.example.a10609516.wqp_internal_app.Clerk.QuotationActivity;
 import com.example.a10609516.wqp_internal_app.Manager.InventoryActivity;
 import com.example.a10609516.wqp_internal_app.Manager.OrderSearchActivity;
 import com.example.a10609516.wqp_internal_app.R;
-import com.example.a10609516.wqp_internal_app.Tools.WQPClickListener;
 import com.example.a10609516.wqp_internal_app.Tools.WQPToolsActivity;
 import com.example.a10609516.wqp_internal_app.Works.CalendarActivity;
 import com.example.a10609516.wqp_internal_app.Works.EngPointsActivity;
@@ -37,6 +30,11 @@ import com.example.a10609516.wqp_internal_app.Works.MissCountActivity;
 import com.example.a10609516.wqp_internal_app.Works.MissionActivity;
 import com.example.a10609516.wqp_internal_app.Works.PointsActivity;
 import com.example.a10609516.wqp_internal_app.Works.ScheduleActivity;
+
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 public class SetupDemandActivity extends WQPToolsActivity {
 
@@ -94,7 +92,7 @@ public class SetupDemandActivity extends WQPToolsActivity {
                     //sendRequestWithOkHttpForMissionUnReported();
                 } else if (status.equals("1")) {
                     //與OkHttp建立連線(查詢已回報之任務明細)
-                    //sendRequestWithOkHttpForMissionReported();
+
                 }
             }
         });
