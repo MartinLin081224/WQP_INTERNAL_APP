@@ -39,13 +39,13 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 public class SetupDemandActivity extends WQPToolsActivity {
 
     private SharedPreferences sp;
-    private TextView not_setup_txt, has_been_setup_txt;
+    private TextView date_txt, no_setup_txt, has_been_setup_txt, mark_setup_txt;
 
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private Button[] dynamically_btn;
     private String status;
 
-    private LinearLayout nav_view, nav_setup;
+    private LinearLayout nav_view, nav_setup, date_llt;
     private DrawerLayout drawer;
     private Toolbar toolbar;
 
@@ -76,10 +76,13 @@ public class SetupDemandActivity extends WQPToolsActivity {
         toolbar = findViewById(R.id.toolbar);
         nav_view = findViewById(R.id.nav_view);
         nav_setup = findViewById(R.id.nav_setup);
+        date_llt = findViewById(R.id.date_llt);
         drawer = findViewById(R.id.drawer_layout);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.refresh_layout);
-        not_setup_txt = findViewById(R.id.not_setup_txt);
+        date_txt = findViewById(R.id.date_txt);
+        no_setup_txt = findViewById(R.id.no_setup_txt);
         has_been_setup_txt = findViewById(R.id.has_been_setup_txt);
+        mark_setup_txt = findViewById(R.id.mark_setup_txt);
 
         //UI介面下拉刷新
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -97,13 +100,29 @@ public class SetupDemandActivity extends WQPToolsActivity {
             }
         });
 
-        not_setup_txt.setOnClickListener(new View.OnClickListener() {
+        date_txt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (date_llt.getVisibility() == View.GONE) {
+                    date_llt.setVisibility(View.VISIBLE);
+                    date_txt.setText("單據日期 : ");
+                } else {
+                    date_llt.setVisibility(View.GONE);
+                    date_txt.setText("單據日期▼");
+                }
+
+            }
+        });
+
+        no_setup_txt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                not_setup_txt.setBackgroundResource(R.drawable.rectangle_radius_solid);
+                no_setup_txt.setBackgroundResource(R.drawable.rectangle_radius_solid);
                 has_been_setup_txt.setBackgroundResource(R.drawable.rectangle_radius_empty);
-                not_setup_txt.setTextColor(mContext.getResources().getColor(R.color.WQP_White));
+                mark_setup_txt.setBackgroundResource(R.drawable.rectangle_radius_empty);
+                no_setup_txt.setTextColor(mContext.getResources().getColor(R.color.WQP_White));
                 has_been_setup_txt.setTextColor(mContext.getResources().getColor(R.color.WQP_Blue));
+                mark_setup_txt.setTextColor(mContext.getResources().getColor(R.color.WQP_Blue));
                 status = "0";
                 nav_setup.removeAllViews();
 
@@ -121,10 +140,35 @@ public class SetupDemandActivity extends WQPToolsActivity {
             @Override
             public void onClick(View view) {
                 has_been_setup_txt.setBackgroundResource(R.drawable.rectangle_radius_solid);
-                not_setup_txt.setBackgroundResource(R.drawable.rectangle_radius_empty);
+                no_setup_txt.setBackgroundResource(R.drawable.rectangle_radius_empty);
+                mark_setup_txt.setBackgroundResource(R.drawable.rectangle_radius_empty);
                 has_been_setup_txt.setTextColor(mContext.getResources().getColor(R.color.WQP_White));
-                not_setup_txt.setTextColor(mContext.getResources().getColor(R.color.WQP_Blue));
+                no_setup_txt.setTextColor(mContext.getResources().getColor(R.color.WQP_Blue));
+                mark_setup_txt.setTextColor(mContext.getResources().getColor(R.color.WQP_Blue));
                 status = "1";
+                nav_setup.removeAllViews();
+
+                try{
+                    // delay 1 second
+                    Thread.sleep(300);
+                    //與OkHttp建立連線(查詢未回報之任務明細)
+                    //sendRequestWithOkHttpForMissionUnReported();
+                } catch(InterruptedException e){
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        mark_setup_txt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mark_setup_txt.setBackgroundResource(R.drawable.rectangle_radius_solid);
+                no_setup_txt.setBackgroundResource(R.drawable.rectangle_radius_empty);
+                has_been_setup_txt.setBackgroundResource(R.drawable.rectangle_radius_empty);
+                mark_setup_txt.setTextColor(mContext.getResources().getColor(R.color.WQP_White));
+                no_setup_txt.setTextColor(mContext.getResources().getColor(R.color.WQP_Blue));
+                has_been_setup_txt.setTextColor(mContext.getResources().getColor(R.color.WQP_Blue));
+                status = "2";
                 nav_setup.removeAllViews();
 
                 try{
@@ -495,10 +539,12 @@ public class SetupDemandActivity extends WQPToolsActivity {
     protected void onRestart() {
         super.onRestart();
         Log.e(LOG, "onRestart");
-        not_setup_txt.setBackgroundResource(R.drawable.rectangle_radius_solid);
+        no_setup_txt.setBackgroundResource(R.drawable.rectangle_radius_solid);
         has_been_setup_txt.setBackgroundResource(R.drawable.rectangle_radius_empty);
-        not_setup_txt.setTextColor(mContext.getResources().getColor(R.color.WQP_White));
+        mark_setup_txt.setBackgroundResource(R.drawable.rectangle_radius_empty);
+        no_setup_txt.setTextColor(mContext.getResources().getColor(R.color.WQP_White));
         has_been_setup_txt.setTextColor(mContext.getResources().getColor(R.color.WQP_Blue));
+        mark_setup_txt.setTextColor(mContext.getResources().getColor(R.color.WQP_Blue));
         nav_setup.removeAllViews();
         //與OkHttp建立連線(查詢未回報之任務明細)
         //sendRequestWithOkHttpForMissionUnReported();

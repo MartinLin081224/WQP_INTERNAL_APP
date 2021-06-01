@@ -22,7 +22,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
                 android:orientation="vertical"
-                android:background="@drawable/frame_line">
+                android:background="@drawable/frame_gray_white_line">
 
                 <LinearLayout
                     android:layout_width="match_parent"

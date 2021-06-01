@@ -1093,7 +1093,7 @@ public class StationReportSearchActivity extends WQPToolsActivity {
                     TableLayout small_tb = new TableLayout(StationReportSearchActivity.this);
                     //全部列自動填充空白處
                     small_tb.setStretchAllColumns(true);
-                    small_tb.setBackgroundResource(R.drawable.frame_line);
+                    small_tb.setBackgroundResource(R.drawable.frame_gray_white_line);
                     //設定TableRow的寬高
                     TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
 

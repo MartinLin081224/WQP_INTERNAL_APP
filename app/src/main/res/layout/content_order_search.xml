@@ -25,7 +25,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="15dp"
-                android:background="@drawable/frame_blue_line"
+                android:background="@drawable/frame_gray_blue_line"
                 android:orientation="vertical">
 
                 <TextView
@@ -212,7 +212,7 @@
                     android:id="@+id/title_llt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/frame_orange_line"
+                    android:background="@drawable/frame_gray_orange_line"
                     android:orientation="horizontal">
 
                     <TextView
@@ -261,7 +261,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
-                    android:background="@drawable/frame_empty_line"
+                    android:background="@drawable/frame_gray_empty_line"
                     android:divider="@drawable/table_h_divider" />
 
             </LinearLayout>
