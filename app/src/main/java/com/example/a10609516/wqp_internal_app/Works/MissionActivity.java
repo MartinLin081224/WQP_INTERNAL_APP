@@ -568,7 +568,7 @@ public class MissionActivity extends WQPToolsActivity implements Listener, Locat
     }
 
     /**
-     * 與OkHttp建立連線(t查詢未回報之任務明細)
+     * 與OkHttp建立連線(查詢未回報之任務明細)
      */
     private void sendRequestWithOkHttpForMissionUnReported() {
         new Thread(new Runnable() {
@@ -655,7 +655,7 @@ public class MissionActivity extends WQPToolsActivity implements Listener, Locat
 
 
     /**
-     * 與OkHttp建立連線(t查詢已回報之任務明細)
+     * 與OkHttp建立連線(查詢已回報之任務明細)
      */
     private void sendRequestWithOkHttpForMissionReported() {
         new Thread(new Runnable() {
@@ -740,7 +740,7 @@ public class MissionActivity extends WQPToolsActivity implements Listener, Locat
     }
 
     /**
-     * 與OkHttp建立連線(t查詢已結案之任務明細)
+     * 與OkHttp建立連線(查詢已結案之任務明細)
      */
     private void sendRequestWithOkHttpForMissionClosed() {
         new Thread(new Runnable() {

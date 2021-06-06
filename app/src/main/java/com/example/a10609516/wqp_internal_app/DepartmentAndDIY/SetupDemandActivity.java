@@ -1,14 +1,22 @@
 package com.example.a10609516.wqp_internal_app.DepartmentAndDIY;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +36,7 @@ import com.example.a10609516.wqp_internal_app.Works.EngPointsActivity;
 import com.example.a10609516.wqp_internal_app.Works.GPSActivity;
 import com.example.a10609516.wqp_internal_app.Works.MissCountActivity;
 import com.example.a10609516.wqp_internal_app.Works.MissionActivity;
+import com.example.a10609516.wqp_internal_app.Works.MissionDetailActivity;
 import com.example.a10609516.wqp_internal_app.Works.PointsActivity;
 import com.example.a10609516.wqp_internal_app.Works.ScheduleActivity;
 
@@ -36,10 +45,26 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
 public class SetupDemandActivity extends WQPToolsActivity {
 
     private SharedPreferences sp;
     private TextView date_txt, no_setup_txt, has_been_setup_txt, mark_setup_txt;
+    private Button start_btn, end_btn;
 
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private Button[] dynamically_btn;
@@ -80,6 +105,8 @@ public class SetupDemandActivity extends WQPToolsActivity {
         drawer = findViewById(R.id.drawer_layout);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.refresh_layout);
         date_txt = findViewById(R.id.date_txt);
+        start_btn = findViewById(R.id.start_btn);
+        end_btn = findViewById(R.id.end_btn);
         no_setup_txt = findViewById(R.id.no_setup_txt);
         has_been_setup_txt = findViewById(R.id.has_been_setup_txt);
         mark_setup_txt = findViewById(R.id.mark_setup_txt);
@@ -534,6 +561,318 @@ public class SetupDemandActivity extends WQPToolsActivity {
             }
         });
     }
+
+    /**
+     * 與OkHttp建立連線(查詢已結案之任務明細)
+     */
+    private void sendRequestWithOkHttpForDemandNotBuild() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                //接收LoginActivity傳過來的值
+                SharedPreferences user_id = getSharedPreferences("user_id", MODE_PRIVATE);
+                String user_id_data = user_id.getString("ID", "");
+                String start_date = start_btn.getText().toString();
+                String end_date = end_btn.getText().toString();
+                Log.e(LOG, user_id_data);
+                Log.e(LOG, start_date);
+                Log.e(LOG, end_date);
+
+                try {
+                    OkHttpClient client = new OkHttpClient();
+                    //POST
+                    RequestBody requestBody = new FormBody.Builder()
+                            .add("U_ACC", user_id_data)
+                            .add("START_DATE", start_date)
+                            .add("END_DATE", end_date)
+                            .build();
+                    Log.e(LOG, user_id_data);
+                    Request request = new Request.Builder()
+                            .url("http://a.wqp-water.com.tw/WQP_OS/DemandSearchNotBuild.php")
+                            //.url("http://192.168.0.172/WQP_OS/DemandSearchNotBuild.php")
+                            .post(requestBody)
+                            .build();
+                    Response response = client.newCall(request).execute();
+                    String responseData = response.body().string();
+                    Log.e(LOG, requestBody.toString());
+                    Log.e(LOG, response.toString());
+                    Log.e(LOG, responseData);
+                    parseJSONWithJSONObjectForDemandNotBuild(responseData);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+    /**
+     * 獲得JSON字串並解析成String字串
+     *
+     * @param jsonData
+     */
+    private void parseJSONWithJSONObjectForDemandNotBuild(String jsonData) {
+        try {
+            JSONArray jsonArray = new JSONArray(jsonData);
+            dynamically_btn = new Button[jsonArray.length()];
+            for (int i = 0; i < jsonArray.length(); i++) {
+                //JSON格式改為字串
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                String TC001 = jsonObject.getString("TC001");
+                String TC002 = jsonObject.getString("TC002");
+                String MV001 = jsonObject.getString("MV001");
+                String MV002 = jsonObject.getString("MV002");
+                String TC003 = jsonObject.getString("TC003");
+                String COMP2 = jsonObject.getString("COMP2");
+                String TC004 = jsonObject.getString("TC004");
+                String TC043 = jsonObject.getString("TC043");
+                String TA_STATUS = jsonObject.getString("TA_STATUS");
+                String SEN_ID = jsonObject.getString("SEN_ID");
+                String SEN_COUNT_ID = jsonObject.getString("SEN_COUNT_ID");
+                /*String DEVICE = jsonObject.getString("DEVICE");*/
+
+                //JSONArray加入SearchData資料
+                ArrayList<String> JArrayList = new ArrayList<String>();
+                JArrayList.add(TC001);
+                JArrayList.add(TC002);
+                JArrayList.add(MV001);
+                JArrayList.add(MV002);
+                JArrayList.add(TC003);
+                JArrayList.add(COMP2);
+                JArrayList.add(TC004);
+                JArrayList.add(TC043);
+                JArrayList.add(TA_STATUS);
+                JArrayList.add(SEN_ID);
+                JArrayList.add(SEN_COUNT_ID);
+                /*JArrayList.add(DEVICE);*/
+
+                Log.e(LOG, TC001);
+                Log.e(LOG, TC002);
+                Log.e(LOG, MV001);
+                Log.e(LOG, MV002);
+                Log.e(LOG, TC003);
+                Log.e(LOG, COMP2);
+                Log.e(LOG, TC004);
+                Log.e(LOG, TC043);
+                Log.e(LOG, TA_STATUS);
+                Log.e(LOG, SEN_ID);
+                Log.e(LOG, SEN_COUNT_ID);
+                //Log.e(LOG, "FILTER : " + FILTER + " / DEVICE : " + DEVICE);
+
+                //HandlerMessage更新UI
+                Bundle b = new Bundle();
+                b.putStringArrayList("JSON_data", JArrayList);
+                Message msg = mHandler.obtainMessage();
+                msg.setData(b);
+                msg.what = 1;
+                msg.sendToTarget();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 更新UI
+     */
+    Handler mHandler = new Handler() {
+        @SuppressLint("HandlerLeak")
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 1:
+                    LinearLayout small_llt0 = new LinearLayout(SetupDemandActivity.this);
+                    small_llt0.setOrientation(LinearLayout.HORIZONTAL);
+                    LinearLayout small_llt1 = new LinearLayout(SetupDemandActivity.this);
+                    small_llt1.setOrientation(LinearLayout.HORIZONTAL);
+                    LinearLayout small_llt2 = new LinearLayout(SetupDemandActivity.this);
+                    small_llt2.setOrientation(LinearLayout.HORIZONTAL);
+                    LinearLayout big_llt1 = new LinearLayout(SetupDemandActivity.this);
+                    big_llt1.setOrientation(LinearLayout.VERTICAL);
+                    LinearLayout big_llt2 = new LinearLayout(SetupDemandActivity.this);
+                    big_llt2.setOrientation(LinearLayout.VERTICAL);
+                    big_llt2.setGravity(Gravity.CENTER);
+                    LinearLayout large_llt = new LinearLayout(SetupDemandActivity.this);
+                    large_llt.setOrientation(LinearLayout.HORIZONTAL);
+                    LinearLayout XL_llt = new LinearLayout(SetupDemandActivity.this);
+                    XL_llt.setOrientation(LinearLayout.VERTICAL);
+                    RelativeLayout id_rlt = new RelativeLayout(SetupDemandActivity.this);
+
+                    Bundle jb = msg.getData();
+                    ArrayList<String> JArrayList = new ArrayList<String>();
+                    //int i = b.getStringArrayList("JSON_data").size();
+                    JArrayList = jb.getStringArrayList("JSON_data");
+
+                    //顯示每筆LinearLayout的Title
+                    TextView dynamically_title;
+                    dynamically_title = new TextView(SetupDemandActivity.this);
+                    dynamically_title.setText("新任務通知");
+                    dynamically_title.setPadding(10, 10, 10, 0);
+                    dynamically_title.setGravity(Gravity.LEFT);
+                    //dynamically_title.setWidth(50);
+                    dynamically_title.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
+                    dynamically_title.setTextColor(mContext.getResources().getColor(R.color.WQP_Black));
+
+                    //顯示每筆LinearLayout的日期時間
+                    /*TextView dynamically_datetime;
+                    dynamically_datetime = new TextView(MissionActivity.this);
+                    dynamically_datetime.setText(JArrayList.get(0).trim());
+                    //dynamically_datetime.setText(JArrayList.get(0).trim().substring(0, JArrayList.get(0).length()-4));
+                    dynamically_datetime.setPadding(0, 10, 10, 0);
+                    dynamically_datetime.setGravity(Gravity.RIGHT);
+                    //dynamically_datetime.setWidth(50);
+                    dynamically_datetime.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
+                    dynamically_datetime.setTextColor(mContext.getResources().getColor(R.color.WQP_Black));*/
+
+                    //顯示每筆LinearLayout的訂單單別單號
+                    TextView dynamically_TC001002;
+                    dynamically_TC001002 = new TextView(SetupDemandActivity.this);
+                    dynamically_TC001002.setText("訂單:" + JArrayList.get(0).trim() + "-" + JArrayList.get(1).trim() );
+                    dynamically_TC001002.setPadding(10, 0, 10, 0);
+                    dynamically_TC001002.setGravity(Gravity.LEFT);
+                    dynamically_TC001002.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
+                    dynamically_TC001002.setTextColor(mContext.getResources().getColor(R.color.WQP_Gray));
+
+                    //顯示每筆LinearLayout的訂單公司別
+                    TextView dynamically_company;
+                    dynamically_company = new TextView(SetupDemandActivity.this);
+                    dynamically_company.setText("[" + JArrayList.get(5).trim() + "] ");
+                    dynamically_company.setPadding(10, 0, 10, 10);
+                    dynamically_company.setGravity(Gravity.RIGHT);
+                    //dynamically_company.setWidth(50);
+                    dynamically_company.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
+                    dynamically_company.setTextColor(mContext.getResources().getColor(R.color.WQP_Gray));
+
+                    //顯示每筆LinearLayout的業務
+                    TextView dynamically_MV001002;
+                    dynamically_MV001002 = new TextView(SetupDemandActivity.this);
+                    dynamically_MV001002.setText("業務:" + JArrayList.get(2).trim() + ":|:" + JArrayList.get(3).trim());
+                    dynamically_MV001002.setPadding(10, 0, 10, 10);
+                    dynamically_MV001002.setGravity(Gravity.LEFT);
+                    //dynamically_MV001002.setWidth(50);
+                    dynamically_MV001002.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
+                    dynamically_MV001002.setTextColor(mContext.getResources().getColor(R.color.WQP_Gray));
+
+                    //顯示每筆LinearLayout的客戶
+                    TextView dynamically_TC004043;
+                    dynamically_TC004043 = new TextView(SetupDemandActivity.this);
+                    dynamically_TC004043.setText("客戶:" + JArrayList.get(6).trim() + ":|:" + JArrayList.get(7).trim());
+                    dynamically_TC004043.setPadding(10, 0, 10, 10);
+                    dynamically_TC004043.setGravity(Gravity.LEFT);
+                    //dynamically_TC004043.setWidth(50);
+                    dynamically_TC004043.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
+                    dynamically_TC004043.setTextColor(mContext.getResources().getColor(R.color.WQP_Gray));
+
+                    //設置每筆LinearLayout的間隔分隔線
+                    TextView dynamically_txt0 = new TextView(SetupDemandActivity.this);
+                    dynamically_txt0.setBackgroundColor(mContext.getResources().getColor(R.color.WQP_Blue));
+
+                    //設置每筆TableLayout的Button監聽器、與動態新增Button的ID
+                    int loc = 0;
+                    for (int i = 0; i < dynamically_btn.length; i++) {
+                        if (dynamically_btn[i] == null) {
+                            loc = i;
+                            break;
+                        }
+                    }
+                    dynamically_btn[loc] = new Button(SetupDemandActivity.this);
+                    //dynamically_btn[loc].setText("Google Map");
+                    dynamically_btn[loc].setAlpha(0);
+                    dynamically_btn[loc].setId(loc);
+                    dynamically_btn[loc].setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            for (int a = 0; a < dynamically_btn.length; a++) {
+                                if (v.getId() == dynamically_btn[a].getId()) {
+                                    Intent intent_ex = new Intent(SetupDemandActivity.this, MissionDetailActivity.class);
+                                    LinearLayout id_llt = (LinearLayout) nav_setup.getChildAt(a);
+
+                                    RelativeLayout big_llt = (RelativeLayout) id_llt.getChildAt(1);
+                                    LinearLayout first_rlt = (LinearLayout) big_llt.getChildAt(0);
+                                    LinearLayout mission_llt = (LinearLayout) first_rlt.getChildAt(0);
+                                    LinearLayout detail_llt = (LinearLayout) mission_llt.getChildAt(1);
+                                    TextView no_txt = (TextView) detail_llt.getChildAt(0);
+                                    String rm002 = no_txt.getText().toString().replace("您有新任務(", "").replace(")", "");
+
+                                    LinearLayout detail_llt2 = (LinearLayout) mission_llt.getChildAt(2);
+                                    TextView type_txt = (TextView) detail_llt2.getChildAt(0);
+                                    String rm003 = type_txt.getText().toString();
+                                    //將SQL裡的資料傳到MapsActivity
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString("rm002", rm002);
+                                    bundle.putString("rm003", rm003);
+                                    Log.e(LOG, "RM002 : " + rm002);
+                                    Log.e(LOG, "RM003 : " + rm003);
+                                    //intent_gps.putExtra("TitleText", TitleText);//可放所有基本類別
+                                    intent_ex.putExtras(bundle);//可放所有基本類別
+
+                                    startActivity(intent_ex);
+                                    //進入MapsActivity後 清空gps_llt的資料
+                                    nav_setup.removeAllViews();
+                                }
+                            }
+                        }
+                    });
+
+                    SimpleDateFormat CurrentTime= new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                    String currentDate = new SimpleDateFormat("yyyy-MM-dd  HH:mm", Locale.getDefault()).format(new Date());
+                    Log.e(LOG, "DATE : " + currentDate);
+
+                    //若任務逾期未回報該任務底色改為粉色
+                    try {
+                        Date get_date = CurrentTime.parse(currentDate);
+                        Date mission_date = CurrentTime.parse(JArrayList.get(2).trim());
+
+                        if (status.equals("0")) {
+                            if(get_date.after(mission_date)) {
+                                Log.e(LOG,"逾期");
+                                id_rlt.setBackgroundColor(mContext.getResources().getColor(R.color.WQP_Pink));
+                            } else {
+                                Log.e(LOG,"未逾期");
+                            }
+                        }
+
+                    } catch (ParseException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+
+                    LinearLayout.LayoutParams small_2pm = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1.7f);
+                    LinearLayout.LayoutParams small_3pm = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 3.0f);
+                    LinearLayout.LayoutParams btn_pm = new LinearLayout.LayoutParams(40, 40);
+                    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+
+                    small_llt0.addView(dynamically_title, small_2pm);
+                    //small_llt0.addView(dynamically_datetime, small_3pm);
+                    small_llt0.addView(dynamically_rm910, small_3pm);
+                    small_llt1.addView(dynamically_rm002);
+                    small_llt2.addView(dynamically_rm003, small_2pm);
+
+                    big_llt1.addView(small_llt0);
+                    big_llt1.addView(small_llt1);
+                    big_llt1.addView(small_llt2);
+                    big_llt2.addView(dynamically_imv, btn_pm);
+
+                    large_llt.addView(big_llt1, new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 9));
+                    large_llt.addView(big_llt2, new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1));
+
+                    id_rlt.addView(large_llt, params);
+                    id_rlt.addView(dynamically_btn[loc], params);
+
+                    XL_llt.addView(dynamically_txt0, LinearLayout.LayoutParams.MATCH_PARENT, 3);
+                    XL_llt.addView(id_rlt);
+
+                    nav_setup.addView(XL_llt);
+
+                    LinearLayout first_llt = (LinearLayout) nav_setup.getChildAt(0);
+                    first_llt.getChildAt(0).setVisibility(View.GONE);
+
+                    break;
+                default:
+                    break;
+            }
+            super.handleMessage(msg);
+        }
+    };
 
     @Override
     protected void onRestart() {
