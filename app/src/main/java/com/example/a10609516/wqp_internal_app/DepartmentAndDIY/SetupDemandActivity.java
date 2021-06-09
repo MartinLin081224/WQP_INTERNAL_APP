@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -14,7 +13,6 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -40,20 +38,15 @@ import com.example.a10609516.wqp_internal_app.Works.MissionDetailActivity;
 import com.example.a10609516.wqp_internal_app.Works.PointsActivity;
 import com.example.a10609516.wqp_internal_app.Works.ScheduleActivity;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
-
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -90,8 +83,8 @@ public class SetupDemandActivity extends WQPToolsActivity {
         SetToolBar();
         nav_setup.removeAllViews();
         status = "0";
-        //與OkHttp建立連線(查詢為回報之任務明細)
-        //sendRequestWithOkHttpForMissionUnReported();
+        //與OkHttp建立連線(查詢未建立施工單之訂單)
+        sendRequestWithOkHttpForDemandNotBuild();
     }
 
     /**
@@ -118,10 +111,13 @@ public class SetupDemandActivity extends WQPToolsActivity {
                 mSwipeRefreshLayout.setRefreshing(false);
                 nav_setup.removeAllViews();
                 if (status.equals("0")) {
-                    //與OkHttp建立連線(查詢未回報之任務明細)
-                    //sendRequestWithOkHttpForMissionUnReported();
+                    //與OkHttp建立連線(查詢未建立施工單之訂單)
+                    sendRequestWithOkHttpForDemandNotBuild();
                 } else if (status.equals("1")) {
                     //與OkHttp建立連線(查詢已回報之任務明細)
+                    //sendRequestWithOkHttpForMissionReported();
+                } else if (status.equals("2")) {
+                    //與OkHttp建立連線(查詢已標記之任務明細)
                     //sendRequestWithOkHttpForMissionReported();
                 }
             }
@@ -563,7 +559,7 @@ public class SetupDemandActivity extends WQPToolsActivity {
     }
 
     /**
-     * 與OkHttp建立連線(查詢已結案之任務明細)
+     * 與OkHttp建立連線(查詢未建立施工單之訂單)
      */
     private void sendRequestWithOkHttpForDemandNotBuild() {
         new Thread(new Runnable() {
@@ -632,17 +628,17 @@ public class SetupDemandActivity extends WQPToolsActivity {
 
                 //JSONArray加入SearchData資料
                 ArrayList<String> JArrayList = new ArrayList<String>();
-                JArrayList.add(TC001);
-                JArrayList.add(TC002);
-                JArrayList.add(MV001);
-                JArrayList.add(MV002);
-                JArrayList.add(TC003);
-                JArrayList.add(COMP2);
-                JArrayList.add(TC004);
-                JArrayList.add(TC043);
-                JArrayList.add(TA_STATUS);
-                JArrayList.add(SEN_ID);
-                JArrayList.add(SEN_COUNT_ID);
+                JArrayList.add(TC001);//訂單單別
+                JArrayList.add(TC002);//訂單單號
+                JArrayList.add(MV001);//員工編號
+                JArrayList.add(MV002);//員工姓名
+                JArrayList.add(TC003);//單據日期
+                JArrayList.add(COMP2);//公司別
+                JArrayList.add(TC004);//客戶編號
+                JArrayList.add(TC043);//客戶全名
+                JArrayList.add(TA_STATUS);//施工單狀態
+                JArrayList.add(SEN_ID);//施工單流水號ID
+                JArrayList.add(SEN_COUNT_ID);//施工單數量ID
                 /*JArrayList.add(DEVICE);*/
 
                 Log.e(LOG, TC001);
@@ -701,27 +697,6 @@ public class SetupDemandActivity extends WQPToolsActivity {
                     ArrayList<String> JArrayList = new ArrayList<String>();
                     //int i = b.getStringArrayList("JSON_data").size();
                     JArrayList = jb.getStringArrayList("JSON_data");
-
-                    //顯示每筆LinearLayout的Title
-                    TextView dynamically_title;
-                    dynamically_title = new TextView(SetupDemandActivity.this);
-                    dynamically_title.setText("新任務通知");
-                    dynamically_title.setPadding(10, 10, 10, 0);
-                    dynamically_title.setGravity(Gravity.LEFT);
-                    //dynamically_title.setWidth(50);
-                    dynamically_title.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
-                    dynamically_title.setTextColor(mContext.getResources().getColor(R.color.WQP_Black));
-
-                    //顯示每筆LinearLayout的日期時間
-                    /*TextView dynamically_datetime;
-                    dynamically_datetime = new TextView(MissionActivity.this);
-                    dynamically_datetime.setText(JArrayList.get(0).trim());
-                    //dynamically_datetime.setText(JArrayList.get(0).trim().substring(0, JArrayList.get(0).length()-4));
-                    dynamically_datetime.setPadding(0, 10, 10, 0);
-                    dynamically_datetime.setGravity(Gravity.RIGHT);
-                    //dynamically_datetime.setWidth(50);
-                    dynamically_datetime.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
-                    dynamically_datetime.setTextColor(mContext.getResources().getColor(R.color.WQP_Black));*/
 
                     //顯示每筆LinearLayout的訂單單別單號
                     TextView dynamically_TC001002;
@@ -783,25 +758,35 @@ public class SetupDemandActivity extends WQPToolsActivity {
                         public void onClick(View v) {
                             for (int a = 0; a < dynamically_btn.length; a++) {
                                 if (v.getId() == dynamically_btn[a].getId()) {
-                                    Intent intent_ex = new Intent(SetupDemandActivity.this, MissionDetailActivity.class);
+                                    Intent intent_ex = new Intent(SetupDemandActivity.this, SetupMasterActivity.class);
                                     LinearLayout id_llt = (LinearLayout) nav_setup.getChildAt(a);
 
                                     RelativeLayout big_llt = (RelativeLayout) id_llt.getChildAt(1);
                                     LinearLayout first_rlt = (LinearLayout) big_llt.getChildAt(0);
                                     LinearLayout mission_llt = (LinearLayout) first_rlt.getChildAt(0);
-                                    LinearLayout detail_llt = (LinearLayout) mission_llt.getChildAt(1);
+                                    LinearLayout detail_llt = (LinearLayout) mission_llt.getChildAt(0);
                                     TextView no_txt = (TextView) detail_llt.getChildAt(0);
-                                    String rm002 = no_txt.getText().toString().replace("您有新任務(", "").replace(")", "");
+                                    Log.e(LOG, "訂單 : " + no_txt.getText().toString());
+                                    String TC001002 = no_txt.getText().toString().replace("訂單:", "");
+                                    String TC001 = TC001002.substring(0, TC001002.indexOf("-"));
+                                    String TC002 = TC001002.substring(TC001002.indexOf("-") + 1);
+                                    Log.e(LOG, "單別 : " + TC001);
+                                    Log.e(LOG, "單號 : " + TC002);
 
                                     LinearLayout detail_llt2 = (LinearLayout) mission_llt.getChildAt(2);
-                                    TextView type_txt = (TextView) detail_llt2.getChildAt(0);
-                                    String rm003 = type_txt.getText().toString();
+                                    TextView cum_txt = (TextView) detail_llt2.getChildAt(0);
+                                    String TC004043 = cum_txt.getText().toString().replace("客戶:", "");
+                                    String TC004 = TC004043.substring(0, TC004043.indexOf(":|:"));
+                                    String TC043 = TC004043.substring(TC004043.indexOf(":|:") + 3);
+                                    Log.e(LOG, "客代 : " + TC004);
+                                    Log.e(LOG, "客戶 : " + TC043);
+
                                     //將SQL裡的資料傳到MapsActivity
                                     Bundle bundle = new Bundle();
-                                    bundle.putString("rm002", rm002);
-                                    bundle.putString("rm003", rm003);
-                                    Log.e(LOG, "RM002 : " + rm002);
-                                    Log.e(LOG, "RM003 : " + rm003);
+                                    bundle.putString("TC001002", TC001002);
+                                    bundle.putString("TC004043", TC004043);
+                                    Log.e(LOG, "訂單 : " + TC001002);
+                                    Log.e(LOG, "客代 : " + TC004043);
                                     //intent_gps.putExtra("TitleText", TitleText);//可放所有基本類別
                                     intent_ex.putExtras(bundle);//可放所有基本類別
 
@@ -813,47 +798,22 @@ public class SetupDemandActivity extends WQPToolsActivity {
                         }
                     });
 
-                    SimpleDateFormat CurrentTime= new SimpleDateFormat("yyyy-MM-dd HH:mm");
-                    String currentDate = new SimpleDateFormat("yyyy-MM-dd  HH:mm", Locale.getDefault()).format(new Date());
-                    Log.e(LOG, "DATE : " + currentDate);
-
-                    //若任務逾期未回報該任務底色改為粉色
-                    try {
-                        Date get_date = CurrentTime.parse(currentDate);
-                        Date mission_date = CurrentTime.parse(JArrayList.get(2).trim());
-
-                        if (status.equals("0")) {
-                            if(get_date.after(mission_date)) {
-                                Log.e(LOG,"逾期");
-                                id_rlt.setBackgroundColor(mContext.getResources().getColor(R.color.WQP_Pink));
-                            } else {
-                                Log.e(LOG,"未逾期");
-                            }
-                        }
-
-                    } catch (ParseException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
-
                     LinearLayout.LayoutParams small_2pm = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1.7f);
                     LinearLayout.LayoutParams small_3pm = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 3.0f);
                     LinearLayout.LayoutParams btn_pm = new LinearLayout.LayoutParams(40, 40);
                     RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 
-                    small_llt0.addView(dynamically_title, small_2pm);
-                    //small_llt0.addView(dynamically_datetime, small_3pm);
-                    small_llt0.addView(dynamically_rm910, small_3pm);
-                    small_llt1.addView(dynamically_rm002);
-                    small_llt2.addView(dynamically_rm003, small_2pm);
+                    small_llt0.addView(dynamically_TC001002, small_3pm);
+                    small_llt0.addView(dynamically_company, small_2pm);
+                    small_llt1.addView(dynamically_MV001002);
+                    small_llt2.addView(dynamically_TC004043);
 
                     big_llt1.addView(small_llt0);
                     big_llt1.addView(small_llt1);
                     big_llt1.addView(small_llt2);
-                    big_llt2.addView(dynamically_imv, btn_pm);
 
                     large_llt.addView(big_llt1, new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 9));
-                    large_llt.addView(big_llt2, new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1));
+                    large_llt.addView(big_llt2, new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 0));
 
                     id_rlt.addView(large_llt, params);
                     id_rlt.addView(dynamically_btn[loc], params);

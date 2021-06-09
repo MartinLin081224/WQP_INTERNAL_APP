@@ -961,7 +961,7 @@ public class MissionActivity extends WQPToolsActivity implements Listener, Locat
                                     LinearLayout detail_llt2 = (LinearLayout) mission_llt.getChildAt(2);
                                     TextView type_txt = (TextView) detail_llt2.getChildAt(0);
                                     String rm003 = type_txt.getText().toString();
-                                    //將SQL裡的資料傳到MapsActivity
+                                    //將SQL裡的資料傳到MissionDetailActivity
                                     Bundle bundle = new Bundle();
                                     bundle.putString("rm002", rm002);
                                     bundle.putString("rm003", rm003);
@@ -971,7 +971,7 @@ public class MissionActivity extends WQPToolsActivity implements Listener, Locat
                                     intent_ex.putExtras(bundle);//可放所有基本類別
 
                                     startActivity(intent_ex);
-                                    //進入MapsActivity後 清空gps_llt的資料
+                                    //進入MissionDetailActivity後 清空gps_llt的資料
                                     nav_mission.removeAllViews();
                                 }
                             }
