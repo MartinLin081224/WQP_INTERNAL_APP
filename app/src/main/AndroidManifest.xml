@@ -52,7 +52,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WQP_OS_APP"
         android:usesCleartextTraffic="true">
-        <activity android:name=".DepartmentAndDIY.SetupMasterActivity"></activity>
+
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -202,6 +202,12 @@
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".DepartmentAndDIY.SetupDemandActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.WQP_OS_APP.NoActionBar"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".DepartmentAndDIY.SetupMasterActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.WQP_OS_APP.NoActionBar"

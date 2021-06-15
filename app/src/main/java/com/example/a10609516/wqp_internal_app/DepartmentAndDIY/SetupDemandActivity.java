@@ -34,7 +34,6 @@ import com.example.a10609516.wqp_internal_app.Works.EngPointsActivity;
 import com.example.a10609516.wqp_internal_app.Works.GPSActivity;
 import com.example.a10609516.wqp_internal_app.Works.MissCountActivity;
 import com.example.a10609516.wqp_internal_app.Works.MissionActivity;
-import com.example.a10609516.wqp_internal_app.Works.MissionDetailActivity;
 import com.example.a10609516.wqp_internal_app.Works.PointsActivity;
 import com.example.a10609516.wqp_internal_app.Works.ScheduleActivity;
 
@@ -522,7 +521,7 @@ public class SetupDemandActivity extends WQPToolsActivity {
             }
         });
 
-        toolbar.setTitle("安裝查詢表");
+        toolbar.setTitle("施工單查詢");
         toolbar.setNavigationIcon(R.drawable.icon_menu);
         setSupportActionBar(toolbar);
 
